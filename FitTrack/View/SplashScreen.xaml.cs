@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FitTrack.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace FitTrack.View
         public SplashScreen()
         {
             InitializeComponent();
+            DataContext = new SplashScreenViewModel(); // Sätt DataContext till ViewModel
         }
     }
 }
