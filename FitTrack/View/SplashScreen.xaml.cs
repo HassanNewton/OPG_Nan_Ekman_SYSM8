@@ -12,18 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace FitTrack
+namespace FitTrack.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SplashScreen.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SplashScreen : Window
     {
-        public MainWindow()
+        public SplashScreen()
         {
             InitializeComponent();
-            //MainWindowViewModel viewModel = new MainWindowViewModel();
-            //DataContext = viewModel;
         }
     }
 }
