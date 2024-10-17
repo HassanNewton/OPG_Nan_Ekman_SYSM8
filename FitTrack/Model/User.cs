@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FitTrack
+namespace FitTrack.Model
 {
     public class User : Person
     {
@@ -19,7 +19,7 @@ namespace FitTrack
             throw new NotImplementedException();
         }
 
-        public void ResetPassword( string securityAnswer)
+        public void ResetPassword(string securityAnswer)
         {
 
         }

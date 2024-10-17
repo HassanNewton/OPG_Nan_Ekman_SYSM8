@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FitTrack
+namespace FitTrack.Model
 {
-    public class AdminUser
+    public class Usermanager
     {
-        public void ManageAllWorkouts()
-        {
 
-        }
     }
 }

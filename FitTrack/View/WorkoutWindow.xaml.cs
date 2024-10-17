@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace FitTrack
+namespace FitTrack.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for WorkoutWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class WorkoutWindow : Window
     {
-        public MainWindow()
+        public WorkoutWindow()
         {
             InitializeComponent();
         }
