@@ -1,11 +1,10 @@
 ﻿<Window x:Class="FitTrack.View.SplashScreen"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="SplashScreen" Height="450" Width="700"
+        Title="SplashScreen" Height="450" Width="800"
         WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="Crimson">
 
     <Grid>
-        
         <!-- Bilden visas under splash-skärmen -->
         <Image Source="C:\Users\NänEkman\Source\Repos\OPG_Nan_Ekman_SYSM8\FitTrack\Images\FitTrackImage.png" Stretch="Uniform" />
     </Grid>

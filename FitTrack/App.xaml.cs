@@ -17,7 +17,7 @@ namespace FitTrack
             var splashScreen = new View.SplashScreen();
             splashScreen.Show();
 
-            // Simulera en kort fördröjning (4 sekunder)
+            // Kort fördröjning (4 sekunder)
             System.Threading.Thread.Sleep(4000);
 
             // Öppna huvudfönstret
@@ -28,5 +28,4 @@ namespace FitTrack
             splashScreen.Close();
         }
     }
-
 }

@@ -8,7 +8,7 @@
         ResizeMode="NoResize" WindowStyle="None" Background="LightGray" WindowStartupLocation="CenterScreen"
         
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="700">
+        Title="MainWindow" Height="450" Width="800">
 
     <!--FITTRACK önskar att HTML-färgerna “Crimson” (#DC143C) och “LightGray” (#D3D3D3) framkommer i Appens design.-->
     
@@ -20,10 +20,7 @@
             <TextBox x:Name="txtBoxUserName" Width="200" Height="30" />
             <Label Content="Password:" HorizontalAlignment="Center" FontFamily="Arial" />
             <TextBox x:Name="txtBoxPassword" Width="200" Height="30" />
-            <Label/>
-            <Button x:Name="btnSignIn" Content="SIGN IN" Width="150" Height="30" Background="Crimson" FontFamily="Arial" />
-            <Label/>
-            <Label/>
+            <Button x:Name="btnSignIn" Content="SIGN IN" Width="150" Height="30" Background="Crimson" FontFamily="Arial" Margin="20" />
             <Label Content="If you do not have a login, please register a new account by clicking the Register button below" HorizontalAlignment="Center" FontFamily="Arial" />
             <Button x:Name="btnRegister" Content="REGISTER" Width="150" Height="30" Background="Crimson" FontFamily="Arial" />
         </StackPanel>
