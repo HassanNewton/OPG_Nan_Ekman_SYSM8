@@ -8,7 +8,17 @@ namespace FitTrack.Model
 {
     public abstract class Person
     {
-        public string UserName { get; set; }
+        private string userName;
+
+        public string UserName
+        {
+            get { return userName; }
+            set 
+            { 
+                userName = value; 
+            }
+        }
+
         public string Password { get; set; }
 
         public abstract void SignIn();

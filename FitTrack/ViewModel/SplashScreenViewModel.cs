@@ -8,5 +8,6 @@ namespace FitTrack.ViewModel
 {
     public class SplashScreenViewModel
     {
+
     }
 }

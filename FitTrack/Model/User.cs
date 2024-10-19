@@ -22,20 +22,38 @@ namespace FitTrack.Model
             set
             {
                 securityAnswer = value;
-                // OnPropertyChanged();
+                //OnPropertyChanged();
             }// VG
         }
 
-        // Konstruktor ??
+        // Konstruktor (osäker om jag ska ha konstruktor)
+        //public User(string Country, string SecurityQuestion, string SecurityAnswer)
+        //{
+        //    this.Country = Country;
+        //    this.SecurityQuestion = SecurityQuestion;
+        //    this.SecurityAnswer = SecurityAnswer;
+        //}
 
 
         // Metoder
 
         public override void SignIn()
         {
-            if(string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password))
+            if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password))
             {
-                Console.WriteLine("Användarnamn eller lösenord får inte vara tomt");
+                Console.WriteLine("Username or password can not be empty");
+            }
+            else
+            {
+                // Validera inloggningsuppgifterna, t.ex. genom att jämföra mot en databas eller hårdkodad användardata
+                if (UserName == "user" && Password == "password")
+                {
+                    Console.WriteLine($"Login succeded! {UserName}");
+                }
+                else
+                {
+                    Console.WriteLine("Wrong username or password");
+                }
             }
         }
 
@@ -43,7 +61,7 @@ namespace FitTrack.Model
         {
             if(securityAnswer == SecurityAnswer)
             {
-                Console.WriteLine("Återställ lösenord");
+                Console.WriteLine("Reset password");
             }
             else
             {

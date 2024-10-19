@@ -7,6 +7,10 @@ using System.Windows.Input;
 
 namespace FitTrack.MVVM
 {
+
+    /* RelayCommand Används för att skapa kommandon som kan bindas till UI-element, såsom knappar. 
+     * Genom att använda denna kan man definiera både vad som ska ske när kommandot körs och om kommandot är aktiverat eller inte, vilket styrs av CanExecute.
+     * */
     public class RelayCommand : ICommand // show potential fix och implement interface
     {
         // Fält för att hålla referenser till metoder som  definierar vad som ska göras
@@ -38,6 +42,7 @@ namespace FitTrack.MVVM
 
         public void Execute(object? parameter) // exekverar själva metoden
         {
+            Console.WriteLine("RelayCommand executed");
             execute(parameter);
         }
     }

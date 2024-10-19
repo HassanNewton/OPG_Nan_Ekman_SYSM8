@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="UserDetailsWindow" Height="450" Width="800">
     <Grid>
-        
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Welcome to User Details" FontSize="30" HorizontalAlignment="Center" />
+        </StackPanel>
     </Grid>
 </Window>
