@@ -7,9 +7,13 @@
                 
         mc:Ignorable="d"
         Title="Login" Height="450" Width="800" ResizeMode="NoResize" Background="LightGray" WindowStartupLocation="CenterScreen" >
+   
 
     <Grid>
+        <DataGrid ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}"/>
+
         <StackPanel>
+            
             <Label Content="FitTrack" FontSize="70" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="Crimson" />
             <Label Content="Username:" HorizontalAlignment="Center" FontFamily="Arial"/>
             <TextBox x:Name="txtBoxUserName" Width="200" Height="30" Text="{Binding UsernameInput, UpdateSourceTrigger=PropertyChanged}" />
@@ -19,7 +23,7 @@
             <Button x:Name="btnForgotPassword" Content="FORGOT PASSWORD?" Width="150" Height="40" Background="Crimson" FontFamily="Arial"/>
             <Label/>
             <Label Content="If you do not have a login, please register a new account by clicking the Register button below" HorizontalAlignment="Center" FontFamily="Arial" />
-            <Button x:Name="btnRegister" Content="REGISTER" Width="150" Height="40" Background="Crimson" FontFamily="Arial" />
+            <Button x:Name="btnRegister" Content="REGISTER" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding RegisterCommand}" />
         </StackPanel>
 
     </Grid>

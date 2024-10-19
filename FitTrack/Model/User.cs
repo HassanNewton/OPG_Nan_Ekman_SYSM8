@@ -45,7 +45,7 @@ namespace FitTrack.Model
             }
             else
             {
-                // Validera inloggningsuppgifterna, t.ex. genom att jämföra mot en databas eller hårdkodad användardata
+                // Validera inloggningsuppgifterna
                 if (UserName == "user" && Password == "password")
                 {
                     Console.WriteLine($"Login succeded! {UserName}");
@@ -61,11 +61,11 @@ namespace FitTrack.Model
         {
             if(securityAnswer == SecurityAnswer)
             {
-                Console.WriteLine("Reset password");
+                Console.WriteLine("Password reset.");
             }
             else
             {
-                Console.WriteLine("");
+                Console.WriteLine("Wrong security answer.");
             }
         }
     }
