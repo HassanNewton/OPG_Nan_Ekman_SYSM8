@@ -5,10 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitTrack.View"
         mc:Ignorable="d"
-        Title="RegisterWindow" Height="450" Width="800">
+        Title="Register new account" Height="450" Width="800" ResizeMode="NoResize" Background="LightGray" WindowStartupLocation="CenterScreen" >
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Label Content="Welcome to Register Window" FontSize="30" HorizontalAlignment="Center" />
+        <StackPanel>
+            <Label Content="FitTrack" FontSize="70" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="Crimson" />
+            <Label Content="Username:" HorizontalAlignment="Center" FontFamily="Arial"/>
+            <TextBox Width="200" Height="30" Text="{Binding UsernameInput, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label Content="Password:" HorizontalAlignment="Center" FontFamily="Arial" />
+            <TextBox Width="200" Height="30" Text="{Binding PasswordInput, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label Content="Confirm Password:" HorizontalAlignment="Center" FontFamily="Arial" />
+            <TextBox Width="200" Height="30" Text="{Binding PasswordInput, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label Content="Country:" HorizontalAlignment="Center" FontFamily="Arial" />
+            <ComboBox ItemsSource="{Binding Countries.SelectedCountry}" Width="200" Height="30" />
+
+            <Button Content="CREATE USER" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Margin="20" Command="{Binding SignInCommand}" />
         </StackPanel>
     </Grid>
 </Window>

@@ -15,7 +15,7 @@ namespace FitTrack.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private ObservableCollection<Person> Users { get; set; } // testa ObservableCollection
+        private ObservableCollection<Person> Users { get; set; } 
 
         // Egenskaper
         //public string LabelTitle { get; set; } // tillfälligt utkommenterad
@@ -52,13 +52,13 @@ namespace FitTrack.ViewModel
         // Konstruktor
         public MainWindowViewModel()
         {
-            Users = new ObservableCollection<Person>(); // testa ObservableCollection
-
-            Users.Add(new User(){ UserName="user1", Password="1234"});           
-            Users.Add(new AdminUser() { UserName = "adminUser", Password = "admin123" });
-
-            //new User() { UserName = "user1", Password = "password" }; // testa ObservableCollection
-            //new User() { UserName = "user2", Password = "password" };      // testa ObservableCollection          
+            // Skapa lisra med 3 fördefinierade användare
+            Users = new ObservableCollection<Person>(); 
+            {
+                Users.Add(new User() { UserName = "user1", Password = "1234" });
+                Users.Add(new User() { UserName = "user2", Password = "5678" });
+                Users.Add(new AdminUser() { UserName = "adminUser", Password = "admin123" });
+            };
 
             SignInCommand = new RelayCommand(SignIn);
             RegisterCommand = new RelayCommand(Register);
@@ -66,36 +66,39 @@ namespace FitTrack.ViewModel
 
         // Metoder
 
-        private Person selectedUser; // tillfällig för att testa ObservableCollection
-        public Person SelectedUser
-        {
-            get { return selectedUser; }
-            set
-            {
-                selectedUser = value;
-                OnPropertyChanged(); // anropas så fort värdet ändras
-            }
-        }
+        //private Person selectedUser; // tillfällig för att testa ObservableCollection
+        //public Person SelectedUser
+        //{
+        //    get { return selectedUser; }
+        //    set
+        //    {
+        //        selectedUser = value;
+        //        OnPropertyChanged(); // anropas så fort värdet ändras
+        //    }
+        //}
+
         private void SignIn(object parameter)
         {
-            
-            // test nedan för att se att sign in funkar. SPARA I LISTA ISTÄLLET??
-            User user = new User
+            // Kontrollera om användarnamn och lösenord inte är tomma
+            if (string.IsNullOrEmpty(UsernameInput) || string.IsNullOrEmpty(PasswordInput))
             {
-                UserName = UsernameInput,
-                Password = PasswordInput
-            };
+                MessageBox.Show("Please enter both username and password.");
+                return;
+            }
 
-            if (user.UserName == "testuser" && user.Password == "1234")
+            // foreach-loop för att leta efter matchande användare
+            foreach (var user in Users)
             {
-                MessageBox.Show($"Welcome {user.UserName}");
-                // stäng main ich öppna UserDetailWindow
-                OpenUserDetailWindow();
+                if (user.UserName == UsernameInput && user.Password == PasswordInput)
+                {
+                    MessageBox.Show($"Welcome {user.UserName}");
+                    OpenUserDetailWindow();
+                    return; // Avbryt loopen och metoden om vi hittar en matchande användare
+                }
             }
-            else
-            {
-                MessageBox.Show($"Invalid username or password");
-            }
+
+            // Om ingen användare hittas, visa felmeddelande
+            MessageBox.Show("Invalid username or password.");
         }
 
 

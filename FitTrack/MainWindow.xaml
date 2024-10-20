@@ -10,20 +10,22 @@
    
 
     <Grid>
-        <DataGrid ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}"/>
-
+        <DataGrid AutoGenerateColumns="True" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}"/>
+ 
         <StackPanel>
             
             <Label Content="FitTrack" FontSize="70" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="Crimson" />
             <Label Content="Username:" HorizontalAlignment="Center" FontFamily="Arial"/>
-            <TextBox x:Name="txtBoxUserName" Width="200" Height="30" Text="{Binding UsernameInput, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Width="200" Height="30" Text="{Binding UsernameInput, UpdateSourceTrigger=PropertyChanged}" />
+            
             <Label Content="Password:" HorizontalAlignment="Center" FontFamily="Arial" />
-            <TextBox x:Name="txtBoxPassword" Width="200" Height="30" Text="{Binding PasswordInput, UpdateSourceTrigger=PropertyChanged}" />
-            <Button x:Name="btnSignIn" Content="SIGN IN" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Margin="20" Command="{Binding SignInCommand}" />
-            <Button x:Name="btnForgotPassword" Content="FORGOT PASSWORD?" Width="150" Height="40" Background="Crimson" FontFamily="Arial"/>
+            <TextBox Width="200" Height="30" Text="{Binding PasswordInput, UpdateSourceTrigger=PropertyChanged}" />
+            <Button Content="SIGN IN" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Margin="20" Command="{Binding SignInCommand}" />
+            
+            <Button Content="FORGOT PASSWORD?" Width="150" Height="40" Background="Crimson" FontFamily="Arial"/>
             <Label/>
             <Label Content="If you do not have a login, please register a new account by clicking the Register button below" HorizontalAlignment="Center" FontFamily="Arial" />
-            <Button x:Name="btnRegister" Content="REGISTER" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding RegisterCommand}" />
+            <Button Content="REGISTER" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding RegisterCommand}" />
         </StackPanel>
 
     </Grid>
