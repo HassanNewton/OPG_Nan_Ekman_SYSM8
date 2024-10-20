@@ -18,7 +18,7 @@ namespace FitTrack.ViewModel
         private ObservableCollection<Person> Users { get; set; } 
 
         // Egenskaper
-        //public string LabelTitle { get; set; } // tillfälligt utkommenterad
+        //public string LabelTitle { get; set; } // tillfälligt utkommenterad, vad är detta?? 
 
         private string usernameInput;
         private string passwordInput;

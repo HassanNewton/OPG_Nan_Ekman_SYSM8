@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Shapes;
 
@@ -23,6 +24,9 @@ namespace FitTrack.ViewModel
      */
     public class RegisterWindowViewModel : ViewModelBase // ändrat att ärva från MainWindow till ViewModelBase
     {
+        // Ny Action för att stänga fönstret
+        public Action CloseAction { get; set; }
+
         // Egenskaper för databindning genom att öppna upp alla set?
         public string UserInput { get; set; }
         public string PasswordInput { get; set; }   
@@ -51,14 +55,28 @@ namespace FitTrack.ViewModel
         // Konstruktor
         public RegisterWindowViewModel()
         {
-            RegisterCommand = new RelayCommand(ReisterNewUser);
+            RegisterCommand = new RelayCommand(RegisterNewUser);
         }
       
 
         // Metod
-        private void ReisterNewUser(object parameter)
+        private void RegisterNewUser(object parameter)
         {
 
+            OpenMainWindow();
+
+            // Stäng fönstret genom att använda CloseAction
+            CloseAction?.Invoke();
+        }
+
+        private void OpenMainWindow()
+        {
+            // Skapa en ny instans av MainWindow
+            MainWindow mainWindow = new MainWindow();
+
+            // Sätt det nya fönstret som huvudfönster och visa det
+            Application.Current.MainWindow = mainWindow;
+            mainWindow.Show();
         }
     }
 }
