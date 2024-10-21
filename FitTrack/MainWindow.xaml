@@ -12,18 +12,18 @@
 
         <StackPanel>
 
-            <Label Content="FitTrack" FontSize="70" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="Crimson" />
+            <Label Content="FitTrack" FontSize="70" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="Crimson" Opacity="0.8" />
             <Label Content="Username:" HorizontalAlignment="Center" FontFamily="Arial"/>
             <TextBox Width="200" Height="30" Text="{Binding UsernameInput, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Content="Password:" HorizontalAlignment="Center" FontFamily="Arial" />
             <TextBox Width="200" Height="30" Text="{Binding PasswordInput, UpdateSourceTrigger=PropertyChanged}" />
-            <Button Content="SIGN IN" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Margin="20" Command="{Binding SignInCommand}" />
+            <Button Content="SIGN IN" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Margin="20" Command="{Binding SignInCommand}" Opacity="0.8" />
 
-            <Button Content="FORGOT PASSWORD?" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding NewPasswordCommand}" />
+            <Button Content="FORGOT PASSWORD?" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding NewPasswordCommand}" Opacity="0.8" />
             <Label/>
             <Label Content="If you do not have a login, please register a new account by clicking the Register button below" HorizontalAlignment="Center" FontFamily="Arial" />
-            <Button Content="REGISTER" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding RegisterCommand}" />
+            <Button Content="REGISTER" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding RegisterCommand}" Opacity="0.8"/>
         </StackPanel>
     </Grid>
 </Window>

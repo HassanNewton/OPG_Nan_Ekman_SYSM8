@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -26,6 +27,9 @@ namespace FitTrack.ViewModel
     {
 
         User user = new User();
+
+        // Refererar till Usermanager klassen, hur hämtar jag listan?? 
+        private Usermanager userManager; 
 
         // Egenskaper för databindning 
         private string userInput;
@@ -97,6 +101,7 @@ namespace FitTrack.ViewModel
             if(ConfirmPasswordInput != PasswordInput)
             {
                 MessageBox.Show("Passwords does not match.");
+                return;
             }
 
             // Om användarnamnet redan är upptaget ska ett varningsmeddelande visas.
@@ -133,6 +138,14 @@ namespace FitTrack.ViewModel
             // Sätt det nya fönstret som huvudfönster och visa det
             Application.Current.MainWindow = mainWindow;
             mainWindow.Show();
+        }
+
+        private void PasswordRequirements()
+        {
+            // Lösenordet måste uppfylla särskilda krav(minst 8 tecken, minst en siffra och ett specialtecken).
+            // Ett fält för att bekräfta lösenordet ska läggas till, där båda fälten måste matcha innan registrering tillåts.
+
+
         }
     }
 }

@@ -2,12 +2,13 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="SplashScreen" Height="450" Width="800"
-        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="Crimson">
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Background="LightGray">
 
     <Grid>
-        <Label Content="FitTrack" FontSize="70" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="Crimson" />
-        <!-- Bilden visas under splash-skärmen -->
-        <Image Source="C:\Users\NänEkman\Source\Repos\OPG_Nan_Ekman_SYSM8\FitTrack\Images\Fittrackpicture.jpg" Stretch="Fill" />
-        <!--<Image Source="C:\Users\NänEkman\Source\Repos\OPG_Nan_Ekman_SYSM8\FitTrack\Images\FitTrackImage.png" Stretch="Uniform" />-->
+        <Image Source="C:\Users\NänEkman\Source\Repos\OPG_Nan_Ekman_SYSM8\FitTrack\Images\cute-little-realistic-pink-rabbit-260nw-2512851753.jpg"  />
+
+        <TextBlock Text="Welcome To FitTrack" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="70" Foreground="Crimson" Opacity="0.7" 
+               Padding="10" FontWeight="Bold" FontFamily="Arial"/>
+
     </Grid>
 </Window>

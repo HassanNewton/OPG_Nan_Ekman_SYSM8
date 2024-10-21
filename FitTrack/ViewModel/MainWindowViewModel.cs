@@ -15,6 +15,7 @@ namespace FitTrack.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        // lista över alla användare - gör public för att komma åt från andra klasser + private set?
         private ObservableCollection<Person> Users { get; set; } 
 
         // Egenskaper
@@ -75,19 +76,30 @@ namespace FitTrack.ViewModel
                 return;
             }
 
+            // validera användarnamn och lösenord
+            if (ValidateUser(UsernameInput, PasswordInput))
+            {
+                MessageBox.Show($"Welcome {UsernameInput}");
+                OpenUserDetailWindow();
+            }
+            else
+            {
+                // Om ingen användare hittas, visa felmeddelande
+                MessageBox.Show("Invalid username or password.");
+            }
+        }
+
+        private bool ValidateUser(string username, string password)
+        {
             // foreach-loop för att leta efter matchande användare
             foreach (var user in Users)
             {
-                if (user.UserName == UsernameInput && user.Password == PasswordInput)
+                if(user.UserName == username && user.Password == password)
                 {
-                    MessageBox.Show($"Welcome {user.UserName}");
-                    OpenUserDetailWindow();
-                    return; // Avbryt loopen och metoden om vi hittar en matchande användare
+                    return true;
                 }
             }
-
-            // Om ingen användare hittas, visa felmeddelande
-            MessageBox.Show("Invalid username or password.");
+            return false;
         }
 
         private void Register(object parameter)
@@ -116,7 +128,6 @@ namespace FitTrack.ViewModel
             userDetailsWindow.Show();
         }
 
-        // Tillfällig kod 
         private void NewPassword(object parameter)
         {
             // tillfälligt meddelande för att kolla att knappen fungerar

@@ -8,7 +8,7 @@
         Title="Register new account" Height="450" Width="800" ResizeMode="NoResize" Background="LightGray" WindowStartupLocation="CenterScreen" >
     <Grid>
         <StackPanel>
-            <Label Content="FitTrack" FontSize="70" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="Crimson" />
+            <Label Content="FitTrack" FontSize="70" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="Crimson" Opacity="0.8" />
             <Label Content="Username:" HorizontalAlignment="Center" FontFamily="Arial"/>
             <TextBox Width="200" Height="30" Text="{Binding UserInput, UpdateSourceTrigger=PropertyChanged}" />
 
@@ -21,7 +21,7 @@
             <Label Content="Country:" HorizontalAlignment="Center" FontFamily="Arial" />
             <ComboBox ItemsSource="{Binding CountryList}" SelectedItem="{Binding CountryComboBox, UpdateSourceTrigger=PropertyChanged}" Width="200" Height="30" />
 
-            <Button Content="CREATE USER" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Margin="20" Command="{Binding RegisterUserCommand}" />
+            <Button Content="CREATE USER" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Margin="20" Command="{Binding RegisterUserCommand}" Opacity="0.8" />
         </StackPanel>
     </Grid>
 </Window>
