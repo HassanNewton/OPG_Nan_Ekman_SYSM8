@@ -43,16 +43,15 @@ namespace FitTrack.ViewModel
             }
         }
 
-        //public ICommand SignInCommand { get; }
-
-        // Skapat instans av RelayCommand för att kunna binda i XAML
+        // Skapat instans av RelayCommand för att kunna binda knappar i XAML
         public RelayCommand SignInCommand { get; }
         public RelayCommand RegisterCommand {  get; }
+        public RelayCommand NewPasswordCommand { get; }
 
         // Konstruktor
         public MainWindowViewModel()
         {
-            // Skapa lisra med 3 fördefinierade användare
+            // Skapa lista med 3 fördefinierade användare
             Users = new ObservableCollection<Person>(); 
             {
                 Users.Add(new User() { UserName = "user1", Password = "1234" });
@@ -62,27 +61,17 @@ namespace FitTrack.ViewModel
 
             SignInCommand = new RelayCommand(SignIn);
             RegisterCommand = new RelayCommand(Register);
+            NewPasswordCommand = new RelayCommand(NewPassword);
         }
 
         // Metoder
-
-        //private Person selectedUser; // tillfällig för att testa ObservableCollection
-        //public Person SelectedUser
-        //{
-        //    get { return selectedUser; }
-        //    set
-        //    {
-        //        selectedUser = value;
-        //        OnPropertyChanged(); // anropas så fort värdet ändras
-        //    }
-        //}
-
         private void SignIn(object parameter)
         {
             // Kontrollera om användarnamn och lösenord inte är tomma
             if (string.IsNullOrEmpty(UsernameInput) || string.IsNullOrEmpty(PasswordInput))
             {
                 MessageBox.Show("Please enter both username and password.");
+                // Avbryt exekveringen av metoden om användarnamn eller lösenord är tom
                 return;
             }
 
@@ -101,7 +90,6 @@ namespace FitTrack.ViewModel
             MessageBox.Show("Invalid username or password.");
         }
 
-
         private void Register(object parameter)
         {
             // Skapa en ny instans av RegisterWindow
@@ -115,7 +103,6 @@ namespace FitTrack.ViewModel
             registerWindow.Show();
         }
 
-
         private void OpenUserDetailWindow()
         {
             // Skapa en ny instans av UserDetailsWindow
@@ -127,6 +114,13 @@ namespace FitTrack.ViewModel
             // Sätt det nya fönstret som huvudfönster och visa det
             Application.Current.MainWindow = userDetailsWindow;
             userDetailsWindow.Show();
+        }
+
+        // Tillfällig kod 
+        private void NewPassword(object parameter)
+        {
+            // tillfälligt meddelande för att kolla att knappen fungerar
+            MessageBox.Show("Du har valt nytt lösenord");
         }
     }
 }

@@ -22,51 +22,107 @@ namespace FitTrack.ViewModel
     •"Register"-knapp för att skapa en användare och komma tillbaka till MainWindow och stänga RegisterWindow.
     •Om användarnamnet redan är upptaget ska ett varningsmeddelande visas.
      */
-    public class RegisterWindowViewModel : ViewModelBase // ändrat att ärva från MainWindow till ViewModelBase
+    public class RegisterWindowViewModel : ViewModelBase // ändrat från att ärva från MainWindow till ViewModelBase
     {
-        // Ny Action för att stänga fönstret
-        public Action CloseAction { get; set; }
 
-        // Egenskaper för databindning genom att öppna upp alla set?
-        public string UserInput { get; set; }
-        public string PasswordInput { get; set; }   
-        public string ConfirmPasswordInput { get; set; }
-        public string CountryComboBox { get; set; }
+        User user = new User();
 
-        // Skapa egenskap av Enum Countries
-        private Countries selectedCountry;
+        // Egenskaper för databindning 
+        private string userInput;
 
-        public Countries SelectedCountry
+        public string UserInput
         {
-            get { return selectedCountry; }
-            set 
-            { 
-                if(selectedCountry != value)
-                {
-                    selectedCountry = value;
-                    OnPropertyChanged(nameof(SelectedCountry));
-                }
+            get { return userInput; }
+            set
+            {
+                userInput = value;
+                OnPropertyChanged();
             }
         }
 
+        private string passwordInput;
+
+        public string PasswordInput
+        {
+            get { return passwordInput; }
+            set
+            {
+                passwordInput = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string confirmPasswordInput;
+
+        public string ConfirmPasswordInput
+        {
+            get { return confirmPasswordInput; }
+            set
+            {
+                confirmPasswordInput = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string countryComboBox;
+
+        public string CountryComboBox
+        {
+            get { return countryComboBox; }
+            set 
+            { 
+                countryComboBox = value; 
+                //OnPropertyChanged(); // behövs ej? 
+            }
+        }
+
+        // Lista med länder till ComboBox
+        public List<string> CountryList { get; set; }
+
         // Skapat instans av RelayCommand för att kunna binda i XAML genom att använda command sitället för clickEvent
-        public RelayCommand RegisterCommand { get; }
+        public RelayCommand RegisterUserCommand { get; }
 
         // Konstruktor
         public RegisterWindowViewModel()
         {
-            RegisterCommand = new RelayCommand(RegisterNewUser);
+            // skapat en lista av Countries
+            CountryList = new List<string> { "Denmark", "Norway", "Sweden" };
+
+            RegisterUserCommand = new RelayCommand(RegisterNewUser);
         }
-      
 
         // Metod
         private void RegisterNewUser(object parameter)
         {
+            if(ConfirmPasswordInput != PasswordInput)
+            {
+                MessageBox.Show("Passwords does not match.");
+            }
 
-            OpenMainWindow();
+            // Om användarnamnet redan är upptaget ska ett varningsmeddelande visas.
+            if(user.UserName == UserInput) // funkar ej
+            {
+                MessageBox.Show("Username already exist.");
+            }
 
-            // Stäng fönstret genom att använda CloseAction
-            CloseAction?.Invoke();
+            // Kontrollera om användarnamn, lösenord och land inte är tomma
+            if (string.IsNullOrEmpty(UserInput) || string.IsNullOrEmpty(PasswordInput) ||
+                string.IsNullOrEmpty(ConfirmPasswordInput) || string.IsNullOrEmpty(CountryComboBox))
+            {
+                MessageBox.Show("Please enter both username, password and country.");
+                return;
+            }
+            else
+            {
+
+                //      logik för att spara ny användare i listan.
+                //      Kan jag kalla på listan från MainWindowViewModel på något sätt?
+
+                MessageBox.Show($"New user created {user.UserName}"); // användare hämtas inte från User
+
+                Application.Current.MainWindow.Close();
+                OpenMainWindow();
+            }            
         }
 
         private void OpenMainWindow()

@@ -22,8 +22,8 @@ namespace FitTrack.View
         public RegisterWindow()
         {
             InitializeComponent();
-            ViewModel.RegisterWindowViewModel registerWindow = new ViewModel.RegisterWindowViewModel();
-            DataContext = registerWindow;
+            ViewModel.RegisterWindowViewModel registerWindowViewModel = new ViewModel.RegisterWindowViewModel();
+            DataContext = registerWindowViewModel;
         }
     }
 }

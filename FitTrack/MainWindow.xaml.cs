@@ -24,8 +24,10 @@ namespace FitTrack
         {
             InitializeComponent();
             //DataContext = new MainWindowViewModel();
-            MainWindowViewModel viewModel = new MainWindowViewModel();
-            DataContext = viewModel;
+            //MainWindowViewModel viewModel = new MainWindowViewModel();
+            //DataContext = viewModel;
+            ViewModel.MainWindowViewModel mainWindowViewModel = new ViewModel.MainWindowViewModel();
+            DataContext = mainWindowViewModel;
         }
     }
 }

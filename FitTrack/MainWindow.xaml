@@ -4,29 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitTrack"        
-                
         mc:Ignorable="d"
         Title="Login" Height="450" Width="800" ResizeMode="NoResize" Background="LightGray" WindowStartupLocation="CenterScreen" >
-   
 
     <Grid>
         <DataGrid AutoGenerateColumns="True" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}"/>
- 
+
         <StackPanel>
-            
+
             <Label Content="FitTrack" FontSize="70" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="Crimson" />
             <Label Content="Username:" HorizontalAlignment="Center" FontFamily="Arial"/>
             <TextBox Width="200" Height="30" Text="{Binding UsernameInput, UpdateSourceTrigger=PropertyChanged}" />
-            
+
             <Label Content="Password:" HorizontalAlignment="Center" FontFamily="Arial" />
             <TextBox Width="200" Height="30" Text="{Binding PasswordInput, UpdateSourceTrigger=PropertyChanged}" />
             <Button Content="SIGN IN" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Margin="20" Command="{Binding SignInCommand}" />
-            
-            <Button Content="FORGOT PASSWORD?" Width="150" Height="40" Background="Crimson" FontFamily="Arial"/>
+
+            <Button Content="FORGOT PASSWORD?" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding NewPasswordCommand}" />
             <Label/>
             <Label Content="If you do not have a login, please register a new account by clicking the Register button below" HorizontalAlignment="Center" FontFamily="Arial" />
             <Button Content="REGISTER" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding RegisterCommand}" />
         </StackPanel>
-
     </Grid>
 </Window>

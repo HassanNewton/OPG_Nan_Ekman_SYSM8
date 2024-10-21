@@ -10,18 +10,18 @@
         <StackPanel>
             <Label Content="FitTrack" FontSize="70" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="Crimson" />
             <Label Content="Username:" HorizontalAlignment="Center" FontFamily="Arial"/>
-            <TextBox Width="200" Height="30" Text="{Binding UsernameInput, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Width="200" Height="30" Text="{Binding UserInput, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Content="Password:" HorizontalAlignment="Center" FontFamily="Arial" />
             <TextBox Width="200" Height="30" Text="{Binding PasswordInput, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Content="Confirm Password:" HorizontalAlignment="Center" FontFamily="Arial" />
-            <TextBox Width="200" Height="30" Text="{Binding PasswordInput, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Width="200" Height="30" Text="{Binding ConfirmPasswordInput, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Content="Country:" HorizontalAlignment="Center" FontFamily="Arial" />
-            <ComboBox ItemsSource="{Binding Countries.SelectedCountry}" Width="200" Height="30" />
+            <ComboBox ItemsSource="{Binding CountryList}" SelectedItem="{Binding CountryComboBox, UpdateSourceTrigger=PropertyChanged}" Width="200" Height="30" />
 
-            <Button Content="CREATE USER" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Margin="20" Command="{Binding SignInCommand}" />
+            <Button Content="CREATE USER" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Margin="20" Command="{Binding RegisterUserCommand}" />
         </StackPanel>
     </Grid>
 </Window>

@@ -7,7 +7,7 @@
     <Grid>
         <Label Content="FitTrack" FontSize="70" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="Crimson" />
         <!-- Bilden visas under splash-skärmen -->
-        <Image Source="C:\Users\NänEkman\Source\Repos\OPG_Nan_Ekman_SYSM8\FitTrack\Images\Fittrackpict.jpg" Stretch="Fill"/>
+        <Image Source="C:\Users\NänEkman\Source\Repos\OPG_Nan_Ekman_SYSM8\FitTrack\Images\Fittrackpicture.jpg" Stretch="Fill" />
         <!--<Image Source="C:\Users\NänEkman\Source\Repos\OPG_Nan_Ekman_SYSM8\FitTrack\Images\FitTrackImage.png" Stretch="Uniform" />-->
     </Grid>
 </Window>
