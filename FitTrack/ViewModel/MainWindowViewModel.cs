@@ -120,7 +120,16 @@ namespace FitTrack.ViewModel
         private void NewPassword(object parameter)
         {
             // tillfälligt meddelande för att kolla att knappen fungerar
-            MessageBox.Show("Du har valt nytt lösenord");
+            //MessageBox.Show("Du har valt nytt lösenord");
+            OpenNewPasswordWindow();
+        }
+
+        private void OpenNewPasswordWindow()
+        {
+            NewPasswordWindow newPasswordWindow = new NewPasswordWindow();
+            Application.Current.MainWindow.Close();
+            Application.Current.MainWindow = newPasswordWindow;
+            newPasswordWindow.Show();
         }
     }
 }
