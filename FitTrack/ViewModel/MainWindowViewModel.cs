@@ -55,15 +55,6 @@ namespace FitTrack.ViewModel
         // Konstruktor
         public MainWindowViewModel()
         {
-            // flyttat min lista till Usermanager klassen
-            // Skapa lista med 3 fördefinierade användare TA BORT!? FINNS  I USERMANAGER KLASSEN
-            //Users = new ObservableCollection<Person>(); 
-            //{
-            //    Users.Add(new User() { UserName = "user1", Password = "1234" });
-            //    Users.Add(new User() { UserName = "user2", Password = "5678" });
-            //    Users.Add(new AdminUser() { UserName = "adminUser", Password = "admin123" });
-            //};
-
             // skapar en instans av Usermanager
             userManager = new Usermanager();
 
@@ -71,12 +62,14 @@ namespace FitTrack.ViewModel
             RegisterCommand = new RelayCommand(Register);
             NewPasswordCommand = new RelayCommand(NewPassword);
 
+            // FLYTTA SPLASHSCREEN?? STARTAS NU UPP VARJE GÅNG JAG STÄNGER ETT FÖNSTER OCH ÖPPNAR MAIN
+
             // Skapa och visa splashskärmen
             var splashScreen = new View.SplashScreen();
             splashScreen.Show();
 
             // Kort fördröjning (4 sekunder)
-            System.Threading.Thread.Sleep(4000);
+            System.Threading.Thread.Sleep(1000);
 
             // Stäng splashskärmen
             splashScreen.Close();           
@@ -134,7 +127,6 @@ namespace FitTrack.ViewModel
 
         private void OpenWorkoutWindow()
         {
-
             // Skapa en ny instans av WorkoutWindow
             WorkoutWindow workoutWindow = new WorkoutWindow();
 

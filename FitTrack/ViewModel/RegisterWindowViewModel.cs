@@ -5,6 +5,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -101,28 +102,32 @@ namespace FitTrack.ViewModel
         // Metod
         private void RegisterNewUser(object parameter)
         {
-            // EXCEPTIONHANDLING TRY CATCH?? 
+            try
+            {
+                // Kontrollera om användarnamn, lösenord och land inte är tomma
+                if (string.IsNullOrEmpty(UserInput) || string.IsNullOrEmpty(PasswordInput) ||
+                    string.IsNullOrEmpty(ConfirmPasswordInput) || string.IsNullOrEmpty(CountryComboBox))
+                {
+                    MessageBox.Show("Please enter both username, password and country.");
+                    return;
+                }
+                if (ConfirmPasswordInput != PasswordInput)
+                {
+                    MessageBox.Show("Passwords does not match.");
+                    return;
+                }
+                if (!ValidatePasswordRequirements(PasswordInput))
+                {
+                    MessageBox.Show("The password must be at least 8 characters, contains at least one letter (upper or lower case), at least one number and one special character.");
+                    return;
+                }
+                // Kontrollerar om anvärdarnamet finns
+                if (userManager.CheckUsername(UserInput))
+                {
+                    MessageBox.Show("Username already exist.");
+                    return;
+                }
 
-            if(ConfirmPasswordInput != PasswordInput)
-            {
-                MessageBox.Show("Passwords does not match.");
-                return;
-            }
-            // Kontrollerar om anvärdarnamet finns
-            if (userManager.CheckUsername(UserInput)) 
-            {
-                MessageBox.Show("Username already exist.");
-            }
-
-            // Kontrollera om användarnamn, lösenord och land inte är tomma
-            if (string.IsNullOrEmpty(UserInput) || string.IsNullOrEmpty(PasswordInput) ||
-                string.IsNullOrEmpty(ConfirmPasswordInput) || string.IsNullOrEmpty(CountryComboBox))
-            {
-                MessageBox.Show("Please enter both username, password and country.");
-                return;
-            }
-            else
-            {
                 // logik för att spara ny användare i listan.
                 User newUser = new User();
                 {
@@ -131,10 +136,14 @@ namespace FitTrack.ViewModel
                 }
                 userManager.AddUser(newUser);
 
-                MessageBox.Show($"New user created {newUser.UserName}"); // användare hämtas inte från User
+                MessageBox.Show($"New user created {newUser.UserName}");
 
                 OpenMainWindow();
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -151,12 +160,11 @@ namespace FitTrack.ViewModel
             mainWindow.Show();
         }
 
-        private void PasswordRequirements()
+        private bool ValidatePasswordRequirements(string PasswordInput)
         {
             // Lösenordet måste uppfylla särskilda krav(minst 8 tecken, minst en siffra och ett specialtecken).
-            // Ett fält för att bekräfta lösenordet ska läggas till, där båda fälten måste matcha innan registrering tillåts.
-
-
+            var passwordRequirements = @"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$";
+            return Regex.IsMatch(PasswordInput, passwordRequirements);
         }
     }
 }

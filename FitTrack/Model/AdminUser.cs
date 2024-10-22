@@ -10,7 +10,9 @@ namespace FitTrack.Model
     {
         public void ManageAllWorkouts()
         {
+            Usermanager userManager = new Usermanager();
             // Hämta alla användare från Usermanager klassen? 
+            userManager.GetAllUsers();
         }
     }
 }
