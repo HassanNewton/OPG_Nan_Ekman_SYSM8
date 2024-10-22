@@ -124,10 +124,9 @@ namespace FitTrack.ViewModel
             else
             {
                 //      logik för att spara ny användare i listan.
-
-                User newUser = new User(CountryComboBox, "SecurityQuestion", "SecurityAnswer");
+                User newUser = new User();
                 {
-                    UserName = UserInput;       // Sätt användarnamn
+                    newUser = UserInput;       // Sätt användarnamn
                     Password = PasswordInput;     // Sätt lösenord
                 }
                 userManager.AddUser(newUser);

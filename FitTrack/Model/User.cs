@@ -23,15 +23,13 @@ namespace FitTrack.Model
             {
                 securityAnswer = value;
                 //OnPropertyChanged();
-            }// VG
+            }
         }
 
         // Konstruktor (osäker om jag ska ha alla parametrar i konstruktorn)
-        public User(string Country, string SecurityQuestion, string SecurityAnswer)
+        public User()
         {
-            this.Country = Country;
-            this.SecurityQuestion = SecurityQuestion;
-            this.SecurityAnswer = SecurityAnswer;
+
         }
 
 
