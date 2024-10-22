@@ -12,8 +12,8 @@ namespace FitTrack.Model
         public string Country { get; set; }
         public string SecurityQuestion { get; set; } 
 
-        private string SecurityAnswer; 
-        public string securityAnswer
+        private string securityAnswer; 
+        public string SecurityAnswer
         {
             get
             {

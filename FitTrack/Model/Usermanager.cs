@@ -10,7 +10,7 @@ namespace FitTrack.Model
 {
     // Använd en manager-klass för att hålla koll på användare och nuvarande inloggade användare o.s.v.
 
-    public class Usermanager : ObservableCollection<Person> // rätt? 
+    public class Usermanager
     {
         // Egenskap för lista av användare
         public ObservableCollection<Person> Users { get; set; }
@@ -41,5 +41,18 @@ namespace FitTrack.Model
             }
             return false; // Om användarnamnet inte hittas, returnera false
         }
+
+        public void AddUser(User newUser)
+        {
+            Users.Add(newUser);
+        }
+
+
+        // Metod för att hämta alla användare
+        public ObservableCollection<Person> GetAllUsers()
+        {
+            return Users;
+        }
+
     }
 }

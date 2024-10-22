@@ -101,7 +101,7 @@ namespace FitTrack.ViewModel
         // Metod
         private void RegisterNewUser(object parameter)
         {
-            // bool för att kontrollera om en användare finns eller inte?? 
+            // EXCEPTIONHANDLING TRY CATCH?? 
 
             if(ConfirmPasswordInput != PasswordInput)
             {
@@ -123,18 +123,18 @@ namespace FitTrack.ViewModel
             }
             else
             {
-                //      logik för att spara ny användare i listan.
+                // logik för att spara ny användare i listan.
                 User newUser = new User();
                 {
-                    newUser = UserInput;       // Sätt användarnamn
-                    Password = PasswordInput;     // Sätt lösenord
+                    newUser.UserName = UserInput;       // Sätt användarnamn
+                    newUser.Password = PasswordInput;     // Sätt lösenord
                 }
                 userManager.AddUser(newUser);
 
-                MessageBox.Show($"New user created {.UserName}"); // användare hämtas inte från User
+                MessageBox.Show($"New user created {newUser.UserName}"); // användare hämtas inte från User
 
-                Application.Current.MainWindow.Close();
                 OpenMainWindow();
+
             }
         }
 
@@ -142,6 +142,9 @@ namespace FitTrack.ViewModel
         {
             // Skapa en ny instans av MainWindow
             MainWindow mainWindow = new MainWindow();
+
+            // Stäng MainWindow
+            Application.Current.MainWindow.Close();
 
             // Sätt det nya fönstret som huvudfönster och visa det
             Application.Current.MainWindow = mainWindow;

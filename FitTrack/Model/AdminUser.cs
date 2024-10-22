@@ -10,7 +10,7 @@ namespace FitTrack.Model
     {
         public void ManageAllWorkouts()
         {
-
+            // Hämta alla användare från Usermanager klassen? 
         }
     }
 }
