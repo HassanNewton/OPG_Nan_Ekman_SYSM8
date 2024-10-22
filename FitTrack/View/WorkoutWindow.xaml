@@ -8,8 +8,9 @@
         Title="WorkoutWindow" Height="450" Width="800">
     <Grid>
         <StackPanel>
-            <Button Content="USER" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding OpenDetailsCommand}" Opacity="0.8"/>
+            <Button Content="USER" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding OpenUserDetailsCommand}" Opacity="0.8"/>
             <Button Content="ADD WORKOUT" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding AddWorkOutCommand}" Opacity="0.8"/>
+            <Button Content="DETAILS" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding OpenWorkoutDetailsWindowCommand}" Opacity="0.8"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -30,7 +30,8 @@ namespace FitTrack.ViewModel
         private List <Workout> WorkoutList { get; set; }
 
         public RelayCommand AddWorkOutCommand { get; }
-        public RelayCommand OpenDetailsCommand { get; }
+        public RelayCommand OpenUserDetailsCommand { get; }
+        public RelayCommand OpenWorkoutDetailsWindowCommand { get; }
 
         // Konstruktor
         public WorkoutWindowViewModel()
@@ -38,13 +39,32 @@ namespace FitTrack.ViewModel
             WorkoutList = new List<Workout>();
 
             AddWorkOutCommand = new RelayCommand(AddWorkOut);
-            //OpenDetailsCommand = new RelayCommand(OpenDetails()); // funkar ej då jag har parameter Workout workout
+            //OpenUserDetailsCommand = new RelayCommand(OpenDetails); 
+            OpenWorkoutDetailsWindowCommand = new RelayCommand(OpenWorkoutDetailsWindow);
         }
 
         // Metoder
         private void AddWorkOut(object parameter)
         {
-            // Skapa en ny instans av WorkoutWindow
+            // Skapa en ny instans av AddWorkoutWindow
+            AddWorkoutWindow addWorkoutWindow = new AddWorkoutWindow();
+
+            // Stäng MainWindow
+            Application.Current.MainWindow.Close();
+
+            // Sätt det nya fönstret som huvudfönster och visa det
+            Application.Current.MainWindow = addWorkoutWindow;
+            addWorkoutWindow.Show();
+        }
+
+        private void RemoveWorkOut()
+        {
+
+        }
+
+        private void OpenDetails(Workout workout)
+        {
+            // Skapa en ny instans av UserDetailsWindow
             UserDetailsWindow userDetailsWindow = new UserDetailsWindow();
 
             // Stäng MainWindow
@@ -55,15 +75,17 @@ namespace FitTrack.ViewModel
             userDetailsWindow.Show();
         }
 
-        private void RemoveWorkOut()
+        private void OpenWorkoutDetailsWindow(object parameter)
         {
+            // Skapa en ny instans av WorkoutDetailsWindow
+            WorkoutDetailsWindow workoutDetailsWindow = new WorkoutDetailsWindow();
 
+            // Stäng MainWindow
+            Application.Current.MainWindow.Close();
+
+            // Sätt det nya fönstret som huvudfönster och visa det
+            Application.Current.MainWindow = workoutDetailsWindow;
+            workoutDetailsWindow.Show();
         }
-
-        private void OpenDetails(Workout workout)
-        {
-
-        }
-
     }
 }
