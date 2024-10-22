@@ -29,7 +29,7 @@ namespace FitTrack.ViewModel
         //User user = new User();
 
         // Refererar till Usermanager klassen, hur hämtar jag listan?? 
-        private Usermanager userManager; 
+        private Usermanager userManager = new Usermanager();
 
         // Egenskaper för databindning 
         private string userInput;
@@ -108,9 +108,8 @@ namespace FitTrack.ViewModel
                 MessageBox.Show("Passwords does not match.");
                 return;
             }
-
-            // Om användarnamnet redan är upptaget ska ett varningsmeddelande visas.
-            if (userManager.Users == UserName) // funkar ej, behöver binda på något sätt? 
+            // Kontrollerar om anvärdarnamet finns
+            if (userManager.CheckUsername(UserInput)) 
             {
                 MessageBox.Show("Username already exist.");
             }
@@ -124,11 +123,16 @@ namespace FitTrack.ViewModel
             }
             else
             {
-
                 //      logik för att spara ny användare i listan.
-                //      Kan jag kalla på listan från MainWindowViewModel på något sätt?
 
-                MessageBox.Show($"New user created {user.UserName}"); // användare hämtas inte från User
+                User newUser = new User(CountryComboBox, "SecurityQuestion", "SecurityAnswer");
+                {
+                    UserName = UserInput;       // Sätt användarnamn
+                    Password = PasswordInput;     // Sätt lösenord
+                }
+                userManager.AddUser(newUser);
+
+                MessageBox.Show($"New user created {.UserName}"); // användare hämtas inte från User
 
                 Application.Current.MainWindow.Close();
                 OpenMainWindow();

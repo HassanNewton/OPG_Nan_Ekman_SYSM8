@@ -79,7 +79,7 @@ namespace FitTrack.ViewModel
             System.Threading.Thread.Sleep(4000);
 
             // Stäng splashskärmen
-            splashScreen.Close();
+            splashScreen.Close();           
         }
 
         // Metoder
@@ -97,7 +97,7 @@ namespace FitTrack.ViewModel
             if (ValidateUser(UsernameInput, PasswordInput))
             {
                 MessageBox.Show($"Welcome {UsernameInput}");
-                OpenWoroutWindow();
+                OpenWorkoutWindow();
             }
             else
             {
@@ -132,7 +132,7 @@ namespace FitTrack.ViewModel
             registerWindow.Show();
         }
 
-        private void OpenWoroutWindow()
+        private void OpenWorkoutWindow()
         {
 
             // Skapa en ny instans av WorkoutWindow

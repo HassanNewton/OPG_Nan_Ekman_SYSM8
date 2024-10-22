@@ -10,9 +10,9 @@ namespace FitTrack.Model
     {
         // Egenskaper
         public string Country { get; set; }
-        public string SecurityQuestion { get; set; } // VG
+        public string SecurityQuestion { get; set; } 
 
-        private string SecurityAnswer; // VG
+        private string SecurityAnswer; 
         public string securityAnswer
         {
             get
@@ -26,13 +26,13 @@ namespace FitTrack.Model
             }// VG
         }
 
-        // Konstruktor (osäker om jag ska ha konstruktor)
-        //public User(string Country, string SecurityQuestion, string SecurityAnswer)
-        //{
-        //    this.Country = Country;
-        //    this.SecurityQuestion = SecurityQuestion;
-        //    this.SecurityAnswer = SecurityAnswer;
-        //}
+        // Konstruktor (osäker om jag ska ha alla parametrar i konstruktorn)
+        public User(string Country, string SecurityQuestion, string SecurityAnswer)
+        {
+            this.Country = Country;
+            this.SecurityQuestion = SecurityQuestion;
+            this.SecurityAnswer = SecurityAnswer;
+        }
 
 
         // Metoder
