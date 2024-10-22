@@ -22,6 +22,8 @@ namespace FitTrack.View
         public UserDetailsWindow()
         {
             InitializeComponent();
+            ViewModel.UserDetailsWindowViewModel userDetailsWindowViewModel = new ViewModel.UserDetailsWindowViewModel();
+            DataContext = userDetailsWindowViewModel;
         }
     }
 }

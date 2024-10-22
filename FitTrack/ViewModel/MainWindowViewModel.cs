@@ -16,7 +16,10 @@ namespace FitTrack.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         // lista över alla användare - gör public för att komma åt från andra klasser + private set?
-        private ObservableCollection<Person> Users { get; set; } 
+        //private ObservableCollection<Person> Users { get; set; } 
+
+        // Refererar till Usermanager klassen, som styr listan, men hur hämtar jag listan?? 
+        private Usermanager userManager;
 
         // Egenskaper
         //public string LabelTitle { get; set; } // tillfälligt utkommenterad, vad är detta?? 
@@ -52,17 +55,31 @@ namespace FitTrack.ViewModel
         // Konstruktor
         public MainWindowViewModel()
         {
-            // Skapa lista med 3 fördefinierade användare
-            Users = new ObservableCollection<Person>(); 
-            {
-                Users.Add(new User() { UserName = "user1", Password = "1234" });
-                Users.Add(new User() { UserName = "user2", Password = "5678" });
-                Users.Add(new AdminUser() { UserName = "adminUser", Password = "admin123" });
-            };
+            // flyttat min lista till Usermanager klassen
+            // Skapa lista med 3 fördefinierade användare TA BORT!? FINNS  I USERMANAGER KLASSEN
+            //Users = new ObservableCollection<Person>(); 
+            //{
+            //    Users.Add(new User() { UserName = "user1", Password = "1234" });
+            //    Users.Add(new User() { UserName = "user2", Password = "5678" });
+            //    Users.Add(new AdminUser() { UserName = "adminUser", Password = "admin123" });
+            //};
+
+            // skapar en instans av Usermanager
+            userManager = new Usermanager();
 
             SignInCommand = new RelayCommand(SignIn);
             RegisterCommand = new RelayCommand(Register);
             NewPasswordCommand = new RelayCommand(NewPassword);
+
+            // Skapa och visa splashskärmen
+            var splashScreen = new View.SplashScreen();
+            splashScreen.Show();
+
+            // Kort fördröjning (4 sekunder)
+            System.Threading.Thread.Sleep(4000);
+
+            // Stäng splashskärmen
+            splashScreen.Close();
         }
 
         // Metoder
@@ -80,7 +97,7 @@ namespace FitTrack.ViewModel
             if (ValidateUser(UsernameInput, PasswordInput))
             {
                 MessageBox.Show($"Welcome {UsernameInput}");
-                OpenUserDetailWindow();
+                OpenWoroutWindow();
             }
             else
             {
@@ -92,7 +109,7 @@ namespace FitTrack.ViewModel
         private bool ValidateUser(string username, string password)
         {
             // foreach-loop för att leta efter matchande användare
-            foreach (var user in Users)
+            foreach (var user in userManager.Users)
             {
                 if(user.UserName == username && user.Password == password)
                 {
@@ -115,17 +132,18 @@ namespace FitTrack.ViewModel
             registerWindow.Show();
         }
 
-        private void OpenUserDetailWindow()
+        private void OpenWoroutWindow()
         {
-            // Skapa en ny instans av UserDetailsWindow
-            UserDetailsWindow userDetailsWindow = new UserDetailsWindow();
+
+            // Skapa en ny instans av WorkoutWindow
+            WorkoutWindow workoutWindow = new WorkoutWindow();
 
             // Stäng MainWindow
             Application.Current.MainWindow.Close();
 
             // Sätt det nya fönstret som huvudfönster och visa det
-            Application.Current.MainWindow = userDetailsWindow;
-            userDetailsWindow.Show();
+            Application.Current.MainWindow = workoutWindow;
+            workoutWindow.Show();
         }
 
         private void NewPassword(object parameter)

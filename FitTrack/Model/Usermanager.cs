@@ -11,10 +11,14 @@ namespace FitTrack.Model
 
     public class Usermanager
     {
-        public ObservableCollection<Person> Users { get; private set; }
+        // Egenskap för lista av användare
+        public ObservableCollection<Person> Users { get; set; }
 
+        // Konstruktor
         public Usermanager()
         {
+            // flyttat lista från MainWindowViewModel
+            // Initierar Users som en ObservableCollection lista av Person-objekt med fördefinierade användare
             Users = new ObservableCollection<Person>
         {
             new User { UserName = "user1", Password = "1234" },

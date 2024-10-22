@@ -26,7 +26,7 @@ namespace FitTrack.ViewModel
     public class RegisterWindowViewModel : ViewModelBase // ändrat från att ärva från MainWindow till ViewModelBase
     {
 
-        User user = new User();
+        //User user = new User();
 
         // Refererar till Usermanager klassen, hur hämtar jag listan?? 
         private Usermanager userManager; 
@@ -89,6 +89,9 @@ namespace FitTrack.ViewModel
         // Konstruktor
         public RegisterWindowViewModel()
         {
+            // skapar en instans av Usermanager
+            userManager = new Usermanager();
+
             // skapat en lista av Countries
             CountryList = new List<string> { "Denmark", "Norway", "Sweden" };
 
@@ -98,6 +101,8 @@ namespace FitTrack.ViewModel
         // Metod
         private void RegisterNewUser(object parameter)
         {
+            // bool för att kontrollera om en användare finns eller inte?? 
+
             if(ConfirmPasswordInput != PasswordInput)
             {
                 MessageBox.Show("Passwords does not match.");
@@ -105,7 +110,7 @@ namespace FitTrack.ViewModel
             }
 
             // Om användarnamnet redan är upptaget ska ett varningsmeddelande visas.
-            if(user.UserName == UserInput) // funkar ej
+            if (userManager.Users == UserName) // funkar ej, behöver binda på något sätt? 
             {
                 MessageBox.Show("Username already exist.");
             }
@@ -127,7 +132,7 @@ namespace FitTrack.ViewModel
 
                 Application.Current.MainWindow.Close();
                 OpenMainWindow();
-            }            
+            }
         }
 
         private void OpenMainWindow()

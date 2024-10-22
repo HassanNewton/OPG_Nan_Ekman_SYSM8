@@ -7,8 +7,16 @@
         mc:Ignorable="d"
         Title="Welcome to your UserWindow" Height="450" Width="800">
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Content="Welcome to User Details" FontSize="30" HorizontalAlignment="Center" />
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Image Source="C:\Users\NänEkman\Source\Repos\OPG_Nan_Ekman_SYSM8\FitTrack\Images\userProfile.png" Height="100" OpacityMask="#FFE34363"  />
+            <Label Content="User Details" FontSize="40" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="Crimson" Opacity="0.8" />
+            <Label Content="Current Username:" HorizontalAlignment="Center" />
+            <TextBox Width="200" Height="30" Text="{Binding CHOOSEPROPERTYNAME, UpdateSourceTrigger=PropertyChanged}" />
+
+
+            <Button Content="SAVE" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding SaveUserDetails}" Opacity="0.8" Margin="10" />
+            <Button Content="CANCEL" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding CancelCommand}" Opacity="0.8" Margin="10" />
         </StackPanel>
+
     </Grid>
 </Window>
