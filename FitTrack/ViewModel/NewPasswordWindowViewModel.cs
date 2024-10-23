@@ -1,4 +1,5 @@
-﻿using FitTrack.MVVM;
+﻿using FitTrack.Model;
+using FitTrack.MVVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,25 @@ namespace FitTrack.ViewModel
 {
     public class NewPasswordWindowViewModel : ViewModelBase
     {
+        // skapa ett objekt av Usermanager
+        private Usermanager usermanager;
 
+        // skapat en selectedUser av User objekt
+
+        private User selectedUser;
+
+        public User SelectedUser
+        {
+            get { return selectedUser; }
+            set 
+            
+            { 
+                selectedUser = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // Egenskaper
         private string userInput;
 
         public string UserInput
@@ -59,15 +78,28 @@ namespace FitTrack.ViewModel
             }
         }
 
+        private string securityAnswerInput;
+        public string SecurityAnswerInput
+        {
+            get { return securityAnswerInput; }
+            set
+            {
+                securityAnswerInput = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public RelayCommand RegisterNewPasswordCommand { get; }
-        public RelayCommand ValidateUserCommand {  get; }
+       //public RelayCommand ValidateUserCommand {  get; }
 
         // Konstruktor
         public NewPasswordWindowViewModel()
         {
             RegisterNewPasswordCommand = new RelayCommand(RegisterNewPassword);
-            ValidateUserCommand = new RelayCommand(ValidateUserSecurityQuestion);
+            //ValidateUserCommand = new RelayCommand(ValidateUserSecurityQuestion);
+
+            usermanager = new Usermanager();
         }
 
         // Metoder
@@ -84,9 +116,14 @@ namespace FitTrack.ViewModel
                 MessageBox.Show("Please fill all the boxes.");
                 return;
             }
+            if (SelectedUser == null)
+            {
+                MessageBox.Show("User not found");
+            }
             else
             {
                 // KOD-LOGIK
+                OnPropertyChanged(nameof(SelectedUser));
 
                 Application.Current.MainWindow.Close();
                 OpenMainWindow();

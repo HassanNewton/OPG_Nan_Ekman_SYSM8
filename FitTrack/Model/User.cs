@@ -29,7 +29,7 @@ namespace FitTrack.Model
         // Konstruktor (osäker om jag ska ha alla parametrar i konstruktorn)
         public User()
         {
-
+            SecurityQuestion = "What was the name of your first pet?";
         }
 
 
@@ -55,11 +55,11 @@ namespace FitTrack.Model
             }
         }
 
-        public void ResetPassword(string securityAnswer)
+        public void ResetPassword(string providedAnswer)
         {
-            if(securityAnswer == SecurityAnswer)
+            if(SecurityAnswer == providedAnswer)
             {
-                Console.WriteLine("Password reset.");
+                Console.WriteLine("Password reset succeded.");
             }
             else
             {
