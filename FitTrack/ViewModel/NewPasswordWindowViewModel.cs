@@ -100,29 +100,36 @@ namespace FitTrack.ViewModel
         // Metoder
         private void RegisterNewPassword(object parameter)
         {
-            // Kontrollera om användarnamn, lösenord och confirm lösenord inte är tomma
-            if (string.IsNullOrEmpty(UserInput) || string.IsNullOrEmpty(PasswordInput) ||
-                string.IsNullOrEmpty(ConfirmPasswordInput))
+            try
             {
-                MessageBox.Show("Please fill all the boxes.");
-                return;
-            }
-            bool userExist = usermanager.CheckUsername(UserInput); 
-            if (!userExist)
-            {
-               
-                MessageBox.Show("User does not exist");
-                return;
-            }
-            if (ConfirmPasswordInput != PasswordInput)
-            {
-                MessageBox.Show("Passwords does not match.");
-                return;
-            }
-            // Logik för att uppdatera/spara nya lösenordet för användaren
+                // Kontrollera om användarnamn, lösenord och confirm lösenord inte är tomma
+                if (string.IsNullOrEmpty(UserInput) || string.IsNullOrEmpty(PasswordInput) ||
+                    string.IsNullOrEmpty(ConfirmPasswordInput))
+                {
+                    MessageBox.Show("Please fill all the boxes.");
+                    return;
+                }
+                // kollar om användare finns i Usermanager listan
+                bool userExist = usermanager.CheckUsername(UserInput);
+                if (!userExist)
+                {
+                    MessageBox.Show("User does not exist");
+                    return;
+                }
+                if (ConfirmPasswordInput != PasswordInput)
+                {
+                    MessageBox.Show("Passwords does not match.");
+                    return;
+                }
+                // Logik för att uppdatera/spara nya lösenordet för användaren
 
 
-            OpenMainWindow();
+                OpenMainWindow();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void OpenMainWindow()
