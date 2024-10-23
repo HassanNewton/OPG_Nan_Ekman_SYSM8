@@ -94,17 +94,12 @@ namespace FitTrack.ViewModel
                 "What was your first teacher's name?",
             };
 
-            //usermanager = new Usermanager();
+            usermanager = new Usermanager();
         }
 
         // Metoder
         private void RegisterNewPassword(object parameter)
         {
-            if (ConfirmPasswordInput != PasswordInput)
-            {
-                MessageBox.Show("Passwords does not match.");
-                return;
-            }
             // Kontrollera om användarnamn, lösenord och confirm lösenord inte är tomma
             if (string.IsNullOrEmpty(UserInput) || string.IsNullOrEmpty(PasswordInput) ||
                 string.IsNullOrEmpty(ConfirmPasswordInput))
@@ -112,31 +107,31 @@ namespace FitTrack.ViewModel
                 MessageBox.Show("Please fill all the boxes.");
                 return;
             }
-            if (usermanager.CheckUsername(UserInput))
+            bool userExist = usermanager.CheckUsername(UserInput); 
+            if (!userExist)
             {
-                MessageBox.Show("User already exist");
+               
+                MessageBox.Show("User does not exist");
                 return;
             }
-
-            User newUser = new User
+            if (ConfirmPasswordInput != PasswordInput)
             {
-                UserName = UserInput,
-                Password = PasswordInput,
-            };
+                MessageBox.Show("Passwords does not match.");
+                return;
+            }
+            // Logik för att uppdatera/spara nya lösenordet för användaren
 
-            usermanager.AddUser(newUser);
-            MessageBox.Show("NEW USER CREATED");
 
-            Application.Current.MainWindow.Close();
             OpenMainWindow();
-
         }
-
 
         private void OpenMainWindow()
         {
             // Skapa en ny instans av MainWindow
             MainWindow mainWindow = new MainWindow();
+
+            // stäng befintligt fönster
+            Application.Current.MainWindow.Close();
 
             // Sätt det nya fönstret som huvudfönster och visa det
             Application.Current.MainWindow = mainWindow;
