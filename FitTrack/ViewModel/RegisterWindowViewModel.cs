@@ -77,7 +77,6 @@ namespace FitTrack.ViewModel
             set 
             { 
                 countryComboBox = value; 
-                //OnPropertyChanged(); // behövs ej? 
             }
         }
 

@@ -10,7 +10,18 @@ namespace FitTrack.Model
     {
         // Egenskaper
         public string Country { get; set; }
-        public string SecurityQuestion { get; set; } 
+
+        private string securityQuestion;
+
+        public string SecurityQuestion
+        {
+            get { return securityQuestion; }
+            set 
+            { 
+                securityQuestion = value;                
+            }
+        }
+
 
         private string securityAnswer; 
         public string SecurityAnswer
@@ -26,10 +37,12 @@ namespace FitTrack.Model
             }
         }
 
+
+
         // Konstruktor (osäker om jag ska ha alla parametrar i konstruktorn)
         public User()
         {
-            SecurityQuestion = "What was the name of your first pet?";
+
         }
 
 

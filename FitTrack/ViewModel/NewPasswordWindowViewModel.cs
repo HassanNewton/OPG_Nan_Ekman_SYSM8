@@ -18,6 +18,9 @@ namespace FitTrack.ViewModel
 
         private User selectedUser;
 
+        // Lista med securityQuestions till ComboBox
+        public List<string> SecurityQuestion { get; set; }
+
         public User SelectedUser
         {
             get { return selectedUser; }
@@ -78,16 +81,16 @@ namespace FitTrack.ViewModel
             }
         }
 
-        private string securityAnswerInput;
-        public string SecurityAnswerInput
-        {
-            get { return securityAnswerInput; }
-            set
-            {
-                securityAnswerInput = value;
-                OnPropertyChanged();
-            }
-        }
+        //private string securityAnswerInput;
+        //public string SecurityAnswerInput
+        //{
+        //    get { return securityAnswerInput; }
+        //    set
+        //    {
+        //        securityAnswerInput = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
 
         public RelayCommand RegisterNewPasswordCommand { get; }
@@ -98,6 +101,14 @@ namespace FitTrack.ViewModel
         {
             RegisterNewPasswordCommand = new RelayCommand(RegisterNewPassword);
             //ValidateUserCommand = new RelayCommand(ValidateUserSecurityQuestion);
+
+            // skapat en lista av SecurityQuestion
+            SecurityQuestion = new List<string> 
+            { 
+                "What was the name of your first pet?",
+                "In what city were you born?",
+                "What was your first teacher's name?",
+            };
 
             usermanager = new Usermanager();
         }
@@ -130,28 +141,33 @@ namespace FitTrack.ViewModel
             }
         }
 
-        private void ValidateUserSecurityQuestion(object parameter)
+        //private void ValidateUserSecurityQuestion(object parameter)
+        //{
+        //    // Användaren kommer behöva svara på en säkerhetsfråga för att validera att det är rätt användare   
+
+        //    // Tillfälligt med MessageBox
+        //    string message = "Was Alice your kindergarten teacher's name?";
+        //    string title = "Security Question";
+        //    MessageBoxButton buttons = MessageBoxButton.YesNo;
+
+        //    // Använd MessageBoxResult istället för DialogResult
+        //    MessageBoxResult result = MessageBox.Show(message, title, buttons);
+
+        //    if (result == MessageBoxResult.Yes)
+        //    {
+        //        // Stäng fönstret om användaren svarade "Yes"
+        //        MessageBox.Show("Correct! Welcome!");
+        //    }
+        //    else
+        //    {
+        //        // Om användare svarar "No"
+        //        MessageBox.Show("Security check failed.");
+        //    }
+        //}
+
+        private void FindUser()
         {
-            // Användaren kommer behöva svara på en säkerhetsfråga för att validera att det är rätt användare   
 
-            // Tillfälligt med MessageBox
-            string message = "Was Alice your kindergarten teacher's name?";
-            string title = "Security Question";
-            MessageBoxButton buttons = MessageBoxButton.YesNo;
-
-            // Använd MessageBoxResult istället för DialogResult
-            MessageBoxResult result = MessageBox.Show(message, title, buttons);
-
-            if (result == MessageBoxResult.Yes)
-            {
-                // Stäng fönstret om användaren svarade "Yes"
-                MessageBox.Show("Correct! Welcome!");
-            }
-            else
-            {
-                // Om användare svarar "No"
-                MessageBox.Show("Security check failed.");
-            }
         }
 
         private void OpenMainWindow()
