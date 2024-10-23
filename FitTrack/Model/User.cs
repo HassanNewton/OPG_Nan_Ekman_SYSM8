@@ -33,7 +33,6 @@ namespace FitTrack.Model
             set
             {
                 securityAnswer = value;
-                //OnPropertyChanged();
             }
         }
 

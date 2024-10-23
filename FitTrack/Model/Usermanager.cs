@@ -42,6 +42,8 @@ namespace FitTrack.Model
             return false; // Om användarnamnet inte hittas, returnera false
         }
 
+        
+
         public void AddUser(User newUser)
         {
             Users.Add(newUser);

@@ -8,11 +8,21 @@ namespace FitTrack.Model
 {
     public class AdminUser : User
     {
+        // OBS OBS OBS!! Programmet kraschar när jag skapar ny instans av Usermanager i AdminUser
+        //Usermanager userManager = new Usermanager();
+
+
         public void ManageAllWorkouts()
         {
-            Usermanager userManager = new Usermanager();
-            // Hämta alla användare från Usermanager klassen? 
-            userManager.GetAllUsers();
+            
+            
+            
         }
+
+        //private void GetUserList()
+        //{
+        //    // Hämta alla användare från Usermanager klassen? 
+        //    userManager.GetAllUsers();
+        //}
     }
 }
