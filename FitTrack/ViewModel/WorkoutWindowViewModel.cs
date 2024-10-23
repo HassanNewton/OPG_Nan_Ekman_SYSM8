@@ -32,6 +32,9 @@ namespace FitTrack.ViewModel
         public RelayCommand AddWorkOutCommand { get; }
         public RelayCommand OpenUserDetailsCommand { get; }
         public RelayCommand OpenWorkoutDetailsWindowCommand { get; }
+        public RelayCommand RemoveWorkoutCommand { get; }
+        public RelayCommand InfoCommand { get; }
+        public RelayCommand SignOutCommand { get; }
 
         // Konstruktor
         public WorkoutWindowViewModel()
@@ -41,6 +44,9 @@ namespace FitTrack.ViewModel
             AddWorkOutCommand = new RelayCommand(AddWorkOut);
             //OpenUserDetailsCommand = new RelayCommand(OpenDetails); 
             OpenWorkoutDetailsWindowCommand = new RelayCommand(OpenWorkoutDetailsWindow);
+            RemoveWorkoutCommand = new RelayCommand(RemoveWorkOut);
+            InfoCommand = new RelayCommand(GetInfo);
+            SignOutCommand = new RelayCommand(SignOut);
         }
 
         // Metoder
@@ -57,9 +63,9 @@ namespace FitTrack.ViewModel
             addWorkoutWindow.Show();
         }
 
-        private void RemoveWorkOut()
+        private void RemoveWorkOut(object parameter)
         {
-
+            // tar bort ett specifikt träningspass markerat i listan
         }
 
         private void OpenDetails(Workout workout)
@@ -86,6 +92,27 @@ namespace FitTrack.ViewModel
             // Sätt det nya fönstret som huvudfönster och visa det
             Application.Current.MainWindow = workoutDetailsWindow;
             workoutDetailsWindow.Show();
+        }
+
+        private void GetInfo(object parameter)
+        {
+            // Liten "info"-knapp som poppar upp en liten ruta där man kan läsa om hur man använder appen och FitTrack som företag
+
+            // MessageBox eller nytt fönster/page? 
+            MessageBox.Show("INFORMATION OM FITTRACK");
+        }
+
+        private void SignOut(object parameter)
+        {
+            // Skapa en ny instans av MainWindow
+            MainWindow mainWindow = new MainWindow();
+
+            // Stäng MainWindow
+            Application.Current.MainWindow.Close();
+
+            // Sätt det nya fönstret som huvudfönster och visa det
+            Application.Current.MainWindow = mainWindow;
+            mainWindow.Show();
         }
     }
 }

@@ -11,6 +11,9 @@
             <Button Content="USER" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding OpenUserDetailsCommand}" Opacity="0.8"/>
             <Button Content="ADD WORKOUT" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding AddWorkOutCommand}" Opacity="0.8"/>
             <Button Content="DETAILS" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding OpenWorkoutDetailsWindowCommand}" Opacity="0.8"/>
+            <Button Content="REMOVE" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding RemoveWorkoutCommand}" Opacity="0.8"/>
+            <Button Content="INFO" Width="50" Height="20" Background="Crimson" FontFamily="Arial" Command="{Binding InfoCommand}" Opacity="0.8"/>
+            <Button Content="SIGN OUT" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding SignOutCommand}" Opacity="0.8"/>
         </StackPanel>
     </Grid>
 </Window>
