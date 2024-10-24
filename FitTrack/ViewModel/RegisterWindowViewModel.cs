@@ -31,6 +31,7 @@ namespace FitTrack.ViewModel
 
         // Refererar till Usermanager klassen, hur hämtar jag listan?? 
         //private Usermanager userManager = new Usermanager();
+        Usermanager usermanager;
 
         // Egenskaper för databindning 
         private string userInput;
@@ -87,8 +88,10 @@ namespace FitTrack.ViewModel
         public RelayCommand RegisterUserCommand { get; }
 
         // Konstruktor
-        public RegisterWindowViewModel()
+        public RegisterWindowViewModel(Usermanager usermanager)
         {
+            this.usermanager = usermanager;
+
             // skapar en instans av Usermanager
             //userManager = new Usermanager();
 
@@ -121,11 +124,11 @@ namespace FitTrack.ViewModel
                     return;
                 }
                 // Kontrollerar om anvärdarnamet finns
-                //if (userManager.CheckUsername(UserInput))
-                //{
-                //    MessageBox.Show("Username already exist.");
-                //    return;
-                //}
+                if (usermanager.CheckUsername(UserInput))
+                {
+                    MessageBox.Show("Username already exist.");
+                    return;
+                }
 
                 // logik för att spara ny användare i listan.
                 User newUser = new User();
@@ -133,12 +136,11 @@ namespace FitTrack.ViewModel
                     newUser.UserName = UserInput;       // Sätt användarnamn
                     newUser.Password = PasswordInput;     // Sätt lösenord
                 }
-                //userManager.AddUser(newUser);
+                usermanager.AddUser(newUser);
 
                 MessageBox.Show($"New user created {newUser.UserName}");
 
                 OpenMainWindow();
-
             }
             catch (Exception ex)
             {
@@ -149,7 +151,7 @@ namespace FitTrack.ViewModel
         private void OpenMainWindow()
         {
             // Skapa en ny instans av MainWindow
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(usermanager);
 
             // Stäng MainWindow
             Application.Current.MainWindow.Close();

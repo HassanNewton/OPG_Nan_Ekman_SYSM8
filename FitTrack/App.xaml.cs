@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using FitTrack.Model;
+using System.Configuration;
 using System.Data;
 using System.Windows;
 
@@ -17,14 +18,17 @@ namespace FitTrack
             var splashScreen = new View.SplashScreen();
             splashScreen.Show();
 
+            // skapa instans av Usermanager
+            Usermanager usermanager = new Usermanager();
+
             // Kort fördröjning (4 sekunder)
-            Thread.Sleep(4000);  // Simulera fördröjning för att visa splash-skärmen
+            Thread.Sleep(1000);  // Simulera fördröjning för att visa splash-skärmen
 
             // Stäng splashskärmen
             splashScreen.Hide();
 
             // Starta mainWindow
-            var mainWindow = new MainWindow();
+            var mainWindow = new MainWindow(usermanager);
             mainWindow.Show();
         }
     }

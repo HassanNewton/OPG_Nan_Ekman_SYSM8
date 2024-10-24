@@ -1,4 +1,5 @@
-﻿using FitTrack.ViewModel;
+﻿using FitTrack.Model;
+using FitTrack.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,15 @@ namespace FitTrack
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+
+        public MainWindow(Usermanager usermanager) 
         {
+
             InitializeComponent();
-            ViewModel.MainWindowViewModel mainWindowViewModel = new ViewModel.MainWindowViewModel();
-            DataContext = mainWindowViewModel;
-            //DataContext = new MainWindowViewModel();
+            ////Usermanager usermanager = new Usermanager();
+            //ViewModel.MainWindowViewModel mainWindowViewModel = new ViewModel.MainWindowViewModel(usermanager);
+            //DataContext = mainWindowViewModel;
+            DataContext = new MainWindowViewModel(usermanager);
         }
     }
 }

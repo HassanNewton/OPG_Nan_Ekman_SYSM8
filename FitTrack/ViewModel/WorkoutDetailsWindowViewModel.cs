@@ -11,6 +11,10 @@ namespace FitTrack.ViewModel
 {
     public class WorkoutDetailsWindowViewModel : MainWindowViewModel
     {
+        // skapat tillfällig metod för att testa
+        public WorkoutDetailsWindowViewModel(Usermanager usermanager) : base(usermanager)
+        {
 
+        }
     }
 }

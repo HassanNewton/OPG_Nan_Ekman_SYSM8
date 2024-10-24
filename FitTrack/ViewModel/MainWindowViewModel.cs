@@ -53,26 +53,14 @@ namespace FitTrack.ViewModel
         public RelayCommand NewPasswordCommand { get; }
 
         // Konstruktor
-        public MainWindowViewModel()
+        public MainWindowViewModel(Usermanager usermanager)
         {
             // skapar en instans av Usermanager
-            userManager = new Usermanager();
+            this.userManager = usermanager;
 
             SignInCommand = new RelayCommand(SignIn);
             RegisterCommand = new RelayCommand(Register);
-            NewPasswordCommand = new RelayCommand(NewPassword);
-
-            // FLYTTA SPLASHSCREEN?? STARTAS NU UPP VARJE GÅNG JAG STÄNGER ETT FÖNSTER OCH ÖPPNAR MAIN
-
-            //// Skapa och visa splashskärmen
-            //var splashScreen = new View.SplashScreen();
-            //splashScreen.Show();
-
-            //// Kort fördröjning (4 sekunder)
-            //System.Threading.Thread.Sleep(1000);
-
-            //// Stäng splashskärmen
-            //splashScreen.Close();           
+            NewPasswordCommand = new RelayCommand(NewPassword);      
         }
 
         // Metoder

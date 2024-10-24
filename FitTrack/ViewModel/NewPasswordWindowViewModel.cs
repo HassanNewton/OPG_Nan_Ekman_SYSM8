@@ -147,7 +147,7 @@ namespace FitTrack.ViewModel
         private void OpenMainWindow()
         {
             // Skapa en ny instans av MainWindow
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(usermanager);
 
             // stäng befintligt fönster
             Application.Current.MainWindow.Close();

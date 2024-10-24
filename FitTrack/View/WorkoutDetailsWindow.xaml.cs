@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FitTrack.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,8 @@ namespace FitTrack.View
         public WorkoutDetailsWindow()
         {
             InitializeComponent();
-            ViewModel.WorkoutDetailsWindowViewModel workoutDetailsWindowViewModel = new ViewModel.WorkoutDetailsWindowViewModel();
+            Usermanager usermanager = new Usermanager();
+            ViewModel.WorkoutDetailsWindowViewModel workoutDetailsWindowViewModel = new ViewModel.WorkoutDetailsWindowViewModel(usermanager);
             DataContext = workoutDetailsWindowViewModel;
         }
     }

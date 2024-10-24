@@ -14,7 +14,8 @@ namespace FitTrack.ViewModel
     public class WorkoutWindowViewModel : ViewModelBase
     {
         // Egenskaper
-        Usermanager usermanager = new Usermanager();
+        //Usermanager usermanager = new Usermanager();
+        Usermanager usermanager;
 
         private User user;
 
@@ -109,7 +110,7 @@ namespace FitTrack.ViewModel
         private void SignOut(object parameter)
         {
             // Skapa en ny instans av MainWindow
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(usermanager);
 
             // Stäng MainWindow
             Application.Current.MainWindow.Close();
