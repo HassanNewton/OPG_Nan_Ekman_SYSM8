@@ -15,15 +15,10 @@ namespace FitTrack.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        // lista över alla användare - gör public för att komma åt från andra klasser + private set?
-        //private ObservableCollection<Person> Users { get; set; } 
-
         // Refererar till Usermanager klassen, som styr listan, men hur hämtar jag listan?? 
         private Usermanager userManager;
 
         // Egenskaper
-        //public string LabelTitle { get; set; } // tillfälligt utkommenterad, vad är detta?? 
-
         private string usernameInput;
         private string passwordInput;
 
@@ -80,6 +75,7 @@ namespace FitTrack.ViewModel
             if (ValidateUser(UsernameInput, PasswordInput))
             {
                 MessageBox.Show($"Welcome {UsernameInput}");
+                
                 OpenWorkoutWindow();
             }
             else
@@ -132,17 +128,25 @@ namespace FitTrack.ViewModel
 
         private void NewPassword(object parameter)
         {
-            // tillfälligt meddelande för att kolla att knappen fungerar
-            //MessageBox.Show("Du har valt nytt lösenord");
             OpenNewPasswordWindow();
         }
 
         private void OpenNewPasswordWindow()
         {
+            // OBS OBS! 
+            // Main stängs bara om jag trycker på knappen Forgot Password först när programmet startas,
+            // men om jag registrerar användare och sedan väljer forgot password så stängs inte main
+
+            // Skapa en ny instans av NewPasswordWindow
             NewPasswordWindow newPasswordWindow = new NewPasswordWindow();
+
+            // Stäng MainWindow
             Application.Current.MainWindow.Close();
+
+            // Sätt det nya fönstret som huvudfönster och visa det
             Application.Current.MainWindow = newPasswordWindow;
             newPasswordWindow.Show();
+
         }
     }
 }

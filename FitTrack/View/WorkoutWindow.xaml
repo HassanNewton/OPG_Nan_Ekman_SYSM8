@@ -5,15 +5,92 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitTrack.View"
         mc:Ignorable="d"
-        Title="WorkoutWindow" Height="450" Width="800">
+        Title= "{Binding Person.UserName}" Height="450" Width="800" Background="LightGray"> <!--Testa binda UserName till Fönster Titel-->
     <Grid>
-        <StackPanel>
-            <Button Content="USER" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding OpenUserDetailsCommand}" Opacity="0.8"/>
-            <Button Content="ADD WORKOUT" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding AddWorkOutCommand}" Opacity="0.8"/>
-            <Button Content="DETAILS" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding OpenWorkoutDetailsWindowCommand}" Opacity="0.8"/>
-            <Button Content="REMOVE" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding RemoveWorkoutCommand}" Opacity="0.8"/>
-            <Button Content="INFO" Width="50" Height="20" Background="Crimson" FontFamily="Arial" Command="{Binding InfoCommand}" Opacity="0.8"/>
-            <Button Content="SIGN OUT" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding SignOutCommand}" Opacity="0.8"/>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition /> <!--Vänster--> <!--width="*" ?--> 
+                <!--<ColumnDefinition /> --><!--Mitten-->
+                <ColumnDefinition /> <!--Höger-->
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <Label/>
+                <Button Grid.Column="0" Content="INFO" Width="70" Height="20" Background="Crimson" FontFamily="Arial" 
+                    Command="{Binding InfoCommand}" Opacity="0.8" HorizontalAlignment="Left" />
+                <Label/>
+                <Button Content="USER" Width="70" Height="20" Background="Crimson" FontFamily="Arial" 
+                        Command="{Binding UserCommand}" Opacity="0.8" HorizontalAlignment="Right" />     <!--Command ej skapad i codebehind ännu-->
+            </StackPanel>
+            
+            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label/>
+                <Button Content="SIGN OUT" Width="70" Height="20" Background="Crimson" FontFamily="Arial" 
+                        Command="{Binding SignOutCommand}" Opacity="0.8" HorizontalAlignment="Right"/>
+                <Label/>
+            </StackPanel>
+
+        </Grid>
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <DataGrid
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                ItemsSource="{Binding Items}"
+                SelectedItem="{Binding SelectedItem}">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Datum" Binding="{Binding XXXX}" Width="4*"/>
+                    <DataGridTextColumn Header="Träningspass" Binding="{Binding WorkoutTypeComboBox}" Width="4*"/>
+                    <!--<DataGridTextColumn Header="Varaktighet" Binding="{Binding Quantity}" Width="2*"/>-->
+                </DataGrid.Columns>
+
+            </DataGrid>
+            
+            <StackPanel Grid.Row="2" Grid.Column="2">
+                <Label Content="Username:" />
+                <TextBox Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+
+                <Label Content="Add Workout:" />
+                <Button Content="ADD WORKOUT" Background="Crimson" FontFamily="Arial" Command="{Binding AddWorkOutCommand}" Opacity="0.8" Margin="5"/>
+                <Label Content="Workout Details:" />
+                <Button Content="DETAILS" Background="Crimson" FontFamily="Arial" Command="{Binding OpenWorkoutDetailsWindowCommand}" Opacity="0.8" Margin="5"/>
+                <Label Content="Remove workout" />
+                <Button Content="REMOVE" Background="Crimson" FontFamily="Arial" Command="{Binding RemoveWorkoutCommand}" Opacity="0.8" Margin="5"/>
+
+                <Label Content="Serial Number" />
+                <TextBox Text="{Binding SelectedItem.SerieNbr, UpdateSourceTrigger=PropertyChanged}" />
+                <Label Content="Quantity" />
+                <TextBox Text="{Binding SelectedItem.Quantity, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+
+        </Grid>
     </Grid>
 </Window>
+
+        <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+            <Button Content="INFO" Width="70" Height="20" Background="Crimson" FontFamily="Arial" Command="{Binding InfoCommand}" Opacity="0.8"/>
+            <Label/>
+    <Button Content="USER" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding OpenUserDetailsCommand}" Opacity="0.8"/>
+            <Button Content="SIGN OUT" Width="70" Height="20" Background="Crimson" FontFamily="Arial" Command="{Binding SignOutCommand}" Opacity="0.8"/>
+        </StackPanel>-->
+           
+        
+
+
+            <!--
+            <Button Content="ADD WORKOUT" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding AddWorkOutCommand}" Opacity="0.8"/>
+            <Button Content="DETAILS" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding OpenWorkoutDetailsWindowCommand}" Opacity="0.8"/>
+            <Button Content="REMOVE" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding RemoveWorkoutCommand}" Opacity="0.8"/>-->
+

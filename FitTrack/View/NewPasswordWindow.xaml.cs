@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FitTrack.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,8 @@ namespace FitTrack.View
         public NewPasswordWindow()
         {
             InitializeComponent();
-            ViewModel.NewPasswordWindowViewModel newPasswordWindowViewModel = new ViewModel.NewPasswordWindowViewModel();
+            Usermanager usermanager = new Usermanager();
+            ViewModel.NewPasswordWindowViewModel newPasswordWindowViewModel = new ViewModel.NewPasswordWindowViewModel(usermanager);
             DataContext = newPasswordWindowViewModel;
         }
     }

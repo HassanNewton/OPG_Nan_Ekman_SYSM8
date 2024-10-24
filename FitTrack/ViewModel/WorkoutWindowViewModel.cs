@@ -3,6 +3,7 @@ using FitTrack.MVVM;
 using FitTrack.View;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -35,7 +36,9 @@ namespace FitTrack.ViewModel
         public RelayCommand AddWorkOutCommand { get; }
         public RelayCommand OpenUserDetailsCommand { get; }
         public RelayCommand OpenWorkoutDetailsWindowCommand { get; }
-        public RelayCommand RemoveWorkoutCommand { get; }
+
+        public RelayCommand RemoveWorkoutCommand {  get; } // Öppna upp get? 
+
         public RelayCommand InfoCommand { get; }
         public RelayCommand SignOutCommand { get; }
 
@@ -43,10 +46,16 @@ namespace FitTrack.ViewModel
         public WorkoutWindowViewModel(Usermanager usermanager)
         {
             this.usermanager = usermanager;
-            WorkoutList = new List<Workout>();
+
+            WorkoutList = new ObservableCollection<Person>
+            {
+            new Workout { UserName = "user1", Password = "1234" },
+            new Workout { UserName = "user2", Password = "5678" },
+            new Workout { UserName = "adminUser", Password = "admin123" }
+            };
 
             AddWorkOutCommand = new RelayCommand(AddWorkOut);
-            //OpenUserDetailsCommand = new RelayCommand(OpenDetails); 
+            // OpenUserDetailsCommand = new RelayCommand(OpenDetails); // HUR SKAPAR JAG RELAY NÄR OpenDetails() skickar med (Workout workout)?? 
             OpenWorkoutDetailsWindowCommand = new RelayCommand(OpenWorkoutDetailsWindow);
             RemoveWorkoutCommand = new RelayCommand(RemoveWorkOut);
             InfoCommand = new RelayCommand(GetInfo);
@@ -70,7 +79,7 @@ namespace FitTrack.ViewModel
         private void RemoveWorkOut(object parameter)
         {
             // tar bort ett specifikt träningspass markerat i listan
-
+            // WorkoutList.Remove(selectedWorkout); // selectedWorkout?
         }
 
         private void OpenDetails(Workout workout)

@@ -157,7 +157,7 @@ namespace FitTrack.ViewModel
             Application.Current.MainWindow.Close();
 
             // Sätt det nya fönstret som huvudfönster och visa det
-            Application.Current.MainWindow = mainWindow;
+           // Application.Current.MainWindow = mainWindow;
             mainWindow.Show();
         }
 

@@ -12,7 +12,7 @@ namespace FitTrack.ViewModel
     public class NewPasswordWindowViewModel : ViewModelBase
     {
         //// skapa ett objekt av Usermanager
-        private Usermanager usermanager;
+        Usermanager usermanager;
 
         // Lista med securityQuestions till ComboBox
         public List<string> SecurityQuestion { get; set; }
@@ -82,8 +82,10 @@ namespace FitTrack.ViewModel
         public RelayCommand RegisterNewPasswordCommand { get; }
 
         // Konstruktor
-        public NewPasswordWindowViewModel()
+        public NewPasswordWindowViewModel(Usermanager usermanager)
         {
+            this.usermanager = usermanager;
+
             RegisterNewPasswordCommand = new RelayCommand(RegisterNewPassword);
 
             // skapat en lista av SecurityQuestion
@@ -122,20 +124,15 @@ namespace FitTrack.ViewModel
                     return;
                 }
                 // Logik för att uppdatera/spara nya lösenordet för användaren
-
-                //Nedan borde fungera?? Eller gör jag fel? Men användare kan inte logga in med det nya lösenordet
                 bool updatedPassword = usermanager.UpdatePassword(UserInput, PasswordInput);
                 if (updatedPassword)
                 {
-                    MessageBox.Show("Changed password");
+                    MessageBox.Show("Changed password successfully!");
                 }
                 else
                 {
                     MessageBox.Show("Failed to update your password");
                 }
-
-
-
                 OpenMainWindow();
             }
             catch (Exception ex)
