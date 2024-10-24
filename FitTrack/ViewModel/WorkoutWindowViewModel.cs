@@ -6,9 +6,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Navigation;
 
 namespace FitTrack.ViewModel
 {
@@ -88,7 +90,6 @@ namespace FitTrack.ViewModel
                 // tar bort ett specifikt träningspass markerat i listan
                 WorkoutList.Remove(selectedWorkout);
             }
-            
         }
 
         private void OpenDetails(Workout workout)
@@ -120,9 +121,17 @@ namespace FitTrack.ViewModel
         private void GetInfo(object parameter)
         {
             // Liten "info"-knapp som poppar upp en liten ruta där man kan läsa om hur man använder appen och FitTrack som företag
-
             // MessageBox eller nytt fönster/page? 
+
             MessageBox.Show("INFORMATION ABOUT FITTRACK");
+
+            // HUR ANROPAR JAG EN PAGE??
+            //FitTrackInfo fitTrackInfo = new FitTrackInfo();
+
+            //// Sätt det nya fönstret som huvudfönster och visa det
+            //Application.Current.MainWindow = fitTrackInfo;
+            //fitTrackInfo.Show();
+
         }
 
         private void SignOut(object parameter)

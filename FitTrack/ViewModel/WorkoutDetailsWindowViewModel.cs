@@ -37,6 +37,7 @@ namespace FitTrack.ViewModel
 
         private void SaveWorkout()
         {
+            // TILLFÄLLIG
             if (workout == null)
             {
                 

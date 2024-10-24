@@ -42,7 +42,6 @@ namespace FitTrack.Model
             return false; // Om användarnamnet inte hittas, returnera false
         }
 
-        // TEST UPPDATERA LÖSENORD
         public bool UpdatePassword(string userName, string newPassword)
         {
             foreach (var user in Users)
@@ -56,7 +55,6 @@ namespace FitTrack.Model
             return false;
         }
         
-
         public void AddUser(User newUser)
         {
             Users.Add(newUser);
