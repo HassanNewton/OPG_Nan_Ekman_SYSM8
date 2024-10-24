@@ -14,6 +14,8 @@ namespace FitTrack.ViewModel
     public class WorkoutWindowViewModel : ViewModelBase
     {
         // Egenskaper
+        Usermanager usermanager = new Usermanager();
+
         private User user;
 
         public User User
@@ -37,8 +39,9 @@ namespace FitTrack.ViewModel
         public RelayCommand SignOutCommand { get; }
 
         // Konstruktor
-        public WorkoutWindowViewModel()
+        public WorkoutWindowViewModel(Usermanager usermanager)
         {
+            this.usermanager = usermanager;
             WorkoutList = new List<Workout>();
 
             AddWorkOutCommand = new RelayCommand(AddWorkOut);
@@ -66,6 +69,7 @@ namespace FitTrack.ViewModel
         private void RemoveWorkOut(object parameter)
         {
             // tar bort ett specifikt träningspass markerat i listan
+
         }
 
         private void OpenDetails(Workout workout)

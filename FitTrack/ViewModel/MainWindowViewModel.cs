@@ -64,18 +64,20 @@ namespace FitTrack.ViewModel
 
             // FLYTTA SPLASHSCREEN?? STARTAS NU UPP VARJE GÅNG JAG STÄNGER ETT FÖNSTER OCH ÖPPNAR MAIN
 
-            // Skapa och visa splashskärmen
-            var splashScreen = new View.SplashScreen();
-            splashScreen.Show();
+            //// Skapa och visa splashskärmen
+            //var splashScreen = new View.SplashScreen();
+            //splashScreen.Show();
 
-            // Kort fördröjning (4 sekunder)
-            System.Threading.Thread.Sleep(1000);
+            //// Kort fördröjning (4 sekunder)
+            //System.Threading.Thread.Sleep(1000);
 
-            // Stäng splashskärmen
-            splashScreen.Close();           
+            //// Stäng splashskärmen
+            //splashScreen.Close();           
         }
 
         // Metoder
+
+        // behöver jag ändra här med i min MainWindow för att användaren ska kunna använda det nya lösenordet från NewPasswordViewModel?
         private void SignIn(object parameter)
         {
             // Kontrollera om användarnamn och lösenord inte är tomma
@@ -98,6 +100,8 @@ namespace FitTrack.ViewModel
                 MessageBox.Show("Invalid username or password.");
             }
         }
+
+        // behöver jag ändra här med i min MainWindow för att användaren ska kunna använda det nya lösenordet från NewPasswordViewModel?
 
         private bool ValidateUser(string username, string password)
         {

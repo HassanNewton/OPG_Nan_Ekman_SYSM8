@@ -23,7 +23,7 @@ namespace FitTrack.View
         public SplashScreen()
         {
             InitializeComponent();
-            DataContext = new SplashScreenViewModel();
+            DataContext = new ViewModel.SplashScreenViewModel();
         }
     }
 }

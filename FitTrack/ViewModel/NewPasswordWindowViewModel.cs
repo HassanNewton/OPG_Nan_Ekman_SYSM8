@@ -123,6 +123,18 @@ namespace FitTrack.ViewModel
                 }
                 // Logik för att uppdatera/spara nya lösenordet för användaren
 
+                //Nedan borde fungera?? Eller gör jag fel? Men användare kan inte logga in med det nya lösenordet
+                bool updatedPassword = usermanager.UpdatePassword(UserInput, PasswordInput);
+                if (updatedPassword)
+                {
+                    MessageBox.Show("Changed password");
+                }
+                else
+                {
+                    MessageBox.Show("Failed to update your password");
+                }
+
+
 
                 OpenMainWindow();
             }
