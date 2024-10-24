@@ -1,0 +1,36 @@
+﻿<Page x:Class="FitTrack.View.FitTrackInfo"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FitTrack.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="FitTrackInfo" Background="LightGray">
+
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="FitTrack: Your Personalized Fitness Tracker" FontSize="20" Foreground="Crimson" FontWeight="Bold" />
+            <TextBlock FontSize="14" >
+                FitTrack is a comprehensive fitness app designed to help users easily manage and track their workouts.
+                <LineBreak/>
+                Whether you're into cardio or strength training, FitTrack offers a streamlined way to log, monitor, and stay consistent with 
+                <LineBreak/>
+                your fitness goals.
+            </TextBlock>
+            <Label/>
+            <TextBlock Text="Why FitTrack?" FontSize="20" Foreground="Crimson" FontWeight="Bold" />
+            <TextBlock FontSize="14">
+                FitTrack is designed to help users maintain a clear overview of their fitness progress. By focusing on ease of use, security, 
+                <LineBreak/>
+                and flexibility, FitTrack empowers users to log detailed information about their workouts, making it simple to track 
+                <LineBreak/> 
+                improvements over time. 
+                <LineBreak/> 
+                <LineBreak/> 
+                Stay consistent, stay organized, and take control of your fitness journey with FitTrack!
+
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</Page>

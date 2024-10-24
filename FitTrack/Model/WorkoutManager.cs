@@ -9,7 +9,11 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FitTrack.Model
 {
-    public class WorkoutManager // ska jag ha denna klassen? 
+
+    // ska jag ha denna klassen? 
+
+
+    public class WorkoutManager 
     {
         // Lista som innehåller workout objekt
         //public ObservableCollection<Workout> WorkoutList { get; set; }

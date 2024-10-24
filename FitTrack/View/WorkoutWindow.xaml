@@ -54,7 +54,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="4*"/>
                     <DataGridTextColumn Header="Activity" Binding="{Binding Type}" Width="4*"/>
-                    <!--<DataGridTextColumn Header="Varaktighet" Binding="{Binding Quantity}" Width="2*"/>-->
+                    <!--<DataGridTextColumn Header="Duration" Binding="{Binding Quantity}" Width="2*"/>-->
                 </DataGrid.Columns>
 
             </DataGrid>

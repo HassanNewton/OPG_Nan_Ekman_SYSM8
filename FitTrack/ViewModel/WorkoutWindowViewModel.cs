@@ -14,10 +14,6 @@ namespace FitTrack.ViewModel
 {
     public class WorkoutWindowViewModel : ViewModelBase
     {
-
-        // Lista som innehåller workout objekt
-        public ObservableCollection<Workout> WorkoutList { get; set; }
-
         // Egenskaper
         Usermanager usermanager;
 
@@ -33,12 +29,14 @@ namespace FitTrack.ViewModel
             }
         }
 
+        // Lista som innehåller workout objekt
+        public ObservableCollection<Workout> WorkoutList { get; set; }
+
         public RelayCommand AddWorkOutCommand { get; } // öppna denna? 
+        public RelayCommand RemoveWorkoutCommand { get; } // Öppna upp get? 
         public RelayCommand OpenUserDetailsCommand { get; }
+
         public RelayCommand OpenWorkoutDetailsWindowCommand { get; }
-
-        public RelayCommand RemoveWorkoutCommand {  get; } // Öppna upp get? 
-
         public RelayCommand InfoCommand { get; }
         public RelayCommand SignOutCommand { get; }
 
@@ -124,7 +122,7 @@ namespace FitTrack.ViewModel
             // Liten "info"-knapp som poppar upp en liten ruta där man kan läsa om hur man använder appen och FitTrack som företag
 
             // MessageBox eller nytt fönster/page? 
-            MessageBox.Show("INFORMATION OM FITTRACK");
+            MessageBox.Show("INFORMATION ABOUT FITTRACK");
         }
 
         private void SignOut(object parameter)

@@ -8,7 +8,7 @@ namespace FitTrack.Model
 {
     public abstract class Workout
     {
-        // Egenskaper
+        // Egenskaper ( Öppna upp alla??)
         public DateTime Date {get; set; }
         public string Type { get; set; }
         public TimeSpan Duration { get; set; }
