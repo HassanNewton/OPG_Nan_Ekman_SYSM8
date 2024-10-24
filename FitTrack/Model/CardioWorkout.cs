@@ -21,7 +21,7 @@ namespace FitTrack.Model
 
         public override int CalculateCaloriesBurned()
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(); // tillfälligt
         }
     }
 }

@@ -12,7 +12,15 @@ namespace FitTrack.ViewModel
     public class WorkoutDetailsWindowViewModel : MainWindowViewModel
     {
         // Egenskaper
-        public Workout workout;
+
+        private Workout workout;
+
+        public Workout Workout
+        {
+            get { return workout; }
+            set { workout = value; }
+        }
+
 
         // Konstruktor
         // skapat tillfällig metod för att testa

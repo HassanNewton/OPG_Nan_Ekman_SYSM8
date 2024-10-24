@@ -14,8 +14,11 @@ namespace FitTrack.ViewModel
 {
     public class WorkoutWindowViewModel : ViewModelBase
     {
+
+        // Lista som innehåller workout objekt
+        public ObservableCollection<Workout> WorkoutList { get; set; }
+
         // Egenskaper
-        //Usermanager usermanager = new Usermanager();
         Usermanager usermanager;
 
         private User user;
@@ -30,7 +33,7 @@ namespace FitTrack.ViewModel
             }
         }
 
-        public RelayCommand AddWorkOutCommand { get; }
+        public RelayCommand AddWorkOutCommand { get; } // öppna denna? 
         public RelayCommand OpenUserDetailsCommand { get; }
         public RelayCommand OpenWorkoutDetailsWindowCommand { get; }
 
@@ -50,6 +53,15 @@ namespace FitTrack.ViewModel
             RemoveWorkoutCommand = new RelayCommand(RemoveWorkOut);
             InfoCommand = new RelayCommand(GetInfo);
             SignOutCommand = new RelayCommand(SignOut);
+
+            //WorkoutList.Add(new CardioWorkout { Date = new DateTime(2024, 11, 01, 18, 30, 0), Type = "Spinning" });
+            //WorkoutList.Add(new StrengthWorkout { Date = new DateTime(2024, 11, 02, 17, 45, 0), Type = "Bodypump" });
+
+            WorkoutList = new ObservableCollection<Workout>
+            {
+            new CardioWorkout { Date = new DateTime(2024, 11, 01, 18, 30, 0), Type = "Spinning" },
+            new StrengthWorkout { Date = new DateTime(2024, 11, 02, 17, 45, 0), Type = "Bodypump" },
+            };
         }
 
         // Metoder
@@ -68,8 +80,17 @@ namespace FitTrack.ViewModel
 
         private void RemoveWorkOut(object parameter)
         {
-            // tar bort ett specifikt träningspass markerat i listan
-            // WorkoutList.Remove(selectedWorkout); // selectedWorkout?
+            if(selectedWorkout == null)
+            {
+                MessageBox.Show("You need to select a activity.");
+                return;
+            }
+            else
+            {
+                // tar bort ett specifikt träningspass markerat i listan
+                WorkoutList.Remove(selectedWorkout);
+            }
+            
         }
 
         private void OpenDetails(Workout workout)
@@ -117,6 +138,18 @@ namespace FitTrack.ViewModel
             // Sätt det nya fönstret som huvudfönster och visa det
             Application.Current.MainWindow = mainWindow;
             mainWindow.Show();
+        }
+
+        // Test
+        private Workout selectedWorkout;
+        public Workout SelectedWorkout
+        {
+            get { return selectedWorkout; }
+            set
+            {
+                selectedWorkout = value;
+                OnPropertyChanged(); // anropas så fort värdet ändras
+            }
         }
     }
 }
