@@ -31,6 +31,8 @@ namespace FitTrack
             //var mainWindow = new MainWindow(usermanager);
             //mainWindow.Show();
 
+
+            // MED NEDAN STÄNGS MAIN VID REGISTRERING AV ANVÄNDARE
             base.OnStartup(e);
 
             // Ändra shutdown-läget till explicit, så applikationen inte stängs när MainWindow stängs

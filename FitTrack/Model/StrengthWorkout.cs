@@ -8,11 +8,20 @@ namespace FitTrack.Model
 {
     public class StrengthWorkout : Workout
     {
-        public int Repetitions;
+        private int repetitions;
 
-        public int CalculateCaloriesBurned()
+        public int Repetitions
         {
-            return 0; // tillfällig
+            get { return repetitions; }
+            set 
+            { 
+                repetitions = value;                
+            }
+        }
+
+        public override int CalculateCaloriesBurned()
+        {
+            throw new NotImplementedException(); // tillfällig
         }
     }
 }

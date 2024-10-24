@@ -30,9 +30,6 @@ namespace FitTrack.ViewModel
             }
         }
 
-        // Lista som innehåller workout objekt
-        private List <Workout> WorkoutList { get; set; }
-
         public RelayCommand AddWorkOutCommand { get; }
         public RelayCommand OpenUserDetailsCommand { get; }
         public RelayCommand OpenWorkoutDetailsWindowCommand { get; }
@@ -46,13 +43,6 @@ namespace FitTrack.ViewModel
         public WorkoutWindowViewModel(Usermanager usermanager)
         {
             this.usermanager = usermanager;
-
-            WorkoutList = new ObservableCollection<Person>
-            {
-            new Workout { UserName = "user1", Password = "1234" },
-            new Workout { UserName = "user2", Password = "5678" },
-            new Workout { UserName = "adminUser", Password = "admin123" }
-            };
 
             AddWorkOutCommand = new RelayCommand(AddWorkOut);
             // OpenUserDetailsCommand = new RelayCommand(OpenDetails); // HUR SKAPAR JAG RELAY NÄR OpenDetails() skickar med (Workout workout)?? 

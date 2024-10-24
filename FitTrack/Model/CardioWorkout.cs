@@ -6,7 +6,22 @@ using System.Threading.Tasks;
 
 namespace FitTrack.Model
 {
-    public class CardioWorkout
+    public class CardioWorkout : Workout
     {
+        private int distance;
+
+        public int Distance
+        {
+            get { return distance; }
+            set 
+            { 
+                distance = value; 
+            }
+        }
+
+        public override int CalculateCaloriesBurned()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

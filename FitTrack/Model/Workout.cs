@@ -8,5 +8,21 @@ namespace FitTrack.Model
 {
     public abstract class Workout
     {
+        // Egenskaper
+        public DateTime Date {get; set; }
+        public string Type { get; set; }
+        public TimeSpan Duration { get; set; }
+        public int CaloriesBurned { get; set; }
+        public string Notes { get; set; }
+
+        // Konstruktor
+        public Workout() 
+        { 
+        
+        }
+
+        // Metoder
+        public abstract int CalculateCaloriesBurned();
+
     }
 }
