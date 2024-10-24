@@ -30,7 +30,7 @@ namespace FitTrack.ViewModel
         //User user = new User();
 
         // Refererar till Usermanager klassen, hur hämtar jag listan?? 
-        private Usermanager userManager = new Usermanager();
+        //private Usermanager userManager = new Usermanager();
 
         // Egenskaper för databindning 
         private string userInput;
@@ -90,7 +90,7 @@ namespace FitTrack.ViewModel
         public RegisterWindowViewModel()
         {
             // skapar en instans av Usermanager
-            userManager = new Usermanager();
+            //userManager = new Usermanager();
 
             // skapat en lista av Countries
             CountryList = new List<string> { "Denmark", "Norway", "Sweden" };
@@ -121,11 +121,11 @@ namespace FitTrack.ViewModel
                     return;
                 }
                 // Kontrollerar om anvärdarnamet finns
-                if (userManager.CheckUsername(UserInput))
-                {
-                    MessageBox.Show("Username already exist.");
-                    return;
-                }
+                //if (userManager.CheckUsername(UserInput))
+                //{
+                //    MessageBox.Show("Username already exist.");
+                //    return;
+                //}
 
                 // logik för att spara ny användare i listan.
                 User newUser = new User();
@@ -133,7 +133,7 @@ namespace FitTrack.ViewModel
                     newUser.UserName = UserInput;       // Sätt användarnamn
                     newUser.Password = PasswordInput;     // Sätt lösenord
                 }
-                userManager.AddUser(newUser);
+                //userManager.AddUser(newUser);
 
                 MessageBox.Show($"New user created {newUser.UserName}");
 
