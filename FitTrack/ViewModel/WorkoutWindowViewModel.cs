@@ -26,8 +26,9 @@ namespace FitTrack.ViewModel
             get { return user; }
             set 
             { 
-                user = value; 
-                OnPropertyChanged(nameof(user));
+                user = value;
+                //OnPropertyChanged(nameof(user));
+                OnPropertyChanged();
             }
         }
 
@@ -147,7 +148,6 @@ namespace FitTrack.ViewModel
             mainWindow.Show();
         }
 
-        // Test
         private Workout selectedWorkout;
         public Workout SelectedWorkout
         {
