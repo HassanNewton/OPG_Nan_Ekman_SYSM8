@@ -26,9 +26,11 @@ namespace FitTrack.ViewModel
             get { return user; }
             set 
             { 
-                user = value;
-                //OnPropertyChanged(nameof(user));
-                OnPropertyChanged();
+                if (user != value)
+                {
+                    user = value;
+                    OnPropertyChanged(nameof(user));
+                }
             }
         }
 
