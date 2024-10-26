@@ -15,6 +15,9 @@ namespace FitTrack.Model
         // Lista som innehåller workout objekt
         public ObservableCollection<Workout> WorkoutList { get; set; }
 
+        // Tillfällig
+        Workout workout;
+
         // Egenskaper
 
 

@@ -20,6 +20,8 @@ namespace FitTrack.ViewModel
         // Refererar till Usermanager klassen
         private WorkoutManager workoutManager;
 
+        private Usermanager usermanager;
+
         // hämta lista från Workoutmanager
         public ObservableCollection<Workout> Workouts { get; }
         
@@ -48,7 +50,9 @@ namespace FitTrack.ViewModel
 
         public RelayCommand OpenWorkoutDetailsWindowCommand { get; }
         public RelayCommand InfoCommand { get; }
-        public RelayCommand SignOutCommand { get; }
+        private RelayCommand signOutCommand;
+
+        public RelayCommand SignOutCommand { get; } 
 
         // Konstruktor
         public WorkoutWindowViewModel(WorkoutManager workoutManager)
@@ -149,7 +153,7 @@ namespace FitTrack.ViewModel
         private void SignOut(object parameter)
         {
             // Skapa en ny instans av MainWindow
-            MainWindow mainWindow = new MainWindow(workoutManager);
+            MainWindow mainWindow = new MainWindow(usermanager);
 
             // Stäng MainWindow
             Application.Current.MainWindow.Close();

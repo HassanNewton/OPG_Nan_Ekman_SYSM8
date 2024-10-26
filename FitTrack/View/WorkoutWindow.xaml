@@ -56,15 +56,17 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="4*"/>
                     <DataGridTextColumn Header="Activity" Binding="{Binding Type}" Width="4*"/>
-                    <!--<DataGridTextColumn Header="Duration" Binding="{Binding Quantity}" Width="2*"/>-->
+                    <DataGridTextColumn Header="Duration" Binding="{Binding Quantity}" Width="2*"/>                                       
                 </DataGrid.Columns>
 
             </DataGrid>
 
-            <ListBox ItemsSource="{Binding Workouts}">
+            <!--HUR SKA JAG BINDA MIN LISTA OCH EGENSKAPER FRÅN WORKOUT KLASSEN??-->
+                <!--<ListBox ItemsSource="{Binding Workouts}" > 
 
+                    <TextBox Text="{Binding Date}"/>
+                </ListBox>-->
 
-            </ListBox>
 
             <StackPanel Grid.Row="2" Grid.Column="2">
                 <Button Content="WORKOUT DETAILS" Background="Crimson" FontFamily="Arial" Command="{Binding OpenWorkoutDetailsWindowCommand}" Opacity="0.8" Margin="5"/>
@@ -76,5 +78,4 @@
         </Grid>
     </Grid>
 </Window>
-
-
+

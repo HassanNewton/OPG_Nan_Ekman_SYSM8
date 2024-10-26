@@ -74,7 +74,7 @@ namespace FitTrack.ViewModel
             // validera användarnamn och lösenord
             if (ValidateUser(UsernameInput, PasswordInput))
             {
-                MessageBox.Show($"Welcome {UsernameInput}");
+                //MessageBox.Show($"Welcome {UsernameInput}");
                 
                 OpenWorkoutWindow();
             }
