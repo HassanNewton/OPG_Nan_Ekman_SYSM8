@@ -59,13 +59,17 @@
                     <DataGridTextColumn Header="Duration" Binding="{Binding Quantity}" Width="2*"/>                                       
                 </DataGrid.Columns>
 
+
+                HUR SKA JAG BINDA MIN LISTA OCH EGENSKAPER FRÅN WORKOUT KLASSEN??
+                <ListBox ItemsSource="{Binding Workouts}" >
+                    <ListBoxItem>
+                        <TextBox Text="{Binding Date}"/>
+                    </ListBoxItem>
+
+                </ListBox>
+
             </DataGrid>
 
-            <!--HUR SKA JAG BINDA MIN LISTA OCH EGENSKAPER FRÅN WORKOUT KLASSEN??-->
-                <!--<ListBox ItemsSource="{Binding Workouts}" > 
-
-                    <TextBox Text="{Binding Date}"/>
-                </ListBox>-->
 
 
             <StackPanel Grid.Row="2" Grid.Column="2">
