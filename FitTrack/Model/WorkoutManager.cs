@@ -21,10 +21,14 @@ namespace FitTrack.Model
         // Konstruktor
         public WorkoutManager()
         {
-            WorkoutList = new ObservableCollection<Workout>();
+            WorkoutList = new ObservableCollection<Workout>
+            {
+                new CardioWorkout { Date = new DateTime(2024, 11, 01, 18, 30, 0), Type = "Spinning" },
+                new StrengthWorkout { Date = new DateTime(2024, 11, 02, 17, 45, 0), Type = "Bodypump" }
+            };
 
-            WorkoutList.Add(new CardioWorkout { Date = new DateTime(2024, 11, 01, 18, 30, 0), Type = "Spinning" });
-            WorkoutList.Add(new StrengthWorkout { Date = new DateTime(2024, 11, 02, 17, 45, 0), Type = "Bodypump" });
+            //WorkoutList.Add(new CardioWorkout { Date = new DateTime(2024, 11, 01, 18, 30, 0), Type = "Spinning" });
+            //WorkoutList.Add(new StrengthWorkout { Date = new DateTime(2024, 11, 02, 17, 45, 0), Type = "Bodypump" });
         }
 
         // Metoder

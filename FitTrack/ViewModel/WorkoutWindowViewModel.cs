@@ -19,6 +19,9 @@ namespace FitTrack.ViewModel
 
         // Refererar till Usermanager klassen
         private WorkoutManager workoutManager;
+
+        // hämta lista från Workoutmanager
+        public ObservableCollection<Workout> Workouts { get; }
         
         // Egenskaper
         private User user;
@@ -50,9 +53,13 @@ namespace FitTrack.ViewModel
         // Konstruktor
         public WorkoutWindowViewModel(WorkoutManager workoutManager)
         {
+            // skapa instans av WorkoutManager
             this.workoutManager = workoutManager;
 
-        AddWorkOutCommand = new RelayCommand(AddWorkOut);
+            // hämta lista från workoutmanager
+            Workouts = workoutManager.WorkoutList;
+
+            AddWorkOutCommand = new RelayCommand(AddWorkOut);
             // OpenUserDetailsCommand = new RelayCommand(OpenDetails); // HUR SKAPAR JAG RELAY NÄR OpenDetails() skickar med (Workout workout)?? 
             OpenWorkoutDetailsWindowCommand = new RelayCommand(OpenWorkoutDetailsWindow);
             RemoveWorkoutCommand = new RelayCommand(RemoveWorkOut);

@@ -23,8 +23,9 @@ namespace FitTrack.View
         public WorkoutWindow()
         {
             InitializeComponent();
-            Usermanager usermanager = new Usermanager();
-            ViewModel.WorkoutWindowViewModel workoutWindowViewModel = new ViewModel.WorkoutWindowViewModel(usermanager);
+            //WorkoutManager usermanager = new Usermanager();
+            WorkoutManager workoutManager = new WorkoutManager();
+            ViewModel.WorkoutWindowViewModel workoutWindowViewModel = new ViewModel.WorkoutWindowViewModel(workoutManager); // ändrat från usermanager till workoutManager i parametern
             DataContext = workoutWindowViewModel;
         }
     }
