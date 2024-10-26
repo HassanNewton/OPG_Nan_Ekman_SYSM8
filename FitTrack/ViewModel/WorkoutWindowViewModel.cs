@@ -16,9 +16,11 @@ namespace FitTrack.ViewModel
 {
     public class WorkoutWindowViewModel : ViewModelBase
     {
-        // Egenskaper
-        Usermanager usermanager;
 
+        // Refererar till Usermanager klassen
+        private WorkoutManager workoutManager;
+        
+        // Egenskaper
         private User user;
 
         public User User
@@ -34,8 +36,8 @@ namespace FitTrack.ViewModel
             }
         }
 
-        // Lista som innehåller workout objekt
-        public ObservableCollection<Workout> WorkoutList { get; set; }
+        //// Lista som innehåller workout objekt
+        //public ObservableCollection<Workout> WorkoutList { get; set; }
 
         public RelayCommand AddWorkOutCommand { get; } // öppna denna? 
         public RelayCommand RemoveWorkoutCommand { get; } // Öppna upp get? 
@@ -46,11 +48,11 @@ namespace FitTrack.ViewModel
         public RelayCommand SignOutCommand { get; }
 
         // Konstruktor
-        public WorkoutWindowViewModel(Usermanager usermanager)
+        public WorkoutWindowViewModel(WorkoutManager workoutManager)
         {
-            this.usermanager = usermanager;
+            this.workoutManager = workoutManager;
 
-            AddWorkOutCommand = new RelayCommand(AddWorkOut);
+        AddWorkOutCommand = new RelayCommand(AddWorkOut);
             // OpenUserDetailsCommand = new RelayCommand(OpenDetails); // HUR SKAPAR JAG RELAY NÄR OpenDetails() skickar med (Workout workout)?? 
             OpenWorkoutDetailsWindowCommand = new RelayCommand(OpenWorkoutDetailsWindow);
             RemoveWorkoutCommand = new RelayCommand(RemoveWorkOut);
@@ -60,11 +62,11 @@ namespace FitTrack.ViewModel
             //WorkoutList.Add(new CardioWorkout { Date = new DateTime(2024, 11, 01, 18, 30, 0), Type = "Spinning" });
             //WorkoutList.Add(new StrengthWorkout { Date = new DateTime(2024, 11, 02, 17, 45, 0), Type = "Bodypump" });
 
-            WorkoutList = new ObservableCollection<Workout>
-            {
-            new CardioWorkout { Date = new DateTime(2024, 11, 01, 18, 30, 0), Type = "Spinning" },
-            new StrengthWorkout { Date = new DateTime(2024, 11, 02, 17, 45, 0), Type = "Bodypump" },
-            };
+            //WorkoutList = new ObservableCollection<Workout>
+            //{
+            //new CardioWorkout { Date = new DateTime(2024, 11, 01, 18, 30, 0), Type = "Spinning" },
+            //new StrengthWorkout { Date = new DateTime(2024, 11, 02, 17, 45, 0), Type = "Bodypump" },
+            //};
         }
 
         // Metoder
@@ -91,7 +93,7 @@ namespace FitTrack.ViewModel
             else
             {
                 // tar bort ett specifikt träningspass markerat i listan
-                WorkoutList.Remove(selectedWorkout);
+                workoutManager.WorkoutList.Remove(selectedWorkout);
             }
         }
 
@@ -140,7 +142,7 @@ namespace FitTrack.ViewModel
         private void SignOut(object parameter)
         {
             // Skapa en ny instans av MainWindow
-            MainWindow mainWindow = new MainWindow(usermanager);
+            MainWindow mainWindow = new MainWindow(workoutManager);
 
             // Stäng MainWindow
             Application.Current.MainWindow.Close();

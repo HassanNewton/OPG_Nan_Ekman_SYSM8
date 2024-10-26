@@ -15,7 +15,7 @@ namespace FitTrack.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        // Refererar till Usermanager klassen, som styr listan, men hur hämtar jag listan?? 
+        // Refererar till Usermanager klassen
         private Usermanager userManager;
 
         // Egenskaper
