@@ -25,7 +25,10 @@ namespace FitTrack.ViewModel
 
         // hämta lista från Workoutmanager
         public ObservableCollection<Workout> Workouts { get; }
-        
+
+        // hämta lista från Usermanager
+        public ObservableCollection<Person> GetUserList { get; }
+
         // Egenskaper
         private User user;
 
@@ -53,11 +56,8 @@ namespace FitTrack.ViewModel
             }
         }
 
-        //// Lista som innehåller workout objekt
-        //public ObservableCollection<Workout> WorkoutList { get; set; }
-
-        public RelayCommand AddWorkOutCommand { get; } // öppna denna? 
-        public RelayCommand RemoveWorkoutCommand { get; } // Öppna upp get? 
+        public RelayCommand AddWorkOutCommand { get; } 
+        public RelayCommand RemoveWorkoutCommand { get; } 
         public RelayCommand OpenUserDetailsCommand { get; }
 
         public RelayCommand OpenWorkoutDetailsWindowCommand { get; }
@@ -76,12 +76,32 @@ namespace FitTrack.ViewModel
             Workouts = workoutManager.WorkoutList;
 
             AddWorkOutCommand = new RelayCommand(AddWorkOut);
-            //OpenUserDetailsCommand = new RelayCommand(OpenDetails); // HUR SKAPAR JAG RELAY NÄR OpenDetails() skickar med (Workout workout)?? 
-            OpenWorkoutDetailsWindowCommand = new RelayCommand(OpenWorkoutDetailsWindow);
+            OpenUserDetailsCommand = new RelayCommand(ExecuteOpenDetails); 
+            OpenWorkoutDetailsWindowCommand = new RelayCommand(ExexuteOpenWorkoutDetails);
             RemoveWorkoutCommand = new RelayCommand(RemoveWorkOut);
             InfoCommand = new RelayCommand(GetInfo);
             SignOutCommand = new RelayCommand(SignOut);
         }
+
+        // Konstruktor för att visa den inloggades användarnamn
+        public WorkoutWindowViewModel(string currentUser)
+        {
+            CurrentUser = currentUser;
+            GetUserList = new ObservableCollection<Person>();
+        }
+
+        private string currentUser;
+
+        public string CurrentUser
+        {
+            get { return currentUser; }
+            set 
+            { 
+                currentUser = value; 
+                OnPropertyChanged();
+            }
+        }
+
 
         // Metoder
         private void AddWorkOut(object parameter)
@@ -111,6 +131,11 @@ namespace FitTrack.ViewModel
             }
         }
 
+        private void ExecuteOpenDetails(object parameter)
+        {
+                OpenDetails(selectedWorkout);
+        }
+
         private void OpenDetails(Workout workout)
         {
                 // Skapa en ny instans av UserDetailsWindow
@@ -122,6 +147,19 @@ namespace FitTrack.ViewModel
                 // Sätt det nya fönstret som huvudfönster och visa det
                 Application.Current.MainWindow = userDetailsWindow;
                 userDetailsWindow.Show();            
+        }
+
+        // Hur selectar jag workout? 
+        private void ExexuteOpenWorkoutDetails(object parameter)
+        {
+            if (parameter is Workout selectedWorkout)
+            {
+                OpenWorkoutDetailsWindow(selectedWorkout);
+            }
+            else
+            {
+                MessageBox.Show("No workout selected.");
+            }
         }
 
         private void OpenWorkoutDetailsWindow(object parameter)
@@ -139,18 +177,17 @@ namespace FitTrack.ViewModel
 
         private void GetInfo(object parameter)
         {
-            // Liten "info"-knapp som poppar upp en liten ruta där man kan läsa om hur man använder appen och FitTrack som företag
-            // MessageBox eller nytt fönster/page? 
+            // Skapar ett nytt fönster och sätt page FitTrackInfo som innehåll
+            Window infoPage = new Window
+            {
+                Content = new FitTrackInfo(),
+                Title = "Information About FitTrack",
+                Height = 450,
+                Width = 800
+            };
 
-            MessageBox.Show("INFORMATION ABOUT FITTRACK");
-
-            // HUR ANROPAR JAG EN PAGE??
-            //FitTrackInfo fitTrackInfo = new FitTrackInfo();
-
-            //// Sätt det nya fönstret som huvudfönster och visa det
-            //Application.Current.MainWindow = fitTrackInfo;
-            //fitTrackInfo.Show();
-
+            // Visa fönstret
+            infoPage.Show();
         }
 
         private void SignOut(object parameter)

@@ -26,6 +26,7 @@
     </Window.Resources>
 
     <Grid>
+        <!--Denna DataGrid visar en lista av användare (Users)-->
         <DataGrid AutoGenerateColumns="True" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}"/>
 
         <StackPanel>

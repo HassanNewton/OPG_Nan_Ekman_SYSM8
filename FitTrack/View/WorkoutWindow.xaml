@@ -1,7 +1,7 @@
 ﻿<Window x:Class="FitTrack.View.WorkoutWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="{Binding User.UserName}" Height="450" Width="800" Background="LightGray">
+        Title="{Binding CurrentUser}" Height="450" Width="800" Background="LightGray">
 
     <!--Sätter stil på knapparna-->
     <Window.Resources>
@@ -38,24 +38,23 @@
             <!-- Vänster stackpanel för info- och användarknapp -->
             <StackPanel Orientation="Horizontal" Background="LightGray">
                 <Button Content="INFO" Width="70" Height="20" Command="{Binding InfoCommand}" HorizontalAlignment="Left" />
-                <Button Content="USER" Width="70" Height="20" Command="{Binding UserCommand}" HorizontalAlignment="Right" />
+                <Button Content="USER DETAILS" Width="100" Height="20" Command="{Binding OpenUserDetailsCommand}" CommandParameter="{Binding SelectedWorkout}" HorizontalAlignment="Right" Margin="10"  />
             </StackPanel>
 
             <!-- Höger stackpanel för användarnamn och utloggningsknapp -->
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Background="LightGray">
-                <TextBox Text="{Binding User.UserName}" FontFamily="Arial" VerticalAlignment="Center" Height="20" IsReadOnly="True"/>
+                <TextBox Text="{Binding CurrentUser}" FontFamily="Arial" VerticalAlignment="Center" Height="20" IsReadOnly="True"/>
                 <Button Content="SIGN OUT" Width="70" Height="20" Command="{Binding SignOutCommand}" HorizontalAlignment="Right" />
             </StackPanel>
         </Grid>
 
-        <!-- Huvudinnehåll -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="7*" />
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
 
-            <!-- DataGrid för träningslistan -->
+            <!-- DataGrid för att kunna filtrera träningslistan -->
             <DataGrid
                 AutoGenerateColumns="False"
                 CanUserAddRows="False"
@@ -77,12 +76,13 @@
                 <TextBox Text="{Binding SelectedWorkout.Duration}" IsReadOnly="True" Margin="0,5"/>
             </StackPanel>
 
-            <!-- Knappsektion för träningsrelaterade åtgärder -->
             <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Vertical" Margin="10" Background="LightGray">
                 <Button Content="WORKOUT DETAILS" Command="{Binding OpenWorkoutDetailsWindowCommand}" Margin="5"/>
                 <Button Content="ADD WORKOUT" Command="{Binding AddWorkOutCommand}" Margin="5"/>
                 <Button Content="REMOVE WORKOUT" Command="{Binding RemoveWorkoutCommand}" Margin="5"/>
             </StackPanel>
+
+
         </Grid>
     </Grid>
 </Window>
