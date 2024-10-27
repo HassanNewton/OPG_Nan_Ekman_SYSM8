@@ -35,8 +35,8 @@ namespace FitTrack.ViewModel
         public User User
         {
             get { return user; }
-            set 
-            { 
+            set
+            {
                 if (user != value)
                 {
                     user = value;
@@ -56,15 +56,15 @@ namespace FitTrack.ViewModel
             }
         }
 
-        public RelayCommand AddWorkOutCommand { get; } 
-        public RelayCommand RemoveWorkoutCommand { get; } 
+        public RelayCommand AddWorkOutCommand { get; }
+        public RelayCommand RemoveWorkoutCommand { get; }
         public RelayCommand OpenUserDetailsCommand { get; }
 
         public RelayCommand OpenWorkoutDetailsWindowCommand { get; }
         public RelayCommand InfoCommand { get; }
         private RelayCommand signOutCommand;
 
-        public RelayCommand SignOutCommand { get; } 
+        public RelayCommand SignOutCommand { get; }
 
         // Konstruktor
         public WorkoutWindowViewModel(WorkoutManager workoutManager)
@@ -76,10 +76,10 @@ namespace FitTrack.ViewModel
             Workouts = workoutManager.WorkoutList;
 
             AddWorkOutCommand = new RelayCommand(AddWorkOut);
-            OpenUserDetailsCommand = new RelayCommand(ExecuteOpenDetails); 
+            OpenUserDetailsCommand = new RelayCommand(ExecuteOpenDetails);
             OpenWorkoutDetailsWindowCommand = new RelayCommand(ExexuteOpenWorkoutDetails);
             RemoveWorkoutCommand = new RelayCommand(RemoveWorkOut);
-            InfoCommand = new RelayCommand(GetInfo);
+            InfoCommand = new RelayCommand(ShowInfo);
             SignOutCommand = new RelayCommand(SignOut);
         }
 
@@ -95,10 +95,10 @@ namespace FitTrack.ViewModel
         public string CurrentUser
         {
             get { return currentUser; }
-            set 
-            { 
-                currentUser = value; 
-                OnPropertyChanged();
+            set
+            {
+                currentUser = value;
+                OnPropertyChanged(nameof(CurrentUser));
             }
         }
 
@@ -119,7 +119,7 @@ namespace FitTrack.ViewModel
 
         private void RemoveWorkOut(object parameter)
         {
-            if(selectedWorkout == null)
+            if (selectedWorkout == null)
             {
                 MessageBox.Show("You need to select a activity.");
                 return;
@@ -133,32 +133,34 @@ namespace FitTrack.ViewModel
 
         private void ExecuteOpenDetails(object parameter)
         {
-                OpenDetails(selectedWorkout);
+            OpenDetails(selectedWorkout);
         }
 
+        // Metod för att öppna UserDetailsWindow
         private void OpenDetails(Workout workout)
         {
-                // Skapa en ny instans av UserDetailsWindow
-                UserDetailsWindow userDetailsWindow = new UserDetailsWindow();
+            // Skapa en ny instans av UserDetailsWindow
+            UserDetailsWindow userDetailsWindow = new UserDetailsWindow();
 
-                // Stäng MainWindow
-                Application.Current.MainWindow.Close();
+            // Stäng MainWindow
+            Application.Current.MainWindow.Close();
 
-                // Sätt det nya fönstret som huvudfönster och visa det
-                Application.Current.MainWindow = userDetailsWindow;
-                userDetailsWindow.Show();            
+            // Sätt det nya fönstret som huvudfönster och visa det
+            Application.Current.MainWindow = userDetailsWindow;
+            userDetailsWindow.Show();
         }
 
         // Hur selectar jag workout? 
         private void ExexuteOpenWorkoutDetails(object parameter)
         {
-            if (parameter is Workout selectedWorkout)
+            if (selectedWorkout == null)
             {
-                OpenWorkoutDetailsWindow(selectedWorkout);
+                MessageBox.Show("No workout selected.");
+                return;
             }
             else
             {
-                MessageBox.Show("No workout selected.");
+                OpenWorkoutDetailsWindow(SelectedWorkout);
             }
         }
 
@@ -175,7 +177,7 @@ namespace FitTrack.ViewModel
             workoutDetailsWindow.Show();
         }
 
-        private void GetInfo(object parameter)
+        private void ShowInfo(object parameter)
         {
             // Skapar ett nytt fönster och sätt page FitTrackInfo som innehåll
             Window infoPage = new Window

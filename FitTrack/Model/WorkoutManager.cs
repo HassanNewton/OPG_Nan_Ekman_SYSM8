@@ -33,7 +33,6 @@ namespace FitTrack.Model
         // Metoder
         public bool CheckWorkout(string workoutType)
         {
-            // ??????
             // går igenom och jämför varje träningspass i WorkoutList
             foreach (var activity in WorkoutList)
             {
