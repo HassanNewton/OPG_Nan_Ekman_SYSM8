@@ -20,12 +20,14 @@ namespace FitTrack.View
     /// </summary>
     public partial class WorkoutDetailsWindow : Window
     {
-        public WorkoutDetailsWindow()
+        public WorkoutDetailsWindow(WorkoutManager workoutManager)
         {
             InitializeComponent();
-            Usermanager usermanager = new Usermanager();
-            ViewModel.WorkoutDetailsWindowViewModel workoutDetailsWindowViewModel = new ViewModel.WorkoutDetailsWindowViewModel(usermanager);
-            DataContext = workoutDetailsWindowViewModel;
+            //Usermanager usermanager = new Usermanager();
+            //WorkoutManager workoutManager = new WorkoutManager();
+            //ViewModel.WorkoutDetailsWindowViewModel workoutDetailsWindowViewModel = new ViewModel.WorkoutDetailsWindowViewModel(workoutManager);
+            //DataContext = workoutDetailsWindowViewModel;
+            DataContext = new ViewModel.WorkoutDetailsWindowViewModel(workoutManager);
         }
     }
 }

@@ -18,7 +18,6 @@ namespace FitTrack.Model
         // Konstruktor
         public Usermanager()
         {
-            // flyttat lista från MainWindowViewModel
             // Initierar Users som en ObservableCollection lista av Person-objekt med fördefinierade användare
             Users = new ObservableCollection<Person>
             {
@@ -54,6 +53,7 @@ namespace FitTrack.Model
             }
             return false;
         }
+        
         
         public void AddUser(User newUser)
         {

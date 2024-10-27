@@ -17,6 +17,7 @@ namespace FitTrack.ViewModel
     {
         // Refererar till Usermanager klassen
         private Usermanager userManager;
+        private WorkoutManager workoutManager;
 
         // Egenskaper
         private string usernameInput;
@@ -58,9 +59,19 @@ namespace FitTrack.ViewModel
             NewPasswordCommand = new RelayCommand(NewPassword);      
         }
 
-        // Metoder
+        // KOnstruktor för att kunna skicka in parameter av  WorkoutManager
+        public MainWindowViewModel(WorkoutManager workoutManager)
+        {
+            this.workoutManager = workoutManager;
+        }
 
-        // behöver jag ändra här med i min MainWindow för att användaren ska kunna använda det nya lösenordet från NewPasswordViewModel?
+        // Tom konstruktor efter error från WorkoutDetailsViewModel
+        public MainWindowViewModel()
+        {
+
+        }
+
+        // Metoder
         private void SignIn(object parameter)
         {
             // Kontrollera om användarnamn och lösenord inte är tomma
@@ -84,8 +95,6 @@ namespace FitTrack.ViewModel
                 MessageBox.Show("Invalid username or password.");
             }
         }
-
-        // behöver jag ändra här med i min MainWindow för att användaren ska kunna använda det nya lösenordet från NewPasswordViewModel?
 
         private bool ValidateUser(string username, string password)
         {

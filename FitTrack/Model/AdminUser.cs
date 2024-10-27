@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,42 +11,36 @@ namespace FitTrack.Model
     public class AdminUser : User
     {
         // En admin-User ska kunna se/ta bort alla träningspass tillagda av användare
-        
-        Usermanager userManager;
-        ObservableCollection<Person> users;
 
-        User user;
-
-        WorkoutManager workoutManager;
-        Workout GetWorkouts;
-        public ObservableCollection<Workout> Workouts { get; }
+        // Egenskaper
+        private Usermanager usermanager;
+        private WorkoutManager workoutmanager;
 
         // Konstruktor
-        public AdminUser()
+        public AdminUser() // ingen parameter så att min lista från WorkoutManager ska funka
         {
+            // måste jag skicka workoutmanager som parameter för att hämta lista från WorkoutManager klassen? 
+        }
+
+        public AdminUser(Usermanager usermanager)
+        {
+            this.usermanager = usermanager;  
             //userManager = new Usermanager(); // OBS OBS OBS!! Programmet kraschar när jag skapar ny instans av Usermanager i AdminUser
-            user = new User();
-        }
 
-        // tillfällig Konstruktor
-        public AdminUser(WorkoutManager workoutManager)
-        {
-            workoutManager = new WorkoutManager();
-            user = new User();
         }
-
 
         public void ManageAllWorkouts()
         {
-            workoutManager.GetAllWorkouts();
-
-             // KODLOGIK 
+            foreach (var workout in workoutmanager.GetAllWorkouts())
+            {
+                // KODLOGIK if?
+            }
         }
 
         private void GetUserList()
         {
             // Hämta alla användare från Usermanager klassen? 
-            userManager.GetAllUsers();
+            usermanager.GetAllUsers();
         }
 
     }

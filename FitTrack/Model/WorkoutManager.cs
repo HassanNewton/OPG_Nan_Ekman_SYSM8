@@ -12,14 +12,10 @@ namespace FitTrack.Model
 {
     public class WorkoutManager 
     {
-        // Lista som innehåller workout objekt
-        public ObservableCollection<Workout> WorkoutList { get; set; }
-
-        // Tillfällig
-        Workout workout;
-
         // Egenskaper
 
+        // Lista som innehåller workout objekt
+        public ObservableCollection<Workout> WorkoutList { get; set; }
 
         // Konstruktor
         public WorkoutManager()
@@ -37,6 +33,7 @@ namespace FitTrack.Model
         // Metoder
         public bool CheckWorkout(string workoutType)
         {
+            // ??????
             // går igenom och jämför varje träningspass i WorkoutList
             foreach (var activity in WorkoutList)
             {

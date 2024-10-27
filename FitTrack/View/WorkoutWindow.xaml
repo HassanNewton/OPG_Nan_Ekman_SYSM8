@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitTrack.View"
         mc:Ignorable="d"
-        Title= "{Binding User.UserName}" Height="450" Width="800" Background="LightGray"> <!--Testa binda UserName till Fönster Titel-->
+        Title= "{Binding User.UserName}" Height="450" Width="800" Background="LightGray"> <!--Testa binda UserName till Fönster Titel FUNKAR EJ-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
@@ -53,24 +53,31 @@
                 ItemsSource="{Binding WorkoutList, UpdateSourceTrigger=PropertyChanged}"
                 SelectedItem="{Binding SelectedWorkout, UpdateSourceTrigger=PropertyChanged}">
 
+                <TextBox Text="{Binding Date}"/> 
+                <TextBox Text="{Binding Type}"/>
+                <TextBox Text="{Binding Duration}"/>
+
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="4*"/>
                     <DataGridTextColumn Header="Activity" Binding="{Binding Type}" Width="4*"/>
-                    <DataGridTextColumn Header="Duration" Binding="{Binding Quantity}" Width="2*"/>                                       
+                    <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="2*"/>
                 </DataGrid.Columns>
 
-
-                HUR SKA JAG BINDA MIN LISTA OCH EGENSKAPER FRÅN WORKOUT KLASSEN??
-                <ListBox ItemsSource="{Binding Workouts}" >
-                    <ListBoxItem>
-                        <TextBox Text="{Binding Date}"/>
-                    </ListBoxItem>
-
-                </ListBox>
+                <!--: 'Items collection must be empty before using ItemsSource.'
+                HUR SKA JAG BINDA MIN LISTA OCH EGENSKAPER FRÅN WORKOUT KLASSEN??-->
+                <!--<ListBox ItemsSource="{Binding Workouts}" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBox Text="{Binding Date}"/>
+                                <TextBox Text="{Binding Type}"/>
+                                <TextBox Text="{Binding Duration}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>-->
 
             </DataGrid>
-
-
 
             <StackPanel Grid.Row="2" Grid.Column="2">
                 <Button Content="WORKOUT DETAILS" Background="Crimson" FontFamily="Arial" Command="{Binding OpenWorkoutDetailsWindowCommand}" Opacity="0.8" Margin="5"/>

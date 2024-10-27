@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,8 +37,19 @@ namespace FitTrack.ViewModel
                 if (user != value)
                 {
                     user = value;
-                    OnPropertyChanged(nameof(user));
+                    OnPropertyChanged(nameof(User));
                 }
+            }
+        }
+
+        private Workout selectedWorkout;
+        public Workout SelectedWorkout
+        {
+            get { return selectedWorkout; }
+            set
+            {
+                selectedWorkout = value;
+                OnPropertyChanged(); // anropas så fort värdet ändras
             }
         }
 
@@ -64,7 +76,7 @@ namespace FitTrack.ViewModel
             Workouts = workoutManager.WorkoutList;
 
             AddWorkOutCommand = new RelayCommand(AddWorkOut);
-            // OpenUserDetailsCommand = new RelayCommand(OpenDetails); // HUR SKAPAR JAG RELAY NÄR OpenDetails() skickar med (Workout workout)?? 
+            //OpenUserDetailsCommand = new RelayCommand(OpenDetails); // HUR SKAPAR JAG RELAY NÄR OpenDetails() skickar med (Workout workout)?? 
             OpenWorkoutDetailsWindowCommand = new RelayCommand(OpenWorkoutDetailsWindow);
             RemoveWorkoutCommand = new RelayCommand(RemoveWorkOut);
             InfoCommand = new RelayCommand(GetInfo);
@@ -110,26 +122,26 @@ namespace FitTrack.ViewModel
 
         private void OpenDetails(Workout workout)
         {
-            // Skapa en ny instans av UserDetailsWindow
-            UserDetailsWindow userDetailsWindow = new UserDetailsWindow();
+                // Skapa en ny instans av UserDetailsWindow
+                UserDetailsWindow userDetailsWindow = new UserDetailsWindow();
 
-            // Stäng MainWindow
-            Application.Current.MainWindow.Close();
+                // Stäng MainWindow
+                Application.Current.MainWindow.Close();
 
-            // Sätt det nya fönstret som huvudfönster och visa det
-            Application.Current.MainWindow = userDetailsWindow;
-            userDetailsWindow.Show();
+                // Sätt det nya fönstret som huvudfönster och visa det
+                Application.Current.MainWindow = userDetailsWindow;
+                userDetailsWindow.Show();            
         }
 
         private void OpenWorkoutDetailsWindow(object parameter)
         {
-            // Skapa en ny instans av WorkoutDetailsWindow
-            WorkoutDetailsWindow workoutDetailsWindow = new WorkoutDetailsWindow();
+            // Skapa en instans av WorkoutDetailsWindow med workoutManager som parameter
+            WorkoutDetailsWindow workoutDetailsWindow = new WorkoutDetailsWindow(workoutManager);
 
-            // Stäng MainWindow
+            // Stäng WorkoutWindow (det nuvarande fönstret)
             Application.Current.MainWindow.Close();
 
-            // Sätt det nya fönstret som huvudfönster och visa det
+            // Sätt WorkoutDetailsWindow som det nya huvudfönstret och visa det
             Application.Current.MainWindow = workoutDetailsWindow;
             workoutDetailsWindow.Show();
         }
@@ -161,17 +173,6 @@ namespace FitTrack.ViewModel
             // Sätt det nya fönstret som huvudfönster och visa det
             Application.Current.MainWindow = mainWindow;
             mainWindow.Show();
-        }
-
-        private Workout selectedWorkout;
-        public Workout SelectedWorkout
-        {
-            get { return selectedWorkout; }
-            set
-            {
-                selectedWorkout = value;
-                OnPropertyChanged(); // anropas så fort värdet ändras
-            }
         }
     }
 }
