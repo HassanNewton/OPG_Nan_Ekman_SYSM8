@@ -6,6 +6,25 @@
         xmlns:local="clr-namespace:FitTrack.View"
         mc:Ignorable="d"
         Title="Welcome to your UserWindow" Height="450" Width="800">
+
+    <!--Sätter stil på knapparna-->
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Crimson"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Opacity" Value="0.8"/>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="1" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Opacity" Value="0.9" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
             <Image Source="C:\Users\NänEkman\Source\Repos\OPG_Nan_Ekman_SYSM8\FitTrack\Images\userProfile.png" Height="100" OpacityMask="#FFE34363"  />
@@ -14,8 +33,8 @@
             <TextBox Width="200" Height="30" Text="{Binding CHOOSEPROPERTYNAME, UpdateSourceTrigger=PropertyChanged}" />
 
 
-            <Button Content="SAVE" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding SaveUserDetails}" Opacity="0.8" Margin="10" />
-            <Button Content="CANCEL" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding CancelCommand}" Opacity="0.8" Margin="10" />
+            <Button Content="SAVE" Width="150" Height="40" Command="{Binding SaveUserDetails}" Margin="10" />
+            <Button Content="CANCEL" Width="150" Height="40" Command="{Binding CancelCommand}" Margin="10" />
         </StackPanel>
 
     </Grid>

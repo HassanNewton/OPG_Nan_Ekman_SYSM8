@@ -3,8 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Workout Details" Height="450" Width="800">
 
+    <!--Sätter stil på knapparna-->
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Crimson"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Opacity" Value="0.8"/>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="1" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Opacity" Value="0.9" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        
+
         <DataGrid
             AutoGenerateColumns="False"
             ItemsSource="{Binding WorkoutList}" 
@@ -12,7 +30,6 @@
             CanUserAddRows="False" 
             CanUserDeleteRows="False"
             Margin="10,10,10,150">
-
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="2*" />
@@ -23,13 +40,17 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel DataContext="{Binding SelectedWorkout}" Orientation="Vertical" Margin="10,300,10,10">
+        <StackPanel DataContext="{Binding SelectedWorkout}" Orientation="Vertical" Margin="10,300,10,10" Background="White" >
+            <StackPanel>
+                <Button Content="SAVE" Width="70"/>
+                <Button Content="EDIT" Width="70"/>
+            </StackPanel>
             <TextBox Text="{Binding SelectedWorkout.Date}" />
             <TextBox Text="{Binding SelectedWorkout.Type}" />
             <TextBox Text="{Binding SelectedWorkout.Duration}" />
             <TextBox Text="{Binding SelectedWorkout.CaloriesBurned}" />
             <TextBox Text="{Binding SelectedWorkout.Notes}" />
         </StackPanel>
-        
+
     </Grid>
 </Window>

@@ -7,6 +7,24 @@
         mc:Ignorable="d"
         Title="Login" Height="450" Width="800" ResizeMode="NoResize" Background="LightGray" WindowStartupLocation="CenterScreen" >
 
+    <!--Sätter stil på knapparna-->
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Crimson"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Opacity" Value="0.8"/>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="1" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Opacity" Value="0.9" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <DataGrid AutoGenerateColumns="True" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}"/>
 
@@ -18,12 +36,12 @@
 
             <Label Content="Password:" HorizontalAlignment="Center" FontFamily="Arial" />
             <TextBox Width="200" Height="30" Text="{Binding PasswordInput, UpdateSourceTrigger=PropertyChanged}" />
-            <Button Content="SIGN IN" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Margin="20" Command="{Binding SignInCommand}" Opacity="0.8" />
+            <Button Content="SIGN IN" Width="150" Height="40" Margin="20" Command="{Binding SignInCommand}" />
 
-            <Button Content="FORGOT PASSWORD?" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding NewPasswordCommand}" Opacity="0.8" />
+            <Button Content="FORGOT PASSWORD?" Width="150" Height="40" Command="{Binding NewPasswordCommand}" />
             <Label/>
             <Label Content="If you do not have a login, please register a new account by clicking the Register button below" HorizontalAlignment="Center" FontFamily="Arial" />
-            <Button Content="REGISTER" Width="150" Height="40" Background="Crimson" FontFamily="Arial" Command="{Binding RegisterCommand}" Opacity="0.8"/>
+            <Button Content="REGISTER" Width="150" Height="40" Command="{Binding RegisterCommand}" />
         </StackPanel>
     </Grid>
 </Window>
