@@ -11,7 +11,6 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Navigation;
 
 namespace FitTrack.ViewModel
 {
@@ -21,7 +20,8 @@ namespace FitTrack.ViewModel
         // Refererar till Usermanager klassen
         private WorkoutManager workoutManager;
 
-        private Usermanager usermanager;
+        Usermanager usermanager;
+
 
         // hämta lista från Workoutmanager
         public ObservableCollection<Workout> Workouts { get; }
@@ -31,17 +31,13 @@ namespace FitTrack.ViewModel
 
         // Egenskaper
         private User user;
-
         public User User
         {
             get { return user; }
             set
             {
-                if (user != value)
-                {
-                    user = value;
-                    OnPropertyChanged(nameof(User));
-                }
+                user = value;
+                OnPropertyChanged(nameof(User));
             }
         }
 
@@ -81,13 +77,16 @@ namespace FitTrack.ViewModel
             RemoveWorkoutCommand = new RelayCommand(RemoveWorkOut);
             InfoCommand = new RelayCommand(ShowInfo);
             SignOutCommand = new RelayCommand(SignOut);
+
+            CurrentUser = currentUser;
         }
 
+
         // Konstruktor för att visa den inloggades användarnamn
-        public WorkoutWindowViewModel(string currentUser)
+        public WorkoutWindowViewModel(User loggedInUser)
         {
-            CurrentUser = currentUser;
-            GetUserList = new ObservableCollection<Person>();
+            this.User = loggedInUser;
+            Workouts = new ObservableCollection<Workout>(); // Anpassa efter logik för workout-listan
         }
 
         private string currentUser;
@@ -161,7 +160,7 @@ namespace FitTrack.ViewModel
             else
             {
                 OpenWorkoutDetailsWindow(SelectedWorkout);
-            }
+            }                
         }
 
         private void OpenWorkoutDetailsWindow(object parameter)

@@ -19,13 +19,16 @@ namespace FitTrack.ViewModel
         public ObservableCollection<Workout> WorkoutList { get; }
 
         // Egenskaper
-
         private Workout workout;
 
         public Workout Workout
         {
             get { return workout; }
-            set { workout = value; }
+            set 
+            { 
+                workout = value;
+                OnPropertyChanged();
+            }
         }
 
 
@@ -39,7 +42,7 @@ namespace FitTrack.ViewModel
         public WorkoutDetailsWindowViewModel(WorkoutManager workoutManager)
         {
             // Sätt WorkoutList till workoutManager’s WorkoutList
-            WorkoutList = workoutManager.WorkoutList;
+            //WorkoutList = workoutManager.WorkoutList; // Detta visar alla aktiviteter i listan men det ska visas specifik info om den valda aktiviteten!
         }
 
         // Metoder

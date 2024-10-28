@@ -1,4 +1,5 @@
 ﻿using FitTrack.Model;
+using FitTrack.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +26,15 @@ namespace FitTrack.View
             InitializeComponent();
             //Usermanager usermanager = new Usermanager();
 
-            WorkoutManager workoutManager = new WorkoutManager();
-            ViewModel.WorkoutWindowViewModel workoutWindowViewModel = new ViewModel.WorkoutWindowViewModel(workoutManager); // ändrat från usermanager till workoutManager i parametern
-            DataContext = workoutWindowViewModel;
+            //WorkoutManager workoutManager = new WorkoutManager();
+            //ViewModel.WorkoutWindowViewModel workoutWindowViewModel = new ViewModel.WorkoutWindowViewModel(workoutManager); // ändrat från usermanager till workoutManager i parametern
+            //DataContext = workoutWindowViewModel;
+
+        }
+
+        public WorkoutWindow(WorkoutWindowViewModel viewModel) : this() // Anropar parameterlös konstruktor
+        {
+            DataContext = viewModel;
         }
     }
 }

@@ -74,26 +74,44 @@ namespace FitTrack.ViewModel
         // Metoder
         private void SignIn(object parameter)
         {
-            // Kontrollera om användarnamn och lösenord inte är tomma
             if (string.IsNullOrEmpty(UsernameInput) || string.IsNullOrEmpty(PasswordInput))
             {
                 MessageBox.Show("Please enter both username and password.");
-                // Avbryt exekveringen av metoden om användarnamn eller lösenord är tom
                 return;
             }
 
-            // validera användarnamn och lösenord
-            if (ValidateUser(UsernameInput, PasswordInput))
+            // Loggar in användaren och returnerar ett Person-objekt
+            Person loggedInPerson = userManager.LogIn(UsernameInput, PasswordInput);
+
+            if (loggedInPerson != null)
             {
-                //MessageBox.Show($"Welcome {UsernameInput}");
-                
-                OpenWorkoutWindow();
+                // Kontrollera om den inloggade personen är en admin
+                if (loggedInPerson is AdminUser adminUser)
+                {
+                    OpenAdminFunctions(adminUser);
+                }
+                else if (loggedInPerson is User user)
+                {
+                    // Hantera vanliga användare
+                    OpenWorkoutWindow(user);
+                }
             }
             else
             {
-                // Om ingen användare hittas, visa felmeddelande
                 MessageBox.Show("Invalid username or password.");
             }
+        }
+
+        // Metod för att hantera access för AdminUser
+        private void OpenAdminFunctions(AdminUser adminUser)
+        {
+            // Visa en lista över användare eller träningspass
+
+            // Tillfällig
+            MessageBox.Show("Welcome, Admin! Here you can manage users and workouts.");
+
+            // Anropar GetUserList TILLFÄLLIG
+            adminUser.GetUserList(); 
         }
 
         private bool ValidateUser(string username, string password)
@@ -122,10 +140,10 @@ namespace FitTrack.ViewModel
             registerWindow.Show();
         }
 
-        private void OpenWorkoutWindow()
+        private void OpenWorkoutWindow(User loggedInUser)
         {
             // Skapa en ny instans av WorkoutWindow
-            WorkoutWindow workoutWindow = new WorkoutWindow();
+            WorkoutWindow workoutWindow = new WorkoutWindow(new WorkoutWindowViewModel(loggedInUser));
 
             // Stäng MainWindow
             Application.Current.MainWindow.Close();

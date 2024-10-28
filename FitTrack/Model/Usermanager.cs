@@ -53,8 +53,7 @@ namespace FitTrack.Model
             }
             return false;
         }
-        
-        
+                
         public void AddUser(User newUser)
         {
             Users.Add(newUser);
@@ -65,6 +64,18 @@ namespace FitTrack.Model
         public ObservableCollection<Person> GetAllUsers()
         {
             return Users;
+        }
+
+        public Person LogIn(string username, string password) // ändrat från void till Person
+        {
+            foreach (var user in Users)
+            {
+                if (user.UserName == username && user.Password == password)
+                {
+                    return user; // Returnera användaren om inloggningen lyckas
+                }
+            }
+            return null; // Returnera null om inloggningen misslyckas
         }
 
     }

@@ -37,10 +37,15 @@ namespace FitTrack.Model
             }
         }
 
-        private void GetUserList()
+        public void GetUserList()
         {
-            // Hämta alla användare från Usermanager klassen? 
-            usermanager.GetAllUsers();
+            // Hämta alla användare från Usermanager klassen
+            var allUsers = usermanager.GetAllUsers(); // Får error när jag loggar in med Admin
+            // Här kan du logik för att visa användarna, t.ex. i en lista
+            foreach (var user in allUsers)
+            {
+                // Kodlogik
+            }
         }
 
     }
