@@ -20,10 +20,10 @@ namespace FitTrack.View
     /// </summary>
     public partial class RegisterWindow : Window
     {
-        public RegisterWindow()
+        public RegisterWindow(Usermanager usermanager)
         {
             InitializeComponent();
-            DataContext = new ViewModel.RegisterWindowViewModel();
+            DataContext = new ViewModel.RegisterWindowViewModel(usermanager);
         }
     }
 }

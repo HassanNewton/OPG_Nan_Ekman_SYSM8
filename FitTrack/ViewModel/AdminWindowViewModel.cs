@@ -10,16 +10,11 @@ namespace FitTrack.ViewModel
 {
     public class AdminWindowViewModel : ViewModelBase
     {
-        private Usermanager usermanager;
-        private WorkoutManager workoutManager;
+        Usermanager usermanager;
 
-        public AdminWindowViewModel()
+        public AdminWindowViewModel(Usermanager usermanager)
         {
-            // Använder de statiska instanserna direkt från App
-            this.usermanager = App.UserManager;
-            this.workoutManager = App.Workoutmanager;
-
-            
+            this.usermanager = usermanager;
         }
 
 

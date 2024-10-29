@@ -15,9 +15,14 @@ namespace FitTrack.Model
         // Egenskap för lista av användare
         public ObservableCollection<Person> Users { get; set; } = new ObservableCollection<Person>();
 
+        // Egenskap av Workoutmanager
+        public WorkoutManager WorkoutManager { get; set; }
+
         // Konstruktor
         public Usermanager()
         {
+            WorkoutManager = new WorkoutManager();
+
             // Initierar Users som en ObservableCollection lista av Person-objekt med fördefinierade användare
             Users = new ObservableCollection<Person>
             {

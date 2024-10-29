@@ -20,6 +20,11 @@ namespace FitTrack.Model
         }
 
         // Konstruktor
+
+        public CardioWorkout()
+        {
+            // Tom eftersom min workoutmanager ska kunna hämta utan parametrar,kanske spara passen på annat sätt? 
+        }
         public CardioWorkout(int distance, TimeSpan duration)
         {
             this.Distance = distance;

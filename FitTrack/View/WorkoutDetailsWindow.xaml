@@ -35,8 +35,8 @@
                 <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="2*"/>
                 <DataGridTextColumn Header="Activity" Binding="{Binding Type}" Width="4*"/>
                 <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="2*"/>
-                <DataGridTextColumn Header="Duration" Binding="{Binding CaloriesBurned}" Width="2*"/>
-                <DataGridTextColumn Header="Duration" Binding="{Binding Notes}" Width="2*"/>
+                <DataGridTextColumn Header="Calories Burned" Binding="{Binding CaloriesBurned}" Width="2*"/>
+                <DataGridTextColumn Header="Notes" Binding="{Binding Notes}" Width="2*"/>
             </DataGrid.Columns>
 
             <TextBox Text="{Binding SelectedWorkout.Date, StringFormat='yyyy-MM-dd'}"  />

@@ -7,6 +7,23 @@
         mc:Ignorable="d"
         Title="AdminWindow" Height="450" Width="800">
     <Grid>
-        
+        <ListView ItemsSource="{Binding Workouts}" x:Name="WorkoutsList">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" Width="215" />
+                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Date}" Width="120" />
+                    <GridViewColumn Header="Duration" DisplayMemberBinding="{Binding Duration}" Width="120" />
+                    <GridViewColumn Header="Calories Burned" DisplayMemberBinding="{Binding CaloriesBurned}" Width="120" />
+                    <GridViewColumn Header="Notes" DisplayMemberBinding="{Binding Notes}" Width="215" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button Content="Delete Selected Workout" 
+                Command="{Binding RemoveWorkoutCommand}" 
+                CommandParameter="{Binding SelectedItem, ElementName=WorkoutsList}" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom" 
+                Width="200" />
     </Grid>
 </Window>

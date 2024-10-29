@@ -66,7 +66,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="4*"/>
                     <DataGridTextColumn Header="Activity" Binding="{Binding Type}" Width="4*"/>
-                    <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="2*"/>
+                    <!--<DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="2*"/>-->
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -74,7 +74,7 @@
             <StackPanel Grid.Column="2" Margin="10" Background="LightGray">
                 <TextBox Text="{Binding SelectedWorkout.Date, StringFormat='dd/MM/yyyy'}" Margin="0,5"/>
                 <TextBox Text="{Binding SelectedWorkout.Type}" Margin="0,5"/>
-                <TextBox Text="{Binding SelectedWorkout.Duration}" Margin="0,5"/>
+                <!--<TextBox Text="{Binding SelectedWorkout.Duration}" Margin="0,5"/>-->
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Vertical" Margin="10" Background="LightGray">

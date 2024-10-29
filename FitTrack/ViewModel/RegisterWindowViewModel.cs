@@ -26,7 +26,7 @@ namespace FitTrack.ViewModel
      */
     public class RegisterWindowViewModel : ViewModelBase // ändrat från att ärva från MainWindow till ViewModelBase
     {
-        // Refererar till Usermanager klassen, hur hämtar jag listan?? 
+        // Refererar till Usermanager klassen 
         Usermanager usermanager;
         WorkoutManager workoutmanager;
 
@@ -85,8 +85,11 @@ namespace FitTrack.ViewModel
         public RelayCommand RegisterUserCommand { get; }
 
         // Konstruktor
-        public RegisterWindowViewModel()
+        public RegisterWindowViewModel(Usermanager usermanager)
         {
+
+            this.usermanager = usermanager;
+
             CountryList = new List<string> { "Denmark", "Norway", "Sweden" };
             RegisterUserCommand = new RelayCommand(RegisterNewUser);
         }
@@ -114,7 +117,7 @@ namespace FitTrack.ViewModel
                 }
 
                 // Använder App.UserManager direkt
-                if (App.UserManager.CheckUsername(UserInput))
+                if (usermanager.CheckUsername(UserInput)) // ändrade från App.UserManager
                 {
                     MessageBox.Show("Username already exists.");
                     return;
@@ -125,7 +128,7 @@ namespace FitTrack.ViewModel
                     UserName = UserInput,
                     Password = PasswordInput
                 };
-                App.UserManager.AddUser(newUser);
+                usermanager.AddUser(newUser);
 
                 MessageBox.Show($"New user created: {newUser.UserName}");
 
@@ -140,8 +143,15 @@ namespace FitTrack.ViewModel
 
         private void OpenMainWindow()
         {
-            Application.Current.MainWindow = new MainWindow();
-            Application.Current.MainWindow.Show();
+            // Skapa en ny instans av MainWindow
+            MainWindow mainWindow = new MainWindow(usermanager);
+
+            // Stäng MainWindow
+            Application.Current.MainWindow.Close();
+
+            // Sätt det nya fönstret som huvudfönster och visa det
+            Application.Current.MainWindow = mainWindow;
+            mainWindow.Show();
         }
 
         private bool ValidatePasswordRequirements(string PasswordInput)

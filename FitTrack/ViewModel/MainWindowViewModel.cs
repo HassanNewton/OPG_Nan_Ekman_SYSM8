@@ -16,8 +16,8 @@ namespace FitTrack.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         // Refererar till Usermanager klassen
-        private Usermanager userManager;
-        private WorkoutManager workoutManager;
+        Usermanager usermanager;
+        //WorkoutManager workoutmanager;
 
         // Egenskaper
         private string usernameInput;
@@ -48,13 +48,10 @@ namespace FitTrack.ViewModel
         public RelayCommand RegisterCommand {  get; }
         public RelayCommand NewPasswordCommand { get; }
 
-        // Gjorde om konstruktor eftersom jag både har usermanager och workoutmanager
-        // Konstruktor som tar emot befintliga instanser eller skapar nya om de saknas
-        public MainWindowViewModel(Usermanager userManager = null, WorkoutManager workoutManager = null)
+        // Konstruktor
+        public MainWindowViewModel(Usermanager usermanager)
         {
-            // Använd den givna instansen eller skapa en ny
-            this.userManager = userManager ?? new Usermanager();
-            this.workoutManager = workoutManager ?? new WorkoutManager();
+            this.usermanager = usermanager;
 
             SignInCommand = new RelayCommand(SignIn);
             RegisterCommand = new RelayCommand(Register);
@@ -71,14 +68,14 @@ namespace FitTrack.ViewModel
             }
 
             // Logga in användaren och returnera ett Person-objekt
-            Person loggedInPerson = App.UserManager.LogIn(UsernameInput, PasswordInput); // Spara den inloggade användaren
+            Person loggedInPerson = usermanager.LogIn(UsernameInput, PasswordInput); // Spara den inloggade användaren
 
             if (loggedInPerson != null)
             {
                 if (loggedInPerson is AdminUser)
                 {
                     // Skapa AdminUser med Usermanager och WorkoutManager instanser
-                    var adminUser = new AdminUser(App.UserManager, App.Workoutmanager);
+                    var adminUser = new AdminUser(usermanager);
                     OpenAdminFunctions(adminUser);
                 }
                 else if (loggedInPerson is User user)
@@ -100,7 +97,7 @@ namespace FitTrack.ViewModel
         private void OpenAdminWindow()
         {
             // Skapa en ny instans av RegisterWindow
-            AdminWindow adminWindow = new AdminWindow();
+            AdminWindow adminWindow = new AdminWindow(usermanager);
 
             // Stäng MainWindow
             Application.Current.MainWindow.Close();
@@ -113,7 +110,7 @@ namespace FitTrack.ViewModel
         private bool ValidateUser(string username, string password)
         {
             // foreach-loop för att leta efter matchande användare
-            foreach (var user in userManager.Users)
+            foreach (var user in usermanager.Users)
             {
                 if(user.UserName == username && user.Password == password)
                 {
@@ -126,7 +123,7 @@ namespace FitTrack.ViewModel
         private void Register(object parameter)
         {
             // Skapa en ny instans av RegisterWindow
-            RegisterWindow registerWindow = new RegisterWindow();
+            RegisterWindow registerWindow = new RegisterWindow(usermanager);
 
             // Stäng MainWindow
             Application.Current.MainWindow.Close();
@@ -139,7 +136,7 @@ namespace FitTrack.ViewModel
         private void OpenWorkoutWindow(User loggedInUser)
         {
             // Skapa en ny instans av WorkoutWindow
-            WorkoutWindow workoutWindow = new WorkoutWindow();
+            WorkoutWindow workoutWindow = new WorkoutWindow(usermanager);
 
             // Stäng MainWindow
             Application.Current.MainWindow.Close();
@@ -160,7 +157,7 @@ namespace FitTrack.ViewModel
             // men om jag registrerar användare och sedan väljer forgot password så stängs inte main
 
             // Skapa en ny instans av NewPasswordWindow
-            NewPasswordWindow newPasswordWindow = new NewPasswordWindow();
+            NewPasswordWindow newPasswordWindow = new NewPasswordWindow(usermanager);
 
             // Stäng MainWindow
             Application.Current.MainWindow.Close();

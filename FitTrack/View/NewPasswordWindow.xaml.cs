@@ -20,11 +20,10 @@ namespace FitTrack.View
     /// </summary>
     public partial class NewPasswordWindow : Window
     {
-        public NewPasswordWindow()
+        public NewPasswordWindow(Usermanager usermanager)
         {
             InitializeComponent();
-            // Använder den statiska instansen av Usermanager från App
-            ViewModel.NewPasswordWindowViewModel newPasswordWindowViewModel = new ViewModel.NewPasswordWindowViewModel();
+            ViewModel.NewPasswordWindowViewModel newPasswordWindowViewModel = new ViewModel.NewPasswordWindowViewModel(usermanager);
             DataContext = newPasswordWindowViewModel;
         }
     }

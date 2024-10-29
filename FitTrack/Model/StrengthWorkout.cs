@@ -20,6 +20,10 @@ namespace FitTrack.Model
         }
 
         // Konstruktor
+        public StrengthWorkout()
+        {
+            // Tom eftersom min workoutmanager ska kunna hämta utan parametrar,kanske spara passen på annat sätt? 
+        }
         public StrengthWorkout(int repetitions, TimeSpan duration)
         {
             this.Repetitions = repetitions;

@@ -1,4 +1,5 @@
 ﻿using FitTrack;
+using FitTrack.Model;
 using FitTrack.MVVM;
 using FitTrack.View;
 using System;
@@ -13,6 +14,9 @@ namespace FitTrack.ViewModel
     public class UserDetailsWindowViewModel : ViewModelBase
     {
         // Egenskaper
+
+        Usermanager usermanager; 
+
         private string usernameInput;
 
         public string UsernameInput
@@ -65,7 +69,7 @@ namespace FitTrack.ViewModel
         public RelayCommand SaveCommand { get; }
 
         // Konstruktor
-        public UserDetailsWindowViewModel()
+        public UserDetailsWindowViewModel(Usermanager usermanager)
         {
             CancelCommand = new RelayCommand(Cancel);
             SaveCommand = new RelayCommand(SaveUserDetails);
@@ -87,7 +91,7 @@ namespace FitTrack.ViewModel
         private void OpenWorkoutsWindow()
         {
             // Skapa en ny instans av MainWindow
-            WorkoutWindow workoutsWindow = new WorkoutWindow();
+            WorkoutWindow workoutsWindow = new WorkoutWindow(usermanager);
 
             // Sätt det nya fönstret som huvudfönster och visa det
             Application.Current.MainWindow = workoutsWindow;

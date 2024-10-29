@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FitTrack.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,11 +20,11 @@ namespace FitTrack.View
     /// </summary>
     public partial class AdminWindow : Window
     {
-        public AdminWindow()
+        public AdminWindow(Usermanager usermanager)
         {
             InitializeComponent();
             // Använd den statiska instansen av Usermanager och WorkoutManager från App
-            ViewModel.AdminWindowViewModel adminWindowViewModel = new ViewModel.AdminWindowViewModel();
+            ViewModel.AdminWindowViewModel adminWindowViewModel = new ViewModel.AdminWindowViewModel(usermanager);
             DataContext = adminWindowViewModel;
         }
     }

@@ -21,16 +21,14 @@ namespace FitTrack
     /// </summary>
     public partial class MainWindow : Window
     {
-        private WorkoutManager workoutManager;
+        //private WorkoutManager workoutManager;
 
-        public MainWindow() 
+
+        public MainWindow(Usermanager manager) 
         {
 
             InitializeComponent();
-            Usermanager usermanager = new Usermanager();
-            //ViewModel.MainWindowViewModel mainWindowViewModel = new ViewModel.MainWindowViewModel(usermanager);
-            //DataContext = mainWindowViewModel;
-            DataContext = new MainWindowViewModel(usermanager);
+            DataContext = new MainWindowViewModel(manager);
         }
 
         //public MainWindow(WorkoutManager workoutManager)

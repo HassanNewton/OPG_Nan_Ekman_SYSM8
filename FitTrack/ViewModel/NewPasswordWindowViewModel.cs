@@ -12,7 +12,7 @@ namespace FitTrack.ViewModel
     public class NewPasswordWindowViewModel : ViewModelBase
     {
         //// skapa ett objekt av Usermanager
-        //Usermanager usermanager;
+        Usermanager usermanager;
         //WorkoutManager workoutmanager;
 
         // Lista med securityQuestions till ComboBox
@@ -83,8 +83,10 @@ namespace FitTrack.ViewModel
         public RelayCommand RegisterNewPasswordCommand { get; }
 
         // Konstruktor
-        public NewPasswordWindowViewModel()
+        public NewPasswordWindowViewModel(Usermanager usermanager)
         {
+            this.usermanager = usermanager;
+
             RegisterNewPasswordCommand = new RelayCommand(RegisterNewPassword);
 
             // skapat en lista av SecurityQuestion
@@ -109,7 +111,7 @@ namespace FitTrack.ViewModel
                     return;
                 }
                 // kollar om användare finns i Usermanager listan
-                bool userExist = App.UserManager.CheckUsername(UserInput);
+                bool userExist = usermanager.CheckUsername(UserInput); // tagit bort App.
                 if (!userExist)
                 {
                     MessageBox.Show("User does not exist");
@@ -121,7 +123,7 @@ namespace FitTrack.ViewModel
                     return;
                 }
                 // Logik för att uppdatera/spara nya lösenordet för användaren
-                bool updatedPassword = App.UserManager.UpdatePassword(UserInput, PasswordInput);
+                bool updatedPassword = usermanager.UpdatePassword(UserInput, PasswordInput); // Tagit bort App.
                 if (updatedPassword)
                 {
                     MessageBox.Show("Changed password successfully!");
@@ -141,7 +143,7 @@ namespace FitTrack.ViewModel
         private void OpenMainWindow()
         {
             // Skapa en ny instans av MainWindow
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(usermanager);
 
             // stäng befintligt fönster
             Application.Current.MainWindow.Close();

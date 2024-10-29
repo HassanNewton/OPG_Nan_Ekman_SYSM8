@@ -14,8 +14,20 @@ namespace FitTrack.ViewModel
     public class WorkoutDetailsWindowViewModel : ViewModelBase
     {
         // Egenskaper
+        private Workout selectedWorkout;
 
-        public Workout SelectedWorkout { get; set; } // om set är private kan jag inte öppna fönster för details
+        public Workout SelectedWorkout
+        {
+            get { return selectedWorkout; }
+            set 
+            { 
+                selectedWorkout = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        /*public Workout SelectedWorkout { get; set; } */// om set är private kan jag inte öppna fönster för details
 
         private Workout workout;
 

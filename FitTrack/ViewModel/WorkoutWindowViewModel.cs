@@ -18,7 +18,7 @@ namespace FitTrack.ViewModel
     {
 
         // Refererar till Usermanager klassen
-        private readonly WorkoutManager workoutmanager;
+        //private readonly WorkoutManager workoutmanager;
 
         private readonly Usermanager usermanager;
 
@@ -60,13 +60,14 @@ namespace FitTrack.ViewModel
         public RelayCommand SignOutCommand { get; }
 
         // Konstruktor
-        public WorkoutWindowViewModel(WorkoutManager workoutManager)
+        public WorkoutWindowViewModel(Usermanager usermanager) // ändrat så konstruktor tar parameter Usermanager istället för Workoutmanager
         {
             // skapa instans av WorkoutManager
-            this.workoutmanager = workoutManager;
+            this.usermanager = usermanager;
 
             // hämta lista från workoutmanager
-            Workouts = workoutManager.WorkoutList;
+            //Workouts = workoutManager.WorkoutList;
+            Workouts = usermanager.WorkoutManager.WorkoutList;
 
             AddWorkOutCommand = new RelayCommand(AddWorkOut);
             OpenUserDetailsCommand = new RelayCommand(ExecuteOpenDetails);
@@ -107,7 +108,7 @@ namespace FitTrack.ViewModel
             else
             {
                 // tar bort ett specifikt träningspass markerat i listan
-                workoutmanager.WorkoutList.Remove(selectedWorkout);
+                usermanager.WorkoutManager.WorkoutList.Remove(selectedWorkout);
             }
         }
 
@@ -120,7 +121,7 @@ namespace FitTrack.ViewModel
         private void OpenDetails(Workout workout)
         {
             // Skapa en ny instans av UserDetailsWindow
-            UserDetailsWindow userDetailsWindow = new UserDetailsWindow();
+            UserDetailsWindow userDetailsWindow = new UserDetailsWindow(usermanager);
 
             // Stäng MainWindow
             Application.Current.MainWindow.Close();
@@ -175,7 +176,7 @@ namespace FitTrack.ViewModel
         private void SignOut(object parameter)
         {
             // Skapa en ny instans av MainWindow
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(usermanager);
 
             // Stäng MainWindow
             Application.Current.MainWindow.Close();
