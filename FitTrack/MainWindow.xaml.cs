@@ -21,8 +21,6 @@ namespace FitTrack
     /// </summary>
     public partial class MainWindow : Window
     {
-        //private WorkoutManager workoutManager;
-
 
         public MainWindow(Usermanager manager) 
         {
@@ -30,10 +28,5 @@ namespace FitTrack
             InitializeComponent();
             DataContext = new MainWindowViewModel(manager);
         }
-
-        //public MainWindow(WorkoutManager workoutManager)
-        //{
-        //    this.workoutManager = workoutManager;
-        //}
     }
 }

@@ -30,12 +30,11 @@ namespace FitTrack.Model
         public AdminUser(Usermanager usermanager)
         {
             this.usermanager = usermanager;
-            //this.workoutmanager = workoutmanager;
         }
 
         public void ManageAllWorkouts()
         {
-            foreach (var workout in App.Workoutmanager.GetAllWorkouts())
+            foreach (var workout in usermanager.WorkoutManager.GetAllWorkouts())
             {
                 // KODLOGIK
             }
