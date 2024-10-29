@@ -62,11 +62,9 @@ namespace FitTrack.ViewModel
         // Konstruktor
         public WorkoutWindowViewModel(Usermanager usermanager) // ändrat så konstruktor tar parameter Usermanager istället för Workoutmanager
         {
-            // skapa instans av WorkoutManager
             this.usermanager = usermanager;
 
             // hämta lista från workoutmanager
-            //Workouts = workoutManager.WorkoutList;
             Workouts = usermanager.WorkoutManager.WorkoutList;
 
             AddWorkOutCommand = new RelayCommand(AddWorkOut);

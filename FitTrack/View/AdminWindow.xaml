@@ -5,25 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitTrack.View"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="450" Width="800">
-    <Grid>
-        <ListView ItemsSource="{Binding Workouts}" x:Name="WorkoutsList">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" Width="215" />
-                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Date}" Width="120" />
-                    <GridViewColumn Header="Duration" DisplayMemberBinding="{Binding Duration}" Width="120" />
-                    <GridViewColumn Header="Calories Burned" DisplayMemberBinding="{Binding CaloriesBurned}" Width="120" />
-                    <GridViewColumn Header="Notes" DisplayMemberBinding="{Binding Notes}" Width="215" />
-                </GridView>
-            </ListView.View>
-        </ListView>
+        Title="AdminWindow" Height="450" Width="800" Background="LightGray">
 
-        <Button Content="Delete Selected Workout" 
-                Command="{Binding RemoveWorkoutCommand}" 
-                CommandParameter="{Binding SelectedItem, ElementName=WorkoutsList}" 
-                HorizontalAlignment="Right" 
-                VerticalAlignment="Bottom" 
-                Width="200" />
+    <!-- Sätter stil på knapparna -->
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Crimson"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Opacity" Value="0.8"/>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="1" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Opacity" Value="0.9" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <!-- Lista över användare -->
+        <GroupBox Header="Users" Margin="10" VerticalAlignment="Top" Foreground="Crimson">
+            <ListBox ItemsSource="{Binding Users}" DisplayMemberPath="UserName" 
+                     SelectedItem="{Binding SelectedUser}" />
+        </GroupBox>
+
+        <!-- Lista över träningspass -->
+        <GroupBox Header="Workouts" Margin="10,150,10,10" VerticalAlignment="Top" Foreground="Crimson">
+            <ListBox ItemsSource="{Binding Workouts}" DisplayMemberPath="Type" 
+                     SelectedItem="{Binding SelectedWorkout}" />
+        </GroupBox>
+
+        <!-- Knappar för att ta bort träningspass och användare -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <Button Content="Delete Workout" Width="120" Margin="5"
+                    Command="{Binding DeleteWorkoutCommand}" />
+            <Button Content="Delete User" Width="120" Margin="5"
+                    Command="{Binding DeleteUserCommand}" />
+        </StackPanel>
     </Grid>
 </Window>

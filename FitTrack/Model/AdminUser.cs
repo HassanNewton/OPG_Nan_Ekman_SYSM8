@@ -13,11 +13,8 @@ namespace FitTrack.Model
     {
         // En admin-User ska kunna se/ta bort alla träningspass tillagda av användare
 
-        //Skapa Relay för DeleteWorkout? Eller kan jag hämta från WorkoutWindow? 
-
         // Egenskaper
         private Usermanager usermanager;
-        //private WorkoutManager workoutmanager;
 
         public ObservableCollection<Workout> Workouts { get; }
 
