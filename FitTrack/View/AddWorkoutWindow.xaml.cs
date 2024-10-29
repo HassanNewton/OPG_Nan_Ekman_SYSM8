@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FitTrack.Model;
+using FitTrack.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,7 @@ namespace FitTrack.View
         public AddWorkoutWindow()
         {
             InitializeComponent();
+            DataContext = new ViewModel.AddWorkoutWindowViewModel();
         }
     }
 }

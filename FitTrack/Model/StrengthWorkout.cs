@@ -26,8 +26,8 @@ namespace FitTrack.Model
         }
         public StrengthWorkout(int repetitions, TimeSpan duration)
         {
-            this.Repetitions = repetitions;
-            this.Duration = duration;
+            Repetitions = repetitions;
+            Duration = duration;
         }
 
         public override int CalculateCaloriesBurned()

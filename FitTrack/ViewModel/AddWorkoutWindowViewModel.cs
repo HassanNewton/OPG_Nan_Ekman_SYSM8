@@ -1,4 +1,5 @@
-﻿using FitTrack.MVVM;
+﻿using FitTrack.Model;
+using FitTrack.MVVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +23,43 @@ namespace FitTrack.ViewModel
 			}
 		}
 
+		private TimeSpan duration;
+
+		public TimeSpan Duration
+		{
+			get { return duration; }
+			set 			{ duration = value; }
+		}
+
+		private int caloriesBurned;
+
+		public int CaloriesBurned
+		{
+			get { return caloriesBurned; }
+			set { caloriesBurned = value; }
+		}
+
+		private string notesInput;
+
+		public string NotesInput
+		{
+			get { return notesInput; }
+			set { notesInput = value; }
+		}
 
 
+
+		// Konstruktor
+		public AddWorkoutWindowViewModel()
+		{
+			
+		}
+
+		// Metoder
+		private void SaveWorkout()
+		{
+
+		}
 
 	}
 }

@@ -27,8 +27,8 @@ namespace FitTrack.Model
         }
         public CardioWorkout(int distance, TimeSpan duration)
         {
-            this.Distance = distance;
-            this.Duration = duration;
+            Distance = distance;
+            Duration = duration;
         }
 
         public override int CalculateCaloriesBurned()

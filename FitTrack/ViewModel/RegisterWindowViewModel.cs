@@ -115,9 +115,7 @@ namespace FitTrack.ViewModel
                     MessageBox.Show("The password must be at least 8 characters, contain at least one letter, one number, and one special character.");
                     return;
                 }
-
-                // Använder App.UserManager direkt
-                if (usermanager.CheckUsername(UserInput)) // ändrade från App.UserManager
+                if (usermanager.CheckUsername(UserInput)) 
                 {
                     MessageBox.Show("Username already exists.");
                     return;
