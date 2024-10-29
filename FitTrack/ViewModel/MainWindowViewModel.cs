@@ -17,7 +17,6 @@ namespace FitTrack.ViewModel
     {
         // Refererar till Usermanager klassen
         Usermanager usermanager;
-        //WorkoutManager workoutmanager;
 
         // Egenskaper
         private string usernameInput;
@@ -152,10 +151,6 @@ namespace FitTrack.ViewModel
 
         private void OpenNewPasswordWindow()
         {
-            // OBS OBS! 
-            // Main stängs bara om jag trycker på knappen Forgot Password först när programmet startas,
-            // men om jag registrerar användare och sedan väljer forgot password så stängs inte main
-
             // Skapa en ny instans av NewPasswordWindow
             NewPasswordWindow newPasswordWindow = new NewPasswordWindow(usermanager);
 

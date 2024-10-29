@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitTrack.View"
         mc:Ignorable="d"
-        Title="AddWorkoutWindow" Height="450" Width="800">
+        Title="AddWorkoutWindow" Height="300" Width="800">
 
     <!--Sätter stil på knapparna-->
     <Window.Resources>
@@ -26,6 +26,23 @@
     </Window.Resources>
 
     <Grid>
-        
+        <StackPanel>
+            <TextBlock Text="Date:"/>
+            <TextBox Text="{Binding Workout.Date, StringFormat='dd/MM/yyyy'}"/>
+            <TextBlock Text="Type:"/>
+            <ComboBox ItemsSource="{Binding Workout.Type}" />
+            <TextBlock Text="Duration:"/>
+            <TextBox Text="{Binding Workout.Duration}"/>
+            <TextBlock Text="CaloriesBurned:"/>
+            <TextBox Text="{Binding Workout.CaloriesBurned}"/>
+            <TextBlock Text="Notes:"/>
+            <TextBox Text="{Binding Workout.Notes}"/>
+
+            <StackPanel VerticalAlignment="Bottom">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                    <Button Content="SAVE" Command="{Binding SaveWorkoutCommand}" Width="70" Margin="5"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

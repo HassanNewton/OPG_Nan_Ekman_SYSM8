@@ -84,7 +84,7 @@ namespace FitTrack.ViewModel
         private void AddWorkOut(object parameter)
         {
             // Skapa en ny instans av AddWorkoutWindow
-            AddWorkoutWindow addWorkoutWindow = new AddWorkoutWindow();
+            AddWorkoutWindow addWorkoutWindow = new AddWorkoutWindow(usermanager);
 
             // Stäng MainWindow
             Application.Current.MainWindow.Close();

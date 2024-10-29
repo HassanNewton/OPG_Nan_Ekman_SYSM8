@@ -5,12 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FitTrack.ViewModel
 {
     public class AddWorkoutWindowViewModel : ViewModelBase
     {
 		// Egenskaper
+		Usermanager usermanager;
+
 		private string workoutTypeComboBox;
 
 		public string WorkoutTypeComboBox
@@ -28,7 +31,7 @@ namespace FitTrack.ViewModel
 		public TimeSpan Duration
 		{
 			get { return duration; }
-			set 			{ duration = value; }
+			set { duration = value; }
 		}
 
 		private int caloriesBurned;
@@ -47,19 +50,30 @@ namespace FitTrack.ViewModel
 			set { notesInput = value; }
 		}
 
+        public RelayCommand SaveWorkoutCommand { get; }
 
-
-		// Konstruktor
-		public AddWorkoutWindowViewModel()
+        // Konstruktor
+        public AddWorkoutWindowViewModel(Usermanager usermanager)
 		{
-			
-		}
+			this.usermanager = usermanager;
+
+            SaveWorkoutCommand = new RelayCommand(SaveWorkout);
+
+        }
 
 		// Metoder
-		private void SaveWorkout()
+		private void SaveWorkout(object parameter)
 		{
-
-		}
+            if (string.IsNullOrEmpty(WorkoutTypeComboBox) || Duration == TimeSpan.Zero || CaloriesBurned == 0 || string.IsNullOrEmpty(NotesInput))
+            {
+                MessageBox.Show("Textbox cannot be empty.");
+                return;
+            }
+            else
+            {
+                Application.Current.MainWindow.Close();
+            }
+        }
 
 	}
 }

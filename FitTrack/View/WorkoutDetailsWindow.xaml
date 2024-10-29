@@ -25,9 +25,9 @@
 
         <StackPanel>
             <TextBlock Text="Date:"/>
-            <TextBox Text="{Binding Workout.Date, StringFormat='dd/MM/yyyy'}" IsEnabled="{Binding IsEditing}" Margin="0,5" Grid.Column="0"/>
+            <TextBox Text="{Binding Workout.Date, StringFormat='dd/MM/yyyy'}" IsEnabled="{Binding IsEditing}" Margin="0,5" />
             <TextBlock Text="Type:"/>
-            <TextBox Text="{Binding Workout.Type}" IsEnabled="{Binding IsEditing}" Margin="0,5" Grid.Column="1"/>
+            <TextBox Text="{Binding Workout.Type}" IsEnabled="{Binding IsEditing}" Margin="0,5" />
             <TextBlock Text="Duration:"/>
             <TextBox Text="{Binding Workout.Duration}" IsEnabled="{Binding IsEditing}" Margin="0,5"/>
             <TextBlock Text="CaloriesBurned:"/>

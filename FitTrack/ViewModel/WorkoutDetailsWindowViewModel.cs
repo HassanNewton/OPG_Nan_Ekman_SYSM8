@@ -56,11 +56,6 @@ namespace FitTrack.ViewModel
             EditCommand = new RelayCommand(EditWorkout);
         }
 
-        //public WorkoutDetailsWindowViewModel(Usermanager usermanager)
-        //{
-        //    this.usermanager = usermanager;
-        //}
-
         // Metoder
         private void EditWorkout(object parameter)
         {
