@@ -22,7 +22,6 @@ namespace FitTrack.Model
             }
         }
 
-
         private string securityAnswer; 
         public string SecurityAnswer
         {
@@ -36,17 +35,23 @@ namespace FitTrack.Model
             }
         }
 
-
-
-        // Konstruktor (osäker om jag ska ha alla parametrar i konstruktorn)
+        // Konstruktor
         public User()
         {
 
         }
 
+        // KOnstruktor med parametrar sen när användare ska korrigeras?
+        public User(string username, string password, string country, string securityQuestion, string securityAnswer)
+        {
+            UserName = username;
+            Password = password;
+            Country = country;
+            SecurityQuestion = securityQuestion;
+            SecurityAnswer = securityAnswer;
+        }
 
         // Metoder
-
         public override void SignIn()
         {
             if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password))

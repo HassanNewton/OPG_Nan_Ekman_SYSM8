@@ -26,12 +26,9 @@ namespace FitTrack.ViewModel
      */
     public class RegisterWindowViewModel : ViewModelBase // ändrat från att ärva från MainWindow till ViewModelBase
     {
-
-        //User user = new User();
-
         // Refererar till Usermanager klassen, hur hämtar jag listan?? 
-        //private Usermanager userManager = new Usermanager();
         Usermanager usermanager;
+        WorkoutManager workoutmanager;
 
         // Egenskaper för databindning 
         private string userInput;
@@ -88,16 +85,9 @@ namespace FitTrack.ViewModel
         public RelayCommand RegisterUserCommand { get; }
 
         // Konstruktor
-        public RegisterWindowViewModel(Usermanager usermanager)
+        public RegisterWindowViewModel()
         {
-            this.usermanager = usermanager;
-
-            // skapar en instans av Usermanager
-            //userManager = new Usermanager();
-
-            // skapat en lista av Countries
             CountryList = new List<string> { "Denmark", "Norway", "Sweden" };
-
             RegisterUserCommand = new RelayCommand(RegisterNewUser);
         }
 
@@ -106,7 +96,6 @@ namespace FitTrack.ViewModel
         {
             try
             {
-                // Kontrollera om användarnamn, lösenord och land inte är tomma
                 if (string.IsNullOrEmpty(UserInput) || string.IsNullOrEmpty(PasswordInput) ||
                     string.IsNullOrEmpty(ConfirmPasswordInput) || string.IsNullOrEmpty(CountryComboBox))
                 {
@@ -115,31 +104,32 @@ namespace FitTrack.ViewModel
                 }
                 if (ConfirmPasswordInput != PasswordInput)
                 {
-                    MessageBox.Show("Passwords does not match.");
+                    MessageBox.Show("Passwords do not match.");
                     return;
                 }
                 if (!ValidatePasswordRequirements(PasswordInput))
                 {
-                    MessageBox.Show("The password must be at least 8 characters, contains at least one letter (upper or lower case), at least one number and one special character.");
-                    return;
-                }
-                // Kontrollerar om anvärdarnamet finns
-                if (usermanager.CheckUsername(UserInput))
-                {
-                    MessageBox.Show("Username already exist.");
+                    MessageBox.Show("The password must be at least 8 characters, contain at least one letter, one number, and one special character.");
                     return;
                 }
 
-                // logik för att spara ny användare i listan.
-                User newUser = new User();
+                // Använder App.UserManager direkt
+                if (App.UserManager.CheckUsername(UserInput))
                 {
-                    newUser.UserName = UserInput;       // Sätt användarnamn
-                    newUser.Password = PasswordInput;     // Sätt lösenord
+                    MessageBox.Show("Username already exists.");
+                    return;
                 }
-                usermanager.AddUser(newUser);
 
-                MessageBox.Show($"New user created {newUser.UserName}");
+                User newUser = new User
+                {
+                    UserName = UserInput,
+                    Password = PasswordInput
+                };
+                App.UserManager.AddUser(newUser);
 
+                MessageBox.Show($"New user created: {newUser.UserName}");
+
+                // Öppna MainWindow efter registrering
                 OpenMainWindow();
             }
             catch (Exception ex)
@@ -150,15 +140,8 @@ namespace FitTrack.ViewModel
 
         private void OpenMainWindow()
         {
-            // Skapa en ny instans av MainWindow
-            MainWindow mainWindow = new MainWindow(usermanager);
-
-            // Stäng MainWindow
-            Application.Current.MainWindow.Close();
-
-            // Sätt det nya fönstret som huvudfönster och visa det
-           // Application.Current.MainWindow = mainWindow;
-            mainWindow.Show();
+            Application.Current.MainWindow = new MainWindow();
+            Application.Current.MainWindow.Show();
         }
 
         private bool ValidatePasswordRequirements(string PasswordInput)

@@ -18,26 +18,23 @@ namespace FitTrack.ViewModel
     {
 
         // Refererar till Usermanager klassen
-        private WorkoutManager workoutManager;
+        private readonly WorkoutManager workoutmanager;
 
-        Usermanager usermanager;
-
+        private readonly Usermanager usermanager;
 
         // hämta lista från Workoutmanager
         public ObservableCollection<Workout> Workouts { get; }
 
-        // hämta lista från Usermanager
-        public ObservableCollection<Person> GetUserList { get; }
+        // Egenskap för inloggad användare - Använde User loggedInUser för förtydligande istället för User user 
+        private User loggedInUser;
 
-        // Egenskaper
-        private User user;
-        public User User
+        public User LoggedInUser
         {
-            get { return user; }
-            set
-            {
-                user = value;
-                OnPropertyChanged(nameof(User));
+            get { return loggedInUser; }
+            set 
+            { 
+                loggedInUser = value;
+                OnPropertyChanged(nameof(LoggedInUser));
             }
         }
 
@@ -48,7 +45,7 @@ namespace FitTrack.ViewModel
             set
             {
                 selectedWorkout = value;
-                OnPropertyChanged(); // anropas så fort värdet ändras
+                OnPropertyChanged(nameof(SelectedWorkout)); // anropas så fort värdet ändras
             }
         }
 
@@ -66,7 +63,7 @@ namespace FitTrack.ViewModel
         public WorkoutWindowViewModel(WorkoutManager workoutManager)
         {
             // skapa instans av WorkoutManager
-            this.workoutManager = workoutManager;
+            this.workoutmanager = workoutManager;
 
             // hämta lista från workoutmanager
             Workouts = workoutManager.WorkoutList;
@@ -77,30 +74,14 @@ namespace FitTrack.ViewModel
             RemoveWorkoutCommand = new RelayCommand(RemoveWorkOut);
             InfoCommand = new RelayCommand(ShowInfo);
             SignOutCommand = new RelayCommand(SignOut);
-
-            CurrentUser = currentUser;
         }
-
 
         // Konstruktor för att visa den inloggades användarnamn
         public WorkoutWindowViewModel(User loggedInUser)
         {
-            this.User = loggedInUser;
-            Workouts = new ObservableCollection<Workout>(); // Anpassa efter logik för workout-listan
+            LoggedInUser = loggedInUser;
+            Workouts = new ObservableCollection<Workout>();
         }
-
-        private string currentUser;
-
-        public string CurrentUser
-        {
-            get { return currentUser; }
-            set
-            {
-                currentUser = value;
-                OnPropertyChanged(nameof(CurrentUser));
-            }
-        }
-
 
         // Metoder
         private void AddWorkOut(object parameter)
@@ -126,7 +107,7 @@ namespace FitTrack.ViewModel
             else
             {
                 // tar bort ett specifikt träningspass markerat i listan
-                workoutManager.WorkoutList.Remove(selectedWorkout);
+                workoutmanager.WorkoutList.Remove(selectedWorkout);
             }
         }
 
@@ -163,10 +144,10 @@ namespace FitTrack.ViewModel
             }                
         }
 
-        private void OpenWorkoutDetailsWindow(object parameter)
+        private void OpenWorkoutDetailsWindow(Workout selectedWorkout)
         {
             // Skapa en instans av WorkoutDetailsWindow med workoutManager som parameter
-            WorkoutDetailsWindow workoutDetailsWindow = new WorkoutDetailsWindow(workoutManager);
+            WorkoutDetailsWindow workoutDetailsWindow = new WorkoutDetailsWindow(selectedWorkout);
 
             // Stäng WorkoutWindow (det nuvarande fönstret)
             Application.Current.MainWindow.Close();
@@ -194,7 +175,7 @@ namespace FitTrack.ViewModel
         private void SignOut(object parameter)
         {
             // Skapa en ny instans av MainWindow
-            MainWindow mainWindow = new MainWindow(usermanager);
+            MainWindow mainWindow = new MainWindow();
 
             // Stäng MainWindow
             Application.Current.MainWindow.Close();

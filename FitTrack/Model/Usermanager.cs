@@ -13,7 +13,7 @@ namespace FitTrack.Model
     public class Usermanager
     {
         // Egenskap för lista av användare
-        public ObservableCollection<Person> Users { get; set; }
+        public ObservableCollection<Person> Users { get; set; } = new ObservableCollection<Person>();
 
         // Konstruktor
         public Usermanager()
@@ -54,7 +54,7 @@ namespace FitTrack.Model
             return false;
         }
                 
-        public void AddUser(User newUser)
+        public void AddUser(Person newUser) 
         {
             Users.Add(newUser);
         }
@@ -66,7 +66,7 @@ namespace FitTrack.Model
             return Users;
         }
 
-        public Person LogIn(string username, string password) // ändrat från void till Person
+        public Person LogIn(string username, string password) 
         {
             foreach (var user in Users)
             {

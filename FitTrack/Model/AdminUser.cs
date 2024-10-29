@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FitTrack.Model
 {
@@ -22,30 +23,42 @@ namespace FitTrack.Model
             // måste jag skicka workoutmanager som parameter för att hämta lista från WorkoutManager klassen? 
         }
 
-        public AdminUser(Usermanager usermanager)
+        public AdminUser(Usermanager usermanager, WorkoutManager workoutmanager)
         {
-            this.usermanager = usermanager;  
-            //userManager = new Usermanager(); // OBS OBS OBS!! Programmet kraschar när jag skapar ny instans av Usermanager i AdminUser
+            if (usermanager == null)
+                throw new ArgumentNullException(nameof(usermanager), "Usermanager cannot be null.");
 
+            if (workoutmanager == null)
+                throw new ArgumentNullException(nameof(workoutmanager), "WorkoutManager cannot be null.");
+
+            this.usermanager = usermanager;
+            this.workoutmanager = workoutmanager;
         }
 
         public void ManageAllWorkouts()
         {
             foreach (var workout in workoutmanager.GetAllWorkouts())
             {
-                // KODLOGIK if?
+                // KODLOGIK
             }
         }
 
-        public void GetUserList()
+        public ObservableCollection<Person> GetUserList()
         {
-            // Hämta alla användare från Usermanager klassen
-            var allUsers = usermanager.GetAllUsers(); // Får error när jag loggar in med Admin
-            // Här kan du logik för att visa användarna, t.ex. i en lista
-            foreach (var user in allUsers)
+            // returnerar user lista från usermanager
+            return usermanager.GetAllUsers();
+        }
+
+        public ObservableCollection<Workout> GetWorkoutsList()
+        {
+            //return workoutmanager.GetAllWorkouts();
+            if (workoutmanager == null)
             {
-                // Kodlogik
+                MessageBox.Show("WorkoutManager is not initialized.");
+                return new ObservableCollection<Workout>(); // Returnerar tom lista om ej initialiserad
             }
+
+            return workoutmanager.GetAllWorkouts();
         }
 
     }

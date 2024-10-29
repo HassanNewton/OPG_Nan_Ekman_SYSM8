@@ -19,24 +19,24 @@ namespace FitTrack.Model
             }
         }
 
+        // Konstruktor
+        public CardioWorkout(int distance, TimeSpan duration)
+        {
+            this.Distance = distance;
+            this.Duration = duration;
+        }
+
         public override int CalculateCaloriesBurned()
         {
-            throw new NotImplementedException(); // tillfälligt
-            /*
-            MET-värdet för aktiviteten
-            MET-värden är standardvärden för olika aktiviteter, till exempel:
+            // fast värde 50 kalorier per kilometer.
+            int caloriesPerKm = 50;
 
-            Gå i normal takt: ca 3,5 MET
-            Springa (5 km/h): ca 7 MET
-            Springa (10 km/h): ca 10 MET
-            Styrketräning (måttlig): ca 4 MET
-            Städa eller dammsuga: ca 3 MET
-            MET-tabeller finns ofta på träningssidor eller hälsosajter om du vill ha fler exempel.
+            // Räkna ut förbrända kalorier baserat på distans
+            int calculatedCalories = distance * caloriesPerKm;
+            this.CaloriesBurned = calculatedCalories;
 
-            Formeln för att räkna ut kaloriförbrukning är:
+            return calculatedCalories;
 
-            Kalorier forbrukade=MET-varde × vikt i kg × tid i timmar
-            */
         }
     }
 }

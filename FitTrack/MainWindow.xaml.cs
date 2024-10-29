@@ -23,19 +23,19 @@ namespace FitTrack
     {
         private WorkoutManager workoutManager;
 
-        public MainWindow(Usermanager usermanager) 
+        public MainWindow() 
         {
 
             InitializeComponent();
-            ////Usermanager usermanager = new Usermanager();
+            Usermanager usermanager = new Usermanager();
             //ViewModel.MainWindowViewModel mainWindowViewModel = new ViewModel.MainWindowViewModel(usermanager);
             //DataContext = mainWindowViewModel;
             DataContext = new MainWindowViewModel(usermanager);
         }
 
-        public MainWindow(WorkoutManager workoutManager)
-        {
-            this.workoutManager = workoutManager;
-        }
+        //public MainWindow(WorkoutManager workoutManager)
+        //{
+        //    this.workoutManager = workoutManager;
+        //}
     }
 }

@@ -19,10 +19,23 @@ namespace FitTrack.Model
             }
         }
 
+        // Konstruktor
+        public StrengthWorkout(int repetitions, TimeSpan duration)
+        {
+            this.Repetitions = repetitions;
+            this.Duration = duration;
+        }
+
         public override int CalculateCaloriesBurned()
         {
-            throw new NotImplementedException(); // tillfällig
-            // selected activity
+            // Exempelvärde: 40 kalorier per timme.
+            int caloriesPerHour = 60; // Timme eller minuter?? 
+
+            // Räkna ut förbrända kalorier baserat på distans
+            int calculatedCalories = repetitions * caloriesPerHour;
+            this.CaloriesBurned = calculatedCalories;
+
+            return calculatedCalories;
 
 
         }

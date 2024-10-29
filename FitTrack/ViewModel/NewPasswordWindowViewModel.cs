@@ -12,7 +12,8 @@ namespace FitTrack.ViewModel
     public class NewPasswordWindowViewModel : ViewModelBase
     {
         //// skapa ett objekt av Usermanager
-        Usermanager usermanager;
+        //Usermanager usermanager;
+        //WorkoutManager workoutmanager;
 
         // Lista med securityQuestions till ComboBox
         public List<string> SecurityQuestion { get; set; }
@@ -82,10 +83,8 @@ namespace FitTrack.ViewModel
         public RelayCommand RegisterNewPasswordCommand { get; }
 
         // Konstruktor
-        public NewPasswordWindowViewModel(Usermanager usermanager)
+        public NewPasswordWindowViewModel()
         {
-            this.usermanager = usermanager;
-
             RegisterNewPasswordCommand = new RelayCommand(RegisterNewPassword);
 
             // skapat en lista av SecurityQuestion
@@ -95,8 +94,6 @@ namespace FitTrack.ViewModel
                 "In what city were you born?",
                 "What was your first teacher's name?",
             };
-
-            usermanager = new Usermanager();
         }
 
         // Metoder
@@ -104,7 +101,7 @@ namespace FitTrack.ViewModel
         {
             try
             {
-                // Kontrollera om användarnamn, lösenord och confirm lösenord inte är tomma
+                // Kontrollera så användarnamn, lösenord och confirm lösenord inte är tomma
                 if (string.IsNullOrEmpty(UserInput) || string.IsNullOrEmpty(PasswordInput) ||
                     string.IsNullOrEmpty(ConfirmPasswordInput))
                 {
@@ -112,7 +109,7 @@ namespace FitTrack.ViewModel
                     return;
                 }
                 // kollar om användare finns i Usermanager listan
-                bool userExist = usermanager.CheckUsername(UserInput);
+                bool userExist = App.UserManager.CheckUsername(UserInput);
                 if (!userExist)
                 {
                     MessageBox.Show("User does not exist");
@@ -124,7 +121,7 @@ namespace FitTrack.ViewModel
                     return;
                 }
                 // Logik för att uppdatera/spara nya lösenordet för användaren
-                bool updatedPassword = usermanager.UpdatePassword(UserInput, PasswordInput);
+                bool updatedPassword = App.UserManager.UpdatePassword(UserInput, PasswordInput);
                 if (updatedPassword)
                 {
                     MessageBox.Show("Changed password successfully!");
@@ -144,7 +141,7 @@ namespace FitTrack.ViewModel
         private void OpenMainWindow()
         {
             // Skapa en ny instans av MainWindow
-            MainWindow mainWindow = new MainWindow(usermanager);
+            MainWindow mainWindow = new MainWindow();
 
             // stäng befintligt fönster
             Application.Current.MainWindow.Close();

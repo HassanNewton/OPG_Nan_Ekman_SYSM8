@@ -10,51 +10,39 @@ namespace FitTrack
     /// </summary>
     public partial class App : Application
     {
+        public static Usermanager UserManager { get; private set; } = new Usermanager();
+        public static WorkoutManager Workoutmanager { get; private set; }
+        public static string LoggedInUsername { get; set; } // FÖr att kunna se användarnamn vid inlogg
         protected override void OnStartup(StartupEventArgs e)
         {
-            //base.OnStartup(e);  // Initiera applikationen korrekt
-
-            //// Skapa och visa splashskärmen
-            //var splashScreen = new View.SplashScreen();
-            //splashScreen.Show();
-
-            //// skapa instans av Usermanager
-            //Usermanager usermanager = new Usermanager();
-
-            //// Kort fördröjning (4 sekunder)
-            //Thread.Sleep(1000);  // Simulera fördröjning för att visa splash-skärmen
-
-            //// Stäng splashskärmen
-            //splashScreen.Hide();
-
-            //// Starta mainWindow
-            //var mainWindow = new MainWindow(usermanager);
-            //mainWindow.Show();
-
-
-            // MED NEDAN STÄNGS MAIN VID REGISTRERING AV ANVÄNDARE
             base.OnStartup(e);
 
-            // Ändra shutdown-läget till explicit, så applikationen inte stängs när MainWindow stängs
+            // Sätt explicit shutdown mode
             Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
-            // Skapa och visa splashskärmen
+            // Initiera statiska instanser av UserManager och WorkoutManager
+            UserManager = new Usermanager();
+            Workoutmanager = new WorkoutManager();
+
+            // Visa splash screen
             var splashScreen = new View.SplashScreen();
             splashScreen.Show();
 
-            // Kort fördröjning (exempel)
+            // Kort fördröjning för effekt (exempel)
             Thread.Sleep(1000);
 
             // Stäng splashskärmen
             splashScreen.Hide();
 
-            // Starta mainWindow
-            var usermanager = new Usermanager();
-            var mainWindow = new MainWindow(usermanager);
+            // Starta mainWindow och visa det
+            var mainWindow = new MainWindow();
             mainWindow.Show();
 
-            // Sätt huvudfönstret
+            // Sätt MainWindow som huvudfönster
             Application.Current.MainWindow = mainWindow;
+
+            // Ändra shutdown-läget till OnLastWindowClose för att stänga appen när sista fönstret stängs
+            Application.Current.ShutdownMode = ShutdownMode.OnLastWindowClose;
         }
     }
 }

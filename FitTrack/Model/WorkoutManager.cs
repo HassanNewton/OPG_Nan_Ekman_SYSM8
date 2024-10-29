@@ -40,14 +40,12 @@ namespace FitTrack.Model
             return false; // Om träningspasset inte hittas, returnera false
         }
 
-        // TILLFÄLLIG TEST
         public bool UpdateWorkout(DateTime date, string type, TimeSpan duration, int CaloriesBurned, string notes)
         {
             foreach (var workout in WorkoutList)
             {
                 if (workout.Date == date && workout.Type == type && workout.CaloriesBurned == CaloriesBurned && workout.Notes == notes)
                 {
-                    MessageBox.Show("UPDATE WORKOUT");
                     return true;
                 }
             }

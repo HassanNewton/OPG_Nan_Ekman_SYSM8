@@ -48,27 +48,17 @@ namespace FitTrack.ViewModel
         public RelayCommand RegisterCommand {  get; }
         public RelayCommand NewPasswordCommand { get; }
 
-        // Konstruktor
-        public MainWindowViewModel(Usermanager usermanager)
+        // Gjorde om konstruktor eftersom jag både har usermanager och workoutmanager
+        // Konstruktor som tar emot befintliga instanser eller skapar nya om de saknas
+        public MainWindowViewModel(Usermanager userManager = null, WorkoutManager workoutManager = null)
         {
-            // skapar en instans av Usermanager
-            this.userManager = usermanager;
+            // Använd den givna instansen eller skapa en ny
+            this.userManager = userManager ?? new Usermanager();
+            this.workoutManager = workoutManager ?? new WorkoutManager();
 
             SignInCommand = new RelayCommand(SignIn);
             RegisterCommand = new RelayCommand(Register);
-            NewPasswordCommand = new RelayCommand(NewPassword);      
-        }
-
-        // KOnstruktor för att kunna skicka in parameter av  WorkoutManager
-        public MainWindowViewModel(WorkoutManager workoutManager)
-        {
-            this.workoutManager = workoutManager;
-        }
-
-        // Tom konstruktor efter error från WorkoutDetailsViewModel
-        public MainWindowViewModel()
-        {
-
+            NewPasswordCommand = new RelayCommand(NewPassword);
         }
 
         // Metoder
@@ -80,19 +70,19 @@ namespace FitTrack.ViewModel
                 return;
             }
 
-            // Loggar in användaren och returnerar ett Person-objekt
-            Person loggedInPerson = userManager.LogIn(UsernameInput, PasswordInput);
+            // Logga in användaren och returnera ett Person-objekt
+            Person loggedInPerson = App.UserManager.LogIn(UsernameInput, PasswordInput); // Spara den inloggade användaren
 
             if (loggedInPerson != null)
             {
-                // Kontrollera om den inloggade personen är en admin
-                if (loggedInPerson is AdminUser adminUser)
+                if (loggedInPerson is AdminUser)
                 {
+                    // Skapa AdminUser med Usermanager och WorkoutManager instanser
+                    var adminUser = new AdminUser(App.UserManager, App.Workoutmanager);
                     OpenAdminFunctions(adminUser);
                 }
                 else if (loggedInPerson is User user)
                 {
-                    // Hantera vanliga användare
                     OpenWorkoutWindow(user);
                 }
             }
@@ -102,16 +92,22 @@ namespace FitTrack.ViewModel
             }
         }
 
-        // Metod för att hantera access för AdminUser
         private void OpenAdminFunctions(AdminUser adminUser)
         {
-            // Visa en lista över användare eller träningspass
+            OpenAdminWindow();
+        }
 
-            // Tillfällig
-            MessageBox.Show("Welcome, Admin! Here you can manage users and workouts.");
+        private void OpenAdminWindow()
+        {
+            // Skapa en ny instans av RegisterWindow
+            AdminWindow adminWindow = new AdminWindow();
 
-            // Anropar GetUserList TILLFÄLLIG
-            adminUser.GetUserList(); 
+            // Stäng MainWindow
+            Application.Current.MainWindow.Close();
+
+            // Sätt det nya fönstret som huvudfönster och visa det
+            Application.Current.MainWindow = adminWindow;
+            adminWindow.Show();
         }
 
         private bool ValidateUser(string username, string password)
@@ -143,7 +139,7 @@ namespace FitTrack.ViewModel
         private void OpenWorkoutWindow(User loggedInUser)
         {
             // Skapa en ny instans av WorkoutWindow
-            WorkoutWindow workoutWindow = new WorkoutWindow(new WorkoutWindowViewModel(loggedInUser));
+            WorkoutWindow workoutWindow = new WorkoutWindow();
 
             // Stäng MainWindow
             Application.Current.MainWindow.Close();
@@ -152,7 +148,6 @@ namespace FitTrack.ViewModel
             Application.Current.MainWindow = workoutWindow;
             workoutWindow.Show();
         }
-
         private void NewPassword(object parameter)
         {
             OpenNewPasswordWindow();

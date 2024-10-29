@@ -7,18 +7,16 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FitTrack.ViewModel
 {
     public class WorkoutDetailsWindowViewModel : ViewModelBase
     {
-
-        private WorkoutManager workoutManager;
-
-        // Bindningsbar lista för träningspass
-        public ObservableCollection<Workout> WorkoutList { get; }
-
         // Egenskaper
+
+        public Workout SelectedWorkout { get; set; } // om set är private kan jag inte öppna fönster för details
+
         private Workout workout;
 
         public Workout Workout
@@ -31,37 +29,41 @@ namespace FitTrack.ViewModel
             }
         }
 
-
-        // Konstruktor
-        public WorkoutDetailsWindowViewModel()
+        private bool isEditing;
+        public bool IsEditing
         {
-            this.workoutManager = new WorkoutManager();
+            get { return isEditing; }
+            set
+            {
+                isEditing = value;
+                OnPropertyChanged(); 
+            }
         }
 
-        // skapat tillfällig metod för att testa
-        public WorkoutDetailsWindowViewModel(WorkoutManager workoutManager)
+        public RelayCommand SaveCommand { get; }
+        public RelayCommand EditCommand { get; }
+
+
+        // Konstruktor
+        public WorkoutDetailsWindowViewModel(Workout workout)
         {
-            // Sätt WorkoutList till workoutManager’s WorkoutList
-            //WorkoutList = workoutManager.WorkoutList; // Detta visar alla aktiviteter i listan men det ska visas specifik info om den valda aktiviteten!
+            SelectedWorkout = workout; // Spara den valda träningen
+            IsEditing = false;
+
+            SaveCommand = new RelayCommand(SaveWorkout);
+            EditCommand = new RelayCommand(EditWorkout);
         }
 
         // Metoder
-        private void EditWorkout()
+        private void EditWorkout(object parameter)
         {
-
+            IsEditing = true;
         }
 
-        private void SaveWorkout()
+        private void SaveWorkout(object parameter)
         {
-            // TILLFÄLLIG
-            if (workout == null)
-            {
-                
-            }
-            else 
-            {
-                //workout = new Workout();
-            }
+            IsEditing = false; // Stäng av redigeringsläge
+            MessageBox.Show("Your changes have been saved!");
         }
     }
 }
