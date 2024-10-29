@@ -18,8 +18,6 @@ namespace FitTrack.ViewModel
     {
 
         // Refererar till Usermanager klassen
-        //private readonly WorkoutManager workoutmanager;
-
         private readonly Usermanager usermanager;
 
         // hämta lista från Workoutmanager
@@ -69,18 +67,18 @@ namespace FitTrack.ViewModel
 
             AddWorkOutCommand = new RelayCommand(AddWorkOut);
             OpenUserDetailsCommand = new RelayCommand(ExecuteOpenDetails);
-            OpenWorkoutDetailsWindowCommand = new RelayCommand(ExexuteOpenWorkoutDetails);
+            OpenWorkoutDetailsWindowCommand = new RelayCommand(ExecuteOpenWorkoutDetails);
             RemoveWorkoutCommand = new RelayCommand(RemoveWorkOut);
             InfoCommand = new RelayCommand(ShowInfo);
             SignOutCommand = new RelayCommand(SignOut);
         }
 
-        // Konstruktor för att visa den inloggades användarnamn
-        public WorkoutWindowViewModel(User loggedInUser)
-        {
-            LoggedInUser = loggedInUser;
-            Workouts = new ObservableCollection<Workout>();
-        }
+        // Konstruktor för att visa den inloggades användarnamn FUNKAR EJ 
+        //public WorkoutWindowViewModel(User loggedInUser)
+        //{
+        //    LoggedInUser = loggedInUser;
+        //    Workouts = new ObservableCollection<Workout>();
+        //}
 
         // Metoder
         private void AddWorkOut(object parameter)
@@ -130,7 +128,7 @@ namespace FitTrack.ViewModel
         }
 
         // Hur selectar jag workout? 
-        private void ExexuteOpenWorkoutDetails(object parameter)
+        private void ExecuteOpenWorkoutDetails(object parameter)
         {
             if (selectedWorkout == null)
             {
@@ -139,14 +137,14 @@ namespace FitTrack.ViewModel
             }
             else
             {
-                OpenWorkoutDetailsWindow(SelectedWorkout);
+                OpenWorkoutDetailsWindow(selectedWorkout);
             }                
         }
 
-        private void OpenWorkoutDetailsWindow(Workout selectedWorkout) // skickar selectedWorkout till WorkoutDetailsWindow
+        private void OpenWorkoutDetailsWindow(Workout workout) // skickar Workout till WorkoutDetailsWindow
         {
             // Skapa en instans av WorkoutDetailsWindow med workoutManager som parameter
-            WorkoutDetailsWindow workoutDetailsWindow = new WorkoutDetailsWindow(selectedWorkout);
+            WorkoutDetailsWindow workoutDetailsWindow = new WorkoutDetailsWindow(workout);
 
             // Stäng WorkoutWindow (det nuvarande fönstret)
             Application.Current.MainWindow.Close();

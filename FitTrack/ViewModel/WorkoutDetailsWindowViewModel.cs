@@ -14,26 +14,15 @@ namespace FitTrack.ViewModel
     public class WorkoutDetailsWindowViewModel : ViewModelBase
     {
         // Egenskaper
-        //private Workout selectedWorkout;
-        //public Workout SelectedWorkout
-        //{
-        //    get { return selectedWorkout; }
-        //    set 
-        //    { 
-        //        selectedWorkout = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-
         private Workout workout;
 
         public Workout Workout
         {
             get { return workout; }
-            set 
-            { 
+            set
+            {
                 workout = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Workout));
             }
         }
 
@@ -71,7 +60,6 @@ namespace FitTrack.ViewModel
         private void SaveWorkout(object parameter)
         {
             IsEditing = false; // Stäng av redigeringsläge
-            MessageBox.Show("Your changes have been saved!");
         }
     }
 }

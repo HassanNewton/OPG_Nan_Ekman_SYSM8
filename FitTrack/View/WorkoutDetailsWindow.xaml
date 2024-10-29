@@ -1,7 +1,7 @@
 ﻿<Window x:Class="FitTrack.View.WorkoutDetailsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Workout Details" Height="300" Width="800" Background="LightGray">
+        Title="Workout Details" Height="350" Width="800" Background="LightGray">
 
     <!-- Sätter stil på knapparna -->
     <Window.Resources>
@@ -23,34 +23,24 @@
 
     <Grid Margin="10">
 
-        <DataGrid
-                AutoGenerateColumns="False"
-                CanUserAddRows="False"
-                CanUserDeleteRows="False"
-                ItemsSource="{Binding Workouts}"
-                SelectedItem="{Binding SelectedWorkout}">
-
-
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="2*"/>
-                <DataGridTextColumn Header="Activity" Binding="{Binding Type}" Width="4*"/>
-                <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="2*"/>
-                <DataGridTextColumn Header="Calories Burned" Binding="{Binding CaloriesBurned}" Width="2*"/>
-                <DataGridTextColumn Header="Notes" Binding="{Binding Notes}" Width="2*"/>
-            </DataGrid.Columns>
-
-            <TextBox Text="{Binding Workout.Date, StringFormat='yyyy-MM-dd'}"  />
-            <TextBox Text="{Binding Workout.Type}" />
-            <TextBox Text="{Binding Workout.Duration}" />
-            <TextBox Text="{Binding Workout.CaloriesBurned}" />
-            <TextBox Text="{Binding Workout.Notes}" />
-        </DataGrid>
+        <StackPanel>
+            <TextBlock Text="Date:"/>
+            <TextBox Text="{Binding Workout.Date, StringFormat='dd/MM/yyyy'}" IsEnabled="{Binding IsEditing}" Margin="0,5" Grid.Column="0"/>
+            <TextBlock Text="Type:"/>
+            <TextBox Text="{Binding Workout.Type}" IsEnabled="{Binding IsEditing}" Margin="0,5" Grid.Column="1"/>
+            <TextBlock Text="Duration:"/>
+            <TextBox Text="{Binding Workout.Duration}" IsEnabled="{Binding IsEditing}" Margin="0,5"/>
+            <TextBlock Text="CaloriesBurned:"/>
+            <TextBox Text="{Binding Workout.CaloriesBurned}" IsEnabled="{Binding IsEditing}" Margin="0,5"/>
+            <TextBlock Text="Notes:"/>
+            <TextBox Text="{Binding Workout.Notes}" IsEnabled="{Binding IsEditing}" Margin="0,5"/>
 
         <StackPanel VerticalAlignment="Bottom">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
                 <Button Content="EDIT" Command="{Binding EditCommand}" Width="70" Margin="5"/>
                 <Button Content="SAVE" Command="{Binding SaveCommand}" Width="70" Margin="5"/>
             </StackPanel>
+        </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

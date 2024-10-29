@@ -8,7 +8,7 @@ namespace FitTrack.Model
 {
     public abstract class Workout
     {
-        // Egenskaper ( ska alla vara öppna?) 
+        // Egenskaper 
         private DateTime date;
 
         public DateTime Date

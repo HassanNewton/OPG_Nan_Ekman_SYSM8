@@ -43,7 +43,7 @@
 
             <!-- Höger stackpanel för användarnamn och utloggningsknapp -->
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Background="LightGray" >
-                <TextBlock Text="{Binding LoggedInUser}" FontFamily="Arial" Background="Transparent" FontWeight="Bold"
+                <TextBlock Text="{Binding User.UserName}" FontFamily="Arial" Background="Transparent" FontWeight="Bold"
                            VerticalAlignment="Center" HorizontalAlignment="Center" Height="20" Width="100" Margin="10" Opacity="0.8"/>
                 <Button Content="SIGN OUT" Width="70" Height="20" Command="{Binding SignOutCommand}" HorizontalAlignment="Right" />
             </StackPanel>
