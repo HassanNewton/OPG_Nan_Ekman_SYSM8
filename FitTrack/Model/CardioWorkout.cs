@@ -35,7 +35,7 @@ namespace FitTrack.Model
             int calculatedCalories = distance * caloriesPerKm;
             this.CaloriesBurned = calculatedCalories;
 
-            return calculatedCalories;
+            return calculatedCalories; 
 
         }
     }
