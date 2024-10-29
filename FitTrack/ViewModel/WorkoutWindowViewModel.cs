@@ -143,7 +143,7 @@ namespace FitTrack.ViewModel
             }                
         }
 
-        private void OpenWorkoutDetailsWindow(Workout selectedWorkout)
+        private void OpenWorkoutDetailsWindow(Workout selectedWorkout) // skickar selectedWorkout till WorkoutDetailsWindow
         {
             // Skapa en instans av WorkoutDetailsWindow med workoutManager som parameter
             WorkoutDetailsWindow workoutDetailsWindow = new WorkoutDetailsWindow(selectedWorkout);

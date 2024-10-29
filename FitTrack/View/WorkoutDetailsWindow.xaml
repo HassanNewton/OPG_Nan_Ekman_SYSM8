@@ -39,11 +39,11 @@
                 <DataGridTextColumn Header="Notes" Binding="{Binding Notes}" Width="2*"/>
             </DataGrid.Columns>
 
-            <TextBox Text="{Binding SelectedWorkout.Date, StringFormat='yyyy-MM-dd'}"  />
-            <TextBox Text="{Binding SelectedWorkout.Type}" />
-            <TextBox Text="{Binding SelectedWorkout.Duration}" />
-            <TextBox Text="{Binding SelectedWorkout.CaloriesBurned}" />
-            <TextBox Text="{Binding SelectedWorkout.Notes}" />
+            <TextBox Text="{Binding Workout.Date, StringFormat='yyyy-MM-dd'}"  />
+            <TextBox Text="{Binding Workout.Type}" />
+            <TextBox Text="{Binding Workout.Duration}" />
+            <TextBox Text="{Binding Workout.CaloriesBurned}" />
+            <TextBox Text="{Binding Workout.Notes}" />
         </DataGrid>
 
         <StackPanel VerticalAlignment="Bottom">

@@ -14,20 +14,16 @@ namespace FitTrack.ViewModel
     public class WorkoutDetailsWindowViewModel : ViewModelBase
     {
         // Egenskaper
-        private Workout selectedWorkout;
-
-        public Workout SelectedWorkout
-        {
-            get { return selectedWorkout; }
-            set 
-            { 
-                selectedWorkout = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-        /*public Workout SelectedWorkout { get; set; } */// om set är private kan jag inte öppna fönster för details
+        //private Workout selectedWorkout;
+        //public Workout SelectedWorkout
+        //{
+        //    get { return selectedWorkout; }
+        //    set 
+        //    { 
+        //        selectedWorkout = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         private Workout workout;
 
@@ -59,7 +55,7 @@ namespace FitTrack.ViewModel
         // Konstruktor
         public WorkoutDetailsWindowViewModel(Workout workout)
         {
-            SelectedWorkout = workout; // Spara den valda träningen
+            Workout = workout; // Spara den valda träningen
             IsEditing = false;
 
             SaveCommand = new RelayCommand(SaveWorkout);
