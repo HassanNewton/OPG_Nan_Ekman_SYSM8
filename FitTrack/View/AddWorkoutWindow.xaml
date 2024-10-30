@@ -30,7 +30,7 @@
             <TextBlock Text="Date:"/>
             <TextBox Text="{Binding Workout.Date, StringFormat='dd/MM/yyyy'}"/>
             <TextBlock Text="Type:"/>
-            <ComboBox ItemsSource="{Binding WorkoutTypes}" SelectedItem="SelectedWorkoutType" />
+            <ComboBox ItemsSource="{Binding WorkoutTypes}" SelectedItem="{Binding SelectedWorkoutType}" />
             <TextBlock Text="Duration:"/>
             <TextBox Text="{Binding Workout.Duration}"/>
             <TextBlock Text="CaloriesBurned:"/>

@@ -25,9 +25,10 @@ namespace FitTrack.Model
         {
             // Tom eftersom min workoutmanager ska kunna hämta utan parametrar,kanske spara passen på annat sätt? 
         }
-        public CardioWorkout(int distance)
+        public CardioWorkout(int distance, TimeSpan duration)
         {
-            Distance = distance;
+            this.Distance = distance;
+            this.Duration = Duration;
         }
 
         public override int CalculateCaloriesBurned()
