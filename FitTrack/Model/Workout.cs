@@ -59,5 +59,8 @@ namespace FitTrack.Model
         // Metoder
         public abstract int CalculateCaloriesBurned();
 
+        //// Abstrakt metod för att kopiera träningspass
+        public abstract Workout CopyWorkout();
+
     }
 }

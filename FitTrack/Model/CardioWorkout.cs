@@ -27,8 +27,8 @@ namespace FitTrack.Model
         }
         public CardioWorkout(int distance, TimeSpan duration)
         {
-            this.Distance = distance;
-            this.Duration = Duration;
+            Distance = distance;
+            Duration = Duration;
         }
 
         public override int CalculateCaloriesBurned()
@@ -38,7 +38,18 @@ namespace FitTrack.Model
             this.CaloriesBurned = calculatedCalories;
 
             return calculatedCalories; 
-
+        }
+        public override Workout CopyWorkout()
+        {
+            return new CardioWorkout
+            {
+                Date = this.Date,
+                Type = this.Type,
+                Duration = this.Duration,
+                CaloriesBurned = this.CaloriesBurned,
+                Notes = this.Notes,
+                //Distance = this.Distance
+            };
         }
     }
 }

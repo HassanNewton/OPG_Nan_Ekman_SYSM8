@@ -16,15 +16,20 @@ namespace FitTrack.Model
         // Lista som innehåller workout objekt
         public ObservableCollection<Workout> WorkoutList { get; set; }
 
+        // lista för Types
+        public ObservableCollection<string> WorkoutTypes { get; private set; }
+                
+
         // Konstruktor
         public WorkoutManager()
         {
+
+            WorkoutTypes = new ObservableCollection<string> { "Cardio", "Strength" };
+
             WorkoutList = new ObservableCollection<Workout>
             {
                 new CardioWorkout { Date = new DateTime(2024, 11, 01, 18, 30, 0), Duration = new TimeSpan(1,0,0), CaloriesBurned = 250, Notes = "Spinning", Type = "Cardio" },
                 new StrengthWorkout { Date = new DateTime(2024, 11, 01, 18, 30, 0), Duration = new TimeSpan(1,0,0), CaloriesBurned = 300, Notes = "Bodypump", Type = "Strength"}
-                //new CardioWorkout { Date = new DateTime(2024, 11, 01, 18, 30, 0), Type = "Spinning" },
-                //new StrengthWorkout { Date = new DateTime(2024, 11, 02, 17, 45, 0), Type = "Bodypump" }
             };
         }
 

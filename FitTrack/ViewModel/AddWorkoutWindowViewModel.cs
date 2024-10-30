@@ -1,5 +1,6 @@
 ﻿using FitTrack.Model;
 using FitTrack.MVVM;
+using FitTrack.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,15 +13,15 @@ namespace FitTrack.ViewModel
 {
     public class AddWorkoutWindowViewModel : ViewModelBase
     {
-		// Egenskaper
-		Usermanager usermanager;
+        // Egenskaper
+        Usermanager usermanager;
 
-		Workout cardioworkout;
+        Workout cardioworkout;
 		Workout strengthworkout;
 
-        public ObservableCollection<string> WorkoutTypes { get; set; }
+		public ObservableCollection<string> WorkoutTypes { get; set; }
 
-        private string selectedWorkoutType;
+		private string selectedWorkoutType;
         public string SelectedWorkoutType
         {
             get { return selectedWorkoutType; }
@@ -65,8 +66,7 @@ namespace FitTrack.ViewModel
 			set 
 			{ 
 				caloriesBurned = value;
-				CalculateCalories();
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(CaloriesBurned));
 			}
 		}
 
@@ -75,7 +75,11 @@ namespace FitTrack.ViewModel
 		public string NotesInput
 		{
 			get { return notesInput; }
-			set { notesInput = value; }
+			set 
+			{ 
+				notesInput = value; 
+				OnPropertyChanged();
+			}
 		}
 
         public RelayCommand SaveWorkoutCommand { get; }
@@ -85,32 +89,73 @@ namespace FitTrack.ViewModel
 		{
 			this.usermanager = usermanager;
 
-            // skapa en lista att förvara Type för att binda till combobox
-            WorkoutTypes = new ObservableCollection<string> { "Cardio", "Strength" };
+			// skapa en lista att förvara Type för att binda till combobox
+			WorkoutTypes = new ObservableCollection<string> { "Cardio", "Strength" };
 
-            SaveWorkoutCommand = new RelayCommand(SaveWorkout);
+			SaveWorkoutCommand = new RelayCommand(SaveWorkout);
 
         }
 
-		// Metoder
-		private void SaveWorkout(object parameter)
-		{
-			if (string.IsNullOrEmpty(WorkoutTypeComboBox) || Duration == TimeSpan.Zero || CaloriesBurned == 0 || string.IsNullOrEmpty(NotesInput))
-			{
-				MessageBox.Show("Textbox cannot be empty.");
-				return;
-			}
-			else
-			{
-				MessageBox.Show("Workout added!");
-			}          
+        // Metoder
+        private void SaveWorkout(object parameter)
+        {
+            if (string.IsNullOrEmpty(SelectedWorkoutType) || Duration == TimeSpan.Zero || CaloriesBurned <= 0 || string.IsNullOrEmpty(NotesInput))
+            {
+                MessageBox.Show("All fields must be filled out correctly.");
+                return;
+            }
+
+            Workout workoutToAdd;
+
+            if (SelectedWorkoutType == "Cardio")
+            {
+                workoutToAdd = new CardioWorkout
+                {
+                    Date = DateTime.Now,
+                    Duration = Duration,
+                    CaloriesBurned = CaloriesBurned,
+                    Notes = NotesInput,
+                    Type = SelectedWorkoutType
+                };
+            }
+            else
+            {
+                workoutToAdd = new StrengthWorkout
+                {
+                    Date = DateTime.Now,
+                    Duration = Duration,
+                    CaloriesBurned = CaloriesBurned,
+                    Notes = NotesInput,
+                    Type = SelectedWorkoutType
+                };
+            }
+
+            usermanager.WorkoutManager.AddWorkout(workoutToAdd);
+            MessageBox.Show("Workout added!");
+
+            // Stäng fönstret efter att workouten har sparats
+            OpenWorkoutWindow();
         }
 
-		private void CalculateCalories()
+        private void OpenWorkoutWindow()
+        {
+            // Skapa en ny instans av UserDetailsWindow
+            var workoutWindow = new WorkoutWindow(usermanager);
+
+            // Close the current main window
+            Application.Current.MainWindow.Close();
+
+            // Set the new window as the main window and show it
+            Application.Current.MainWindow = workoutWindow;
+            workoutWindow.Show();
+        }
+
+        // TA BORT DENNA? KALKYLERA AUTOMATISKT I SISTA UPPGIFTEN/FÖNSTRET?? 
+        private void CalculateCalories()
 		{
 			if (SelectedWorkoutType == "Cardio")
 			{
-				cardioworkout = new CardioWorkout
+				var cardioworkout = new CardioWorkout
 				{
 					Duration = Duration
                 };
@@ -118,7 +163,7 @@ namespace FitTrack.ViewModel
 			}
 			else if (SelectedWorkoutType == "Strength")
 			{
-				strengthworkout = new StrengthWorkout
+				var strengthworkout = new StrengthWorkout
 				{
 					Duration = Duration
 				};

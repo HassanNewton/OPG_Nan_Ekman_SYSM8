@@ -81,6 +81,7 @@
                 <Button Content="WORKOUT DETAILS" Command="{Binding OpenWorkoutDetailsWindowCommand}" Margin="5"/>
                 <Button Content="ADD WORKOUT" Command="{Binding AddWorkOutCommand}" Margin="5"/>
                 <Button Content="REMOVE WORKOUT" Command="{Binding RemoveWorkoutCommand}" Margin="5"/>
+                <Button Content="COPY WORKOUT" Command="{Binding CopyCommand}" Margin="5"/>
             </StackPanel>
 
         </Grid>

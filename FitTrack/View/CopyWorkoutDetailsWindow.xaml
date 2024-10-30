@@ -1,13 +1,13 @@
-﻿<Window x:Class="FitTrack.View.AddWorkoutWindow"
+﻿<Window x:Class="FitTrack.View.CopyWorkoutDetailsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitTrack.View"
         mc:Ignorable="d"
-        Title="AddWorkoutWindow" Height="300" Width="800">
+        Title="CopyWorkoutDetailsWindow" Height="350" Width="800">
 
-    <!--Sätter stil på knapparna-->
+    <!-- Sätter stil på knapparna -->
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Background" Value="Crimson"/>
@@ -25,22 +25,23 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
+    <Grid Margin="10">
+
         <StackPanel>
             <TextBlock Text="Date:"/>
-            <TextBox Text="{Binding Workout.Date, StringFormat='dd/MM/yyyy'}"/>
+            <TextBox Text="{Binding NewWorkout.Date, StringFormat='dd/MM/yyyy'}" Margin="0,5" />
             <TextBlock Text="Type:"/>
-            <ComboBox ItemsSource="{Binding WorkoutTypes}" SelectedItem="{Binding SelectedWorkoutType}" />
+            <TextBox Text="{Binding NewWorkout.Type}" Margin="0,5" />
             <TextBlock Text="Duration:"/>
-            <TextBox Text="{Binding Duration}"/>
+            <TextBox Text="{Binding NewWorkout.Duration}" Margin="0,5"/>
             <TextBlock Text="CaloriesBurned:"/>
-            <TextBox Text="{Binding CaloriesBurned}"/>
+            <TextBox Text="{Binding NewWorkout.CaloriesBurned}" Margin="0,5"/>
             <TextBlock Text="Notes:"/>
-            <TextBox Text="{Binding NotesInput}"/>
+            <TextBox Text="{Binding NewWorkout.Notes}" Margin="0,5"/>
 
             <StackPanel VerticalAlignment="Bottom">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-                    <Button Content="SAVE" Command="{Binding SaveWorkoutCommand}" Width="70" Margin="5"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                    <Button Content="SAVE" Command="{Binding SaveNewWorkoutCommand}" Width="70" Margin="5"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

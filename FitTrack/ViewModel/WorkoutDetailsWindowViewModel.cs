@@ -13,10 +13,11 @@ namespace FitTrack.ViewModel
 {
     public class WorkoutDetailsWindowViewModel : ViewModelBase
     {
-
         // Egenskaper
 
         Usermanager usermanager;
+
+        public ObservableCollection<string> WorkoutTypes { get; }
 
         private Workout workout;
 
@@ -45,6 +46,7 @@ namespace FitTrack.ViewModel
         public RelayCommand EditCommand { get; }
 
 
+
         // Konstruktor
         public WorkoutDetailsWindowViewModel(Workout workout, Usermanager usermanager)
         {
@@ -52,8 +54,11 @@ namespace FitTrack.ViewModel
             this.usermanager = usermanager;
             IsEditing = false;
 
+            WorkoutTypes = usermanager.WorkoutManager.WorkoutTypes;
+
             SaveCommand = new RelayCommand(SaveWorkout);
             EditCommand = new RelayCommand(EditWorkout);
+
         }
 
         // Metoder
@@ -70,11 +75,9 @@ namespace FitTrack.ViewModel
                 MessageBox.Show("Textbox cannot be empty.");
                 return;
             }
-            else
-            {
-                IsEditing = false; // Stäng av redigeringsläge
-                OpenWorkoutWindow();
-            }            
+
+            IsEditing = false; // Stäng av redigeringsläge
+            OpenWorkoutWindow();
         }
 
         private void OpenWorkoutWindow()

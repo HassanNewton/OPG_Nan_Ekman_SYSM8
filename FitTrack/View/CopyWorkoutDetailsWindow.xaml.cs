@@ -1,4 +1,5 @@
 ﻿using FitTrack.Model;
+using FitTrack.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,15 @@ using System.Windows.Shapes;
 namespace FitTrack.View
 {
     /// <summary>
-    /// Interaction logic for WorkoutDetailsWindow.xaml
+    /// Interaction logic for CopyWorkoutDetailsWindow.xaml
     /// </summary>
-    public partial class WorkoutDetailsWindow : Window
+    public partial class CopyWorkoutDetailsWindow : Window
     {
-        public WorkoutDetailsWindow(Workout workout, Usermanager usermanager) 
+        public CopyWorkoutDetailsWindow(WorkoutWindowViewModel viewmodel)
         {
             InitializeComponent();
-            DataContext = new ViewModel.WorkoutDetailsWindowViewModel(workout, usermanager); 
+            DataContext = viewmodel;
+
         }
     }
 }

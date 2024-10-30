@@ -18,6 +18,9 @@ namespace FitTrack.Model
         // Egenskap av Workoutmanager
         public WorkoutManager WorkoutManager { get; set; }
 
+        // skapa nuvarande inloggad användare för bindning
+        public Person CurrentUser { get; private set; }
+
         // Konstruktor
         public Usermanager()
         {
@@ -71,16 +74,17 @@ namespace FitTrack.Model
             return Users;
         }
 
-        public Person LogIn(string username, string password) 
+        public Person LogIn(string username, string password)
         {
             foreach (var user in Users)
             {
                 if (user.UserName == username && user.Password == password)
                 {
-                    return user; // Returnera användaren om inloggningen lyckas
+                    CurrentUser = user;  // Sätt CurrentUser vid lyckad inloggning
+                    return user;
                 }
             }
-            return null; // Returnera null om inloggningen misslyckas
+            return null;  // Returnera null om inloggningen misslyckas
         }
 
     }
