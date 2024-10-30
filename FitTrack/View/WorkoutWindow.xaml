@@ -65,8 +65,8 @@
 
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="4*"/>
-                    <DataGridTextColumn Header="Activity" Binding="{Binding Type}" Width="4*"/>
-                    <!--<DataGridTextColumn Header="Duration" Binding="{Binding Duration}" Width="2*"/>-->
+                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="4*"/>
+                    <DataGridTextColumn Header="Notes" Binding="{Binding Notes}" Width="2*"/>
                 </DataGrid.Columns>
             </DataGrid>
 

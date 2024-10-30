@@ -25,19 +25,15 @@ namespace FitTrack.Model
         {
             // Tom eftersom min workoutmanager ska kunna hämta utan parametrar,kanske spara passen på annat sätt? 
         }
-        public CardioWorkout(int distance, TimeSpan duration)
+        public CardioWorkout(int distance)
         {
             Distance = distance;
-            Duration = duration;
         }
 
         public override int CalculateCaloriesBurned()
         {
-            // fast värde 50 kalorier per kilometer.
-            int caloriesPerKm = 50;
-
             // Räkna ut förbrända kalorier baserat på distans
-            int calculatedCalories = distance * caloriesPerKm;
+            int calculatedCalories = Distance * (int)Duration.TotalMinutes;
             this.CaloriesBurned = calculatedCalories;
 
             return calculatedCalories; 
