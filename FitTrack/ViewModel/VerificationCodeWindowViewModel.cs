@@ -50,21 +50,44 @@ namespace FitTrack.ViewModel
             }
         }
 
+        // egenskap för att lagra verifieringskod
+        private string verificationCode;
+
         public RelayCommand GetCodeCommand { get; }
+        public RelayCommand VerifyCodeCommand { get; }
 
         // Konstruktor
         public VerificationCodeWindowViewModel(Usermanager usermanager)
         {
             this.usermanager = usermanager;
 
-            GetCodeCommand = new RelayCommand(ExecuteVerification);
+            GetCodeCommand = new RelayCommand(ExecuteGetCode);
+            VerifyCodeCommand = new RelayCommand(ExecuteVerification);
         }
 
         // Metoder
 
+        private void ExecuteGetCode(object parameter)
+        {
+            if (Email != ConfirmEmail)
+            {
+                MessageBox.Show("Emails do not match. Please try again.");
+                return;
+            }
+
+        }
+
         private void ExecuteVerification(object parameter)
         {
+            if (CodeInput == verificationCode)
+            {
+                MessageBox.Show("Verification successful!");
 
+            }
+            else
+            {
+                MessageBox.Show("Invalid verification code. Please try again.");
+            }
         }
 
         private string GetVerificationCode()

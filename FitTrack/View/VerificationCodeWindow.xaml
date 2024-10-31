@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitTrack.View"
         mc:Ignorable="d"
-        Title="VerificationCodeWindow" Height="350" Width="800">
+        Title="VerificationCodeWindow" Height="450" Width="800">
 
     <!--Sätter stil på knapparna-->
     <Window.Resources>
@@ -39,6 +39,7 @@
             <Button Content="Get Verification Code" Width="150" Height="40" Margin="20" Command="{Binding GetCodeCommand}"/>
             <Label Content="Enter Verification Code:" HorizontalAlignment="center"/>
             <TextBox Width="200" Height="30" Text="{Binding CodeInput, UpdateSourceTrigger=PropertyChanged}" />
+            <Button Content="Verify Code" Width="150" Height="40" Margin="20" Command="{Binding VerifyCodeCommand}"/>
 
 
             <!--<Button Content="CREATE USER" Width="150" Height="40" Margin="20" Command="{Binding RegisterUserCommand}" />-->

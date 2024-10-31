@@ -162,5 +162,18 @@ namespace FitTrack.ViewModel
             newPasswordWindow.Show();
 
         }
+
+        private void OpenVerificationCodeWindow()
+        {
+            // Skapa en ny instans av VerificationCodeWindow
+            VerificationCodeWindow verificationCodeWindow = new VerificationCodeWindow(usermanager);
+
+            // Stäng MainWindow
+            Application.Current.MainWindow.Close();
+
+            // Sätt det nya fönstret som huvudfönster och visa det
+            Application.Current.MainWindow = verificationCodeWindow;
+            verificationCodeWindow.Show();
+        }
     }
 }
