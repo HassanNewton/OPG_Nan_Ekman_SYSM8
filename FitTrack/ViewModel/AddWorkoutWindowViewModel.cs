@@ -82,6 +82,32 @@ namespace FitTrack.ViewModel
 			}
 		}
 
+        private int distance;
+
+        public int Distance
+        {
+            get { return distance; }
+            set
+            {
+                distance = value;
+                CalculateCalories();
+                OnPropertyChanged();
+            }
+        }
+
+        private int repetitions;
+
+        public int Repetitions
+        {
+            get { return repetitions; }
+            set
+            {
+                repetitions = value;
+                CalculateCalories();
+                OnPropertyChanged();
+            }
+        }
+
         public RelayCommand SaveWorkoutCommand { get; }
 
         // Konstruktor
@@ -99,7 +125,7 @@ namespace FitTrack.ViewModel
         // Metoder
         private void SaveWorkout(object parameter)
         {
-            if (string.IsNullOrEmpty(SelectedWorkoutType) || Duration == TimeSpan.Zero || CaloriesBurned <= 0 || string.IsNullOrEmpty(NotesInput))
+            if (string.IsNullOrEmpty(SelectedWorkoutType) || Duration == TimeSpan.Zero || string.IsNullOrEmpty(NotesInput))
             {
                 MessageBox.Show("All fields must be filled out correctly.");
                 return;
@@ -113,6 +139,7 @@ namespace FitTrack.ViewModel
                 {
                     Date = DateTime.Now,
                     Duration = Duration,
+                    Distance = Distance,
                     CaloriesBurned = CaloriesBurned,
                     Notes = NotesInput,
                     Type = SelectedWorkoutType
@@ -124,6 +151,7 @@ namespace FitTrack.ViewModel
                 {
                     Date = DateTime.Now,
                     Duration = Duration,
+                    Repetitions = Repetitions,
                     CaloriesBurned = CaloriesBurned,
                     Notes = NotesInput,
                     Type = SelectedWorkoutType
@@ -150,14 +178,14 @@ namespace FitTrack.ViewModel
             workoutWindow.Show();
         }
 
-        // TA BORT DENNA? KALKYLERA AUTOMATISKT I SISTA UPPGIFTEN/FÖNSTRET?? 
         private void CalculateCalories()
 		{
 			if (SelectedWorkoutType == "Cardio")
 			{
-				var cardioworkout = new CardioWorkout
-				{
-					Duration = Duration
+                var cardioworkout = new CardioWorkout
+                {
+                    Duration = Duration,
+                    Distance = Distance
                 };
 				CaloriesBurned = cardioworkout.CalculateCaloriesBurned();
 			}
@@ -165,7 +193,8 @@ namespace FitTrack.ViewModel
 			{
 				var strengthworkout = new StrengthWorkout
 				{
-					Duration = Duration
+					Duration = Duration,
+                    Repetitions = Repetitions
 				};
 				CaloriesBurned = strengthworkout.CalculateCaloriesBurned();
 

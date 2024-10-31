@@ -106,9 +106,7 @@ namespace FitTrack.ViewModel
 
         private bool IsUserVerified(User user)
         {
-            // Implementera logik för att kontrollera om användaren är verifierad
-            // Det kan vara en egenskap på User-objektet eller en extern verifiering
-            return user.IsVerified; // Anta att IsVerified är en egenskap på User
+            return user.IsVerified; 
         }
 
         private void OpenAdminFunctions(AdminUser adminUser)

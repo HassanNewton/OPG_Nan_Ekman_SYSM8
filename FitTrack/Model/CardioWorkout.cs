@@ -20,7 +20,6 @@ namespace FitTrack.Model
         }
 
         // Konstruktor
-
         public CardioWorkout()
         {
             // Tom eftersom min workoutmanager ska kunna hämta utan parametrar,kanske spara passen på annat sätt? 
@@ -34,7 +33,7 @@ namespace FitTrack.Model
         public override int CalculateCaloriesBurned()
         {
             // Räkna ut förbrända kalorier baserat på distans
-            int calculatedCalories = Distance * (int)Duration.TotalMinutes;
+            int calculatedCalories = (int)(Distance * Duration.TotalMinutes * 0.1);
             this.CaloriesBurned = calculatedCalories;
 
             return calculatedCalories; 
@@ -48,7 +47,7 @@ namespace FitTrack.Model
                 Duration = this.Duration,
                 CaloriesBurned = this.CaloriesBurned,
                 Notes = this.Notes,
-                //Distance = this.Distance
+                Distance = this.Distance
             };
         }
     }

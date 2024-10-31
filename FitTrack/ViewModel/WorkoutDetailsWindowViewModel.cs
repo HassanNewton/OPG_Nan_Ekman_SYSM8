@@ -70,11 +70,15 @@ namespace FitTrack.ViewModel
         private void SaveWorkout(object parameter)
         {
             if (Workout.Date == null || string.IsNullOrEmpty(Workout.Type) ||
-                Workout.Duration == TimeSpan.Zero || Workout.CaloriesBurned == 0 || string.IsNullOrEmpty(Workout.Notes))
+                Workout.Duration == TimeSpan.Zero || string.IsNullOrEmpty(Workout.Notes))
             {
                 MessageBox.Show("Textbox cannot be empty.");
                 return;
             }
+
+            Workout.CalculateCaloriesBurned();
+
+            usermanager.WorkoutManager.WorkoutList.Add(Workout);
 
             IsEditing = false; // Stäng av redigeringsläge
             OpenWorkoutWindow();

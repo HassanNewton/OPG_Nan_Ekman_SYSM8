@@ -33,7 +33,7 @@ namespace FitTrack.Model
         public override int CalculateCaloriesBurned()
         {
             // Räkna ut förbrända kalorier baserat på distans
-            int calculatedCalories = repetitions * (int)Duration.TotalMinutes;
+            int calculatedCalories = (int)(Repetitions * Duration.TotalMinutes * 0.2);
             this.CaloriesBurned = calculatedCalories;
 
             return calculatedCalories;
@@ -48,7 +48,7 @@ namespace FitTrack.Model
                 Duration = this.Duration,
                 CaloriesBurned = this.CaloriesBurned,
                 Notes = this.Notes,
-                //Repetitions = this.Repetitions
+                Repetitions = this.Repetitions
             };
         }
     }
