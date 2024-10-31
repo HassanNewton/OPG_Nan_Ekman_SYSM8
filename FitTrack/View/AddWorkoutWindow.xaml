@@ -33,8 +33,15 @@
             <ComboBox ItemsSource="{Binding WorkoutTypes}" SelectedItem="{Binding SelectedWorkoutType}" />
             <TextBlock Text="Duration:"/>
             <TextBox Text="{Binding Duration}"/>
+
+            <TextBlock Text="Distance(Cardio):"/>
+            <TextBox Text="{Binding Distance}"/>
+            <TextBlock Text="Repetitions(Strength):"/>
+            <TextBox Text="{Binding Repetitions}"/>
+
             <TextBlock Text="CaloriesBurned:"/>
             <TextBox Text="{Binding CaloriesBurned}"/>
+            
             <TextBlock Text="Notes:"/>
             <TextBox Text="{Binding NotesInput}"/>
 
