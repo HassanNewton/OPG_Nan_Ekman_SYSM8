@@ -56,6 +56,12 @@ namespace FitTrack.ViewModel
             }
         }
 
+        // NY för att kunna uppdatera det nya användarnamnet från UserDetailsWindow
+        public void UpdateUserName()
+        {
+            OnPropertyChanged(nameof(User));
+        }
+
         public RelayCommand AddWorkOutCommand { get; }
         public RelayCommand RemoveWorkoutCommand { get; }
         public RelayCommand OpenUserDetailsCommand { get; }
@@ -70,7 +76,7 @@ namespace FitTrack.ViewModel
         // Konstruktor
         public WorkoutWindowViewModel(Usermanager usermanager) 
         {
-            this.usermanager = usermanager;
+            this.usermanager = usermanager; 
 
             // hämta lista från workoutmanager
             Workouts = usermanager.WorkoutManager.WorkoutList;
@@ -180,12 +186,18 @@ namespace FitTrack.ViewModel
         private void ExecuteOpenDetails(object parameter)
         {
             OpenDetails(selectedWorkout);
+
+            //// Öppna UserDetailsWindow med referens till Usermanager och WorkoutWindowViewModel
+            //UserDetailsWindow userDetailsWindow = new UserDetailsWindow(usermanager, this);
+            
+            //Application.Current.MainWindow = userDetailsWindow;
+            //userDetailsWindow.Show();
         }
 
         // Metod för att öppna UserDetailsWindow
         private void OpenDetails(Workout workout)
         {
-            UserDetailsWindow userDetailsWindow = new UserDetailsWindow(usermanager);
+            UserDetailsWindow userDetailsWindow = new UserDetailsWindow(usermanager, this);
 
             //Application.Current.MainWindow.Close();
 
@@ -233,15 +245,39 @@ namespace FitTrack.ViewModel
 
         private void SignOut(object parameter)
         {
-            // Skapa en ny instans av MainWindow
-            MainWindow mainWindow = new MainWindow(usermanager);
+            ////usermanager.CurrentUser = null;
 
-            // Stäng MainWindow
-            Application.Current.MainWindow.Close();
+            //// Skapa en ny instans av MainWindow
+            //MainWindow mainWindow = new MainWindow(usermanager);
 
-            // Sätt det nya fönstret som huvudfönster och visa det
-            Application.Current.MainWindow = mainWindow;
-            mainWindow.Show();
+            //// Stäng MainWindow
+            //Application.Current.MainWindow.Close();
+
+            //// Sätt det nya fönstret som huvudfönster och visa det
+            //Application.Current.MainWindow = mainWindow;
+            //mainWindow.Show();
+
+            try
+            {
+                // Stäng alla öppna fönster
+                foreach (Window window in Application.Current.Windows)
+                {
+                    window.Hide();
+                }
+
+                // Skapa en ny instans av MainWindow
+                MainWindow mainWindow = new MainWindow(usermanager);
+                mainWindow.Show(); 
+
+                // Sätt det nya fönstret som huvudfönster
+                Application.Current.MainWindow = mainWindow;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred during sign out: {ex.Message}");
+            }
         }
+
+
     }
 }

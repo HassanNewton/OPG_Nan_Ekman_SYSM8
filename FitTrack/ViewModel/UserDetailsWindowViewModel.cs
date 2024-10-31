@@ -18,8 +18,12 @@ namespace FitTrack.ViewModel
 
         Usermanager usermanager;
 
+        private WorkoutWindowViewModel workoutWindowViewModel;
+
         // list länder från usermanager
         public List<string> CountryList { get; private set; }
+
+        public Person CurrentUser => usermanager.CurrentUser; // Lägg till denna egenskap // NY
 
         private string usernameInput;
 
@@ -73,11 +77,15 @@ namespace FitTrack.ViewModel
         public RelayCommand SaveCommand { get; }
 
         // Konstruktor
-        public UserDetailsWindowViewModel(Usermanager usermanager)
+        public UserDetailsWindowViewModel(Usermanager usermanager, WorkoutWindowViewModel workoutWindowViewModel) // lagt till workoutwindow som parameter
         {
             this.usermanager = usermanager;
+            this.workoutWindowViewModel = workoutWindowViewModel; // ny
 
             CountryList = usermanager.CountryList;
+
+            // Initialisera UsernameInput med den nuvarande användarens namn
+            UsernameInput = CurrentUser.UserName;
 
             CancelCommand = new RelayCommand(Cancel);
             SaveCommand = new RelayCommand(SaveUserDetails);
@@ -118,15 +126,18 @@ namespace FitTrack.ViewModel
                     return;
                 }
 
-                User newUser = new User
-                {
-                    UserName = UsernameInput,
-                    Password = PasswordInput
-                };
+                // Här uppdaterar vi det aktuella användarnamnet i Usermanager
+                usermanager.CurrentUser.UserName = UsernameInput;
 
-                usermanager.AddUser(newUser);
+                // NY
+                // Anropa metoden för att uppdatera användarnamnet i WorkoutWindowViewModel
+                workoutWindowViewModel.UpdateUserName();
 
-                //MessageBox.Show($"Username updated: {newUser.UserName}");
+                // Här kan du visa en bekräftelse
+                MessageBox.Show($"Username updated: {UsernameInput}");
+
+
+
                 Application.Current.MainWindow.Close();
 
             }
@@ -168,6 +179,12 @@ namespace FitTrack.ViewModel
             // Lösenordet måste vara minst 5 tecken långt.
             var passwordLengthRequirement = @"^.{5,}$";
             return Regex.IsMatch(PasswordInput, passwordLengthRequirement);
+        }
+
+        private void ExecuteOpenDetails(object parameter)
+        {
+            UserDetailsWindow userDetailsWindow = new UserDetailsWindow(usermanager, workoutWindowViewModel);
+            userDetailsWindow.Show();
         }
     }
 }

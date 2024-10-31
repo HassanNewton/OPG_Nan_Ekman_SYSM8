@@ -67,17 +67,17 @@ namespace FitTrack.ViewModel
             }
 
             // Logga in användaren och returnera ett Person-objekt
-            Person loggedInPerson = usermanager.LogIn(UsernameInput, PasswordInput); // Spara den inloggade användaren
+            Person currentUser = usermanager.LogIn(UsernameInput, PasswordInput); // Spara den inloggade användaren
 
-            if (loggedInPerson != null)
+            if (currentUser != null) // ändrat från loggedInPerson
             {
-                if (loggedInPerson is AdminUser)
+                if (currentUser is AdminUser)
                 {
                     // Skapa AdminUser med Usermanager och WorkoutManager instanser
                     var adminUser = new AdminUser(usermanager);
                     OpenAdminFunctions(adminUser);
                 }
-                else if (loggedInPerson is User user)
+                else if (currentUser is User user)
                 {
                     OpenWorkoutWindow(user);
                 }

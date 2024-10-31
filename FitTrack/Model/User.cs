@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FitTrack.Model
 {
@@ -56,18 +57,18 @@ namespace FitTrack.Model
         {
             if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password))
             {
-                Console.WriteLine("Username or password can not be empty");
+                MessageBox.Show("Username or password can not be empty");
             }
             else
             {
                 // Validera inloggningsuppgifterna
                 if (UserName == "user" && Password == "password")
                 {
-                    Console.WriteLine($"Login succeded! {UserName}");
+                    MessageBox.Show($"Login succeded! {UserName}");
                 }
                 else
                 {
-                    Console.WriteLine("Wrong username or password");
+                    MessageBox.Show("Wrong username or password");
                 }
             }
         }
@@ -76,11 +77,11 @@ namespace FitTrack.Model
         {
             if(SecurityAnswer == providedAnswer)
             {
-                Console.WriteLine("Password reset succeded.");
+                MessageBox.Show("Password reset succeded.");
             }
             else
             {
-                Console.WriteLine("Wrong security answer.");
+                MessageBox.Show("Wrong security answer.");
             }
         }
     }

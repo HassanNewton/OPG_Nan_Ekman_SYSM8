@@ -30,7 +30,7 @@
             <Image Source="C:\Users\NänEkman\Source\Repos\OPG_Nan_Ekman_SYSM8\FitTrack\Images\userProfile.png" Height="100" OpacityMask="#FFE34363"  />
             <Label Content="User Details" FontSize="40" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="Crimson" Opacity="0.8" />
             <!--<Label Content="Current Username:" HorizontalAlignment="Center" />-->
-            <TextBlock Width="200" Height="30" Text="{Binding User.UserName, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Width="200" Height="30" Text="{Binding CurrentUser.UserName, UpdateSourceTrigger=PropertyChanged}" /> <!--funkar ej-->
             <TextBlock Text="Choose New Username:" HorizontalAlignment="Center"/>
             <TextBox Text="{Binding UsernameInput}" Width="200" Height="30"/>
             <TextBlock Text="New Password:" HorizontalAlignment="Center"/>

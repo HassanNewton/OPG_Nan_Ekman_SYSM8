@@ -37,9 +37,6 @@ namespace FitTrack.Model
             new User { UserName = "user2", Password = "5678" },
             new AdminUser { UserName = "adminUser", Password = "admin123" }
             };
-
-            // Gemensam country lista
-
         }
 
         // Metoder
@@ -88,6 +85,7 @@ namespace FitTrack.Model
                 if (user.UserName == username && user.Password == password)
                 {
                     CurrentUser = user;  // Sätt CurrentUser vid lyckad inloggning
+                    /*user.SignIn();*/ // NY för att anropa den specifika SignIn metoden
                     return user;
                 }
             }

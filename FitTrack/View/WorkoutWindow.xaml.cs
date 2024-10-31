@@ -26,5 +26,11 @@ namespace FitTrack.View
             InitializeComponent();
             DataContext = new WorkoutWindowViewModel(usermanager);
         }
+
+        // Lägg till en metod för att stänga fönstret
+        public void SignOut()
+        {
+            this.Close();
+        }
     }
 }
