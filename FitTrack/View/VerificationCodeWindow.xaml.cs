@@ -17,14 +17,14 @@ using System.Windows.Shapes;
 namespace FitTrack.View
 {
     /// <summary>
-    /// Interaction logic for WorkoutWindow.xaml
+    /// Interaction logic for VerificationCodeWindow.xaml
     /// </summary>
-    public partial class WorkoutWindow : Window
+    public partial class VerificationCodeWindow : Window
     {
-        public WorkoutWindow(Usermanager usermanager)
+        public VerificationCodeWindow(Usermanager usermanager)
         {
             InitializeComponent();
-            DataContext = new WorkoutWindowViewModel(usermanager);
+            DataContext = new VerificationCodeWindowViewModel(usermanager);
         }
     }
 }
