@@ -15,6 +15,10 @@ namespace FitTrack.Model
         // Egenskap för lista av användare
         public ObservableCollection<Person> Users { get; set; } = new ObservableCollection<Person>();
 
+        // lista för länder
+        public List<string> CountryList { get; } = new List<string> { "Denmark", "Norway", "Sweden" };
+
+
         // Egenskap av Workoutmanager
         public WorkoutManager WorkoutManager { get; set; }
 
@@ -33,6 +37,9 @@ namespace FitTrack.Model
             new User { UserName = "user2", Password = "5678" },
             new AdminUser { UserName = "adminUser", Password = "admin123" }
             };
+
+            // Gemensam country lista
+
         }
 
         // Metoder

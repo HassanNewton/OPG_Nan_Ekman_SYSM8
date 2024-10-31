@@ -79,7 +79,7 @@ namespace FitTrack.ViewModel
         }
 
         // Lista med länder till ComboBox
-        public List<string> CountryList { get; set; }
+        public List<string> CountryList { get; set; } // private set? 
 
         // Skapat instans av RelayCommand för att kunna binda i XAML genom att använda command sitället för clickEvent
         public RelayCommand RegisterUserCommand { get; }
@@ -90,7 +90,8 @@ namespace FitTrack.ViewModel
 
             this.usermanager = usermanager;
 
-            CountryList = new List<string> { "Denmark", "Norway", "Sweden" };
+            //CountryList = new List<string> { "Denmark", "Norway", "Sweden" };
+            CountryList = usermanager.CountryList;
             RegisterUserCommand = new RelayCommand(RegisterNewUser);
         }
 

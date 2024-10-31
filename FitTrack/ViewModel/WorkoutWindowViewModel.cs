@@ -187,7 +187,7 @@ namespace FitTrack.ViewModel
         {
             UserDetailsWindow userDetailsWindow = new UserDetailsWindow(usermanager);
 
-            Application.Current.MainWindow.Close();
+            //Application.Current.MainWindow.Close();
 
             Application.Current.MainWindow = userDetailsWindow;
             userDetailsWindow.Show();
