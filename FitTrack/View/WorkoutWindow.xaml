@@ -44,8 +44,9 @@
 
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                 <ComboBox Text="Type" ItemsSource="{Binding WorkoutTypes}" SelectedItem="{Binding SelectedWorkoutType}" Width="80" Height="20" />
-                <ComboBox Text="Date" Width="80" Height="20"/>
-                <Button Content="FILTER" Width="100" Height="20" Command="{Binding FilterCommand}" CommandParameter="{Binding SelectedWorkout}" HorizontalAlignment="Right" Margin="10"  />
+                <!--Filtrera på datepicker så användare kan välja datum-->
+                <DatePicker Text="Date" Width="80" Height="20" SelectedDate="{Binding FilterDate}" />
+                <Button Content="FILTER" Width="100" Height="20" Command="{Binding FilterCommand}" HorizontalAlignment="Right" Margin="10"  />
             </StackPanel>
             
             <!-- Höger stackpanel för användarnamn och utloggningsknapp -->

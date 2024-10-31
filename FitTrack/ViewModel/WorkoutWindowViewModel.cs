@@ -23,6 +23,12 @@ namespace FitTrack.ViewModel
         // hämta lista från Workoutmanager
         public ObservableCollection<Workout> Workouts { get; }
 
+        // lista för filtrering
+        public ObservableCollection<Workout> FilteredWorkouts { get; set; } // private set?
+
+        // lista för välja Type i comboBox
+        public ObservableCollection<string> WorkoutTypes { get; set; }
+
 
         private Workout selectedWorkout;
         public Workout SelectedWorkout
@@ -56,6 +62,30 @@ namespace FitTrack.ViewModel
             }
         }
 
+
+        private string selectedWorkoutType;
+        public string SelectedWorkoutType
+        {
+            get { return selectedWorkoutType; }
+            set
+            {
+                selectedWorkoutType = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private DateTime filterDate = DateTime.MinValue; // Standardvärde
+        public DateTime FilterDate
+        {
+            get { return filterDate; }
+            set
+            {
+                filterDate = value;
+                OnPropertyChanged();                
+            }
+        }
+
+
         // uppdatera det nya användarnamnet från UserDetailsWindow
         public void UpdateUserName()
         {
@@ -84,6 +114,11 @@ namespace FitTrack.ViewModel
             // hämta lista från workoutmanager
             Workouts = usermanager.WorkoutManager.WorkoutList;
 
+            FilteredWorkouts = new ObservableCollection<Workout>(Workouts);
+
+            // hämta WokoutTypes från Workoutmanager
+            WorkoutTypes = usermanager.WorkoutManager.WorkoutTypes;
+
             NewWorkout = new CardioWorkout();
             NewWorkout = new StrengthWorkout();
 
@@ -95,10 +130,24 @@ namespace FitTrack.ViewModel
             SignOutCommand = new RelayCommand(SignOut);
             CopyCommand = new RelayCommand(CopyWorkout);
             SaveNewWorkoutCommand = new RelayCommand(SaveNewWorkout);
+            SearchCommand = new RelayCommand(SearchingForWorkout);
+            FilterCommand = new RelayCommand(FilterWorkout);
+
 
         }
 
         // Metoder
+
+        private void FilterWorkout(object parameter)
+        {
+
+        }
+
+        private void SearchingForWorkout(object parameter)
+        {
+
+        }
+
         private void AddWorkOut(object parameter)
         {
             Application.Current.MainWindow.Close();
@@ -262,11 +311,6 @@ namespace FitTrack.ViewModel
             {
                 MessageBox.Show($"An error occurred during sign out: {ex.Message}");
             }
-        }
-
-        private void FilterWorkout()
-        {
-
         }
     }
 }
