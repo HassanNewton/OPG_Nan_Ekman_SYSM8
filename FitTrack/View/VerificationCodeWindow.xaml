@@ -5,8 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitTrack.View"
         mc:Ignorable="d"
-        Title="VerificationCodeWindow" Height="450" Width="800">
+        Title="VerificationCodeWindow" Height="350" Width="800">
+
+    <!--Sätter stil på knapparna-->
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Crimson"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Opacity" Value="0.8"/>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="1" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Opacity" Value="0.9" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
+    
     <Grid>
-        
+        <StackPanel>
+            <Label Content="Two-factor authentication" FontSize="30" HorizontalAlignment="Center" FontFamily="Arial" FontWeight="Bold" Foreground="Crimson" Opacity="0.8" />
+            <Label/>
+            <Label/>
+            <Label Content="Enter your E-mail:" HorizontalAlignment="Center" FontFamily="Arial" />
+            <TextBox Width="200" Height="30" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label Content="Confirm E-mail:" HorizontalAlignment="Center" FontFamily="Arial" />
+            <TextBox Width="200" Height="30" Text="{Binding ConfirmEmail, UpdateSourceTrigger=PropertyChanged}" />
+            <Button Content="Get Verification Code" Width="150" Height="40" Margin="20" Command="{Binding GetCodeCommand}"/>
+            <Label Content="Enter Verification Code:" HorizontalAlignment="center"/>
+            <TextBox Width="200" Height="30" Text="{Binding CodeInput, UpdateSourceTrigger=PropertyChanged}" />
+
+
+            <!--<Button Content="CREATE USER" Width="150" Height="40" Margin="20" Command="{Binding RegisterUserCommand}" />-->
+        </StackPanel>
     </Grid>
 </Window>
