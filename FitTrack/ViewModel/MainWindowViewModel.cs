@@ -46,46 +46,98 @@ namespace FitTrack.ViewModel
         public RelayCommand SignInCommand { get; }
         public RelayCommand RegisterCommand {  get; }
         public RelayCommand NewPasswordCommand { get; }
+        public RelayCommand OpenVerificationCodeCommand { get; }
 
         // Konstruktor
         public MainWindowViewModel(Usermanager usermanager)
         {
             this.usermanager = usermanager;
 
-            SignInCommand = new RelayCommand(SignIn);
+            SignInCommand = new RelayCommand(SignIn, CanSignIn);
             RegisterCommand = new RelayCommand(Register);
             NewPasswordCommand = new RelayCommand(NewPassword);
+            OpenVerificationCodeCommand = new RelayCommand(OpenVerificationCodeWindow);
         }
 
         // Metoder
+
+        private bool CanSignIn(object parameter)
+        {
+            // Kontrollera att användarnamn och lösenord är angivna
+            return !string.IsNullOrEmpty(UsernameInput) && !string.IsNullOrEmpty(PasswordInput);
+        }
+
         private void SignIn(object parameter)
         {
-            if (string.IsNullOrEmpty(UsernameInput) || string.IsNullOrEmpty(PasswordInput))
+            // Kontrollera om kommandot kan köras
+            if (!CanSignIn(parameter))
             {
-                MessageBox.Show("Please enter both username and password.");
-                return;
+                return; // Avsluta om det inte kan köras
             }
 
-            // Logga in användaren och returnera ett Person-objekt
-            Person currentUser = usermanager.LogIn(UsernameInput, PasswordInput); // Spara den inloggade användaren
+            // Logga in användaren
+            Person currentUser = usermanager.LogIn(UsernameInput, PasswordInput);
 
-            if (currentUser != null) // ändrat från loggedInPerson
+            if (currentUser != null)
             {
-                if (currentUser is AdminUser)
+                if (currentUser is User user)
                 {
-                    // Skapa AdminUser med Usermanager och WorkoutManager instanser
-                    var adminUser = new AdminUser(usermanager);
-                    OpenAdminFunctions(adminUser);
+
+                    if (IsUserVerified(user))
+                    {
+                        OpenWorkoutWindow(user); // Öppna WorkoutWindow om användaren är verifierad
+                    }
+                    else
+                    {
+                        OpenVerificationCodeWindow(null); // Öppna verifieringsfönstret om inte
+                    }
+                    //// Öppna verifieringsfönstret om inloggningen lyckas
+                    //OpenVerificationCodeWindow(null);
                 }
-                else if (currentUser is User user)
+                else if (currentUser is AdminUser adminUser)
                 {
-                    OpenWorkoutWindow(user);
+                    OpenAdminFunctions(adminUser);
                 }
             }
             else
             {
                 MessageBox.Show("Invalid username or password.");
             }
+        }
+        //private void SignIn(object parameter)
+        //{
+        //    if (string.IsNullOrEmpty(UsernameInput) || string.IsNullOrEmpty(PasswordInput))
+        //    {
+        //        MessageBox.Show("Please enter both username and password.");
+        //        return;
+        //    }
+
+        //    // Logga in användaren och returnera ett Person-objekt
+        //    Person currentUser = usermanager.LogIn(UsernameInput, PasswordInput); // Spara den inloggade användaren
+
+        //    if (currentUser != null)
+        //    {
+        //        if (currentUser is User user)
+        //        {
+        //            // anropar metod för att öppna verifieringsfönstret
+        //            OpenVerificationCodeWindow(null); 
+        //        }
+        //        else if (currentUser is AdminUser adminUser)
+        //        {
+        //            OpenAdminFunctions(adminUser);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Invalid username or password.");
+        //    }
+        //}
+
+        private bool IsUserVerified(User user)
+        {
+            // Implementera logik för att kontrollera om användaren är verifierad
+            // Det kan vara en egenskap på User-objektet eller en extern verifiering
+            return user.IsVerified; // Anta att IsVerified är en egenskap på User
         }
 
         private void OpenAdminFunctions(AdminUser adminUser)
@@ -163,7 +215,7 @@ namespace FitTrack.ViewModel
 
         }
 
-        private void OpenVerificationCodeWindow()
+        private void OpenVerificationCodeWindow(object parameter)
         {
             // Skapa en ny instans av VerificationCodeWindow
             VerificationCodeWindow verificationCodeWindow = new VerificationCodeWindow(usermanager);

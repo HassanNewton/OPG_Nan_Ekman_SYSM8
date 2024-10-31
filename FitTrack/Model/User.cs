@@ -12,6 +12,8 @@ namespace FitTrack.Model
         // Egenskaper
         public string Country { get; set; }
 
+        public bool IsVerified { get; set; } // Ny egenskap för verifieringsstatus
+
         private string securityQuestion;
 
         public string SecurityQuestion

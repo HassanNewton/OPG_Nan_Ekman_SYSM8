@@ -1,5 +1,6 @@
 ﻿using FitTrack.Model;
 using FitTrack.MVVM;
+using FitTrack.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,6 +76,8 @@ namespace FitTrack.ViewModel
                 return;
             }
 
+            verificationCode = GetVerificationCode();
+            SendVerificationCode(Email, verificationCode); // Visa koden i MessageBox
         }
 
         private void ExecuteVerification(object parameter)
@@ -82,7 +85,7 @@ namespace FitTrack.ViewModel
             if (CodeInput == verificationCode)
             {
                 MessageBox.Show("Verification successful!");
-
+                //OpenWorkoutWindow();
             }
             else
             {
@@ -100,5 +103,19 @@ namespace FitTrack.ViewModel
         {
             MessageBox.Show($"Verification code sent to {email}: {code}");
         }
+
+        private void OpenWorkoutWindow()
+        {
+            // Skapa en ny instans av WorkoutWindow
+            WorkoutWindow workoutWindow = new WorkoutWindow(usermanager);
+
+            // Stäng MainWindow
+            Application.Current.MainWindow.Close();
+
+            // Sätt det nya fönstret som huvudfönster och visa det
+            Application.Current.MainWindow = workoutWindow;
+            workoutWindow.Show();
+        }
+
     }
 }

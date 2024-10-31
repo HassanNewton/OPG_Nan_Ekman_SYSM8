@@ -85,7 +85,6 @@ namespace FitTrack.Model
                 if (user.UserName == username && user.Password == password)
                 {
                     CurrentUser = user;  // Sätt CurrentUser vid lyckad inloggning
-                    /*user.SignIn();*/ // NY för att anropa den specifika SignIn metoden
                     return user;
                 }
             }
