@@ -14,6 +14,7 @@ namespace FitTrack.ViewModel
     {
         // Egenskaper
         Usermanager usermanager;
+        public Person currentUser;
 
         private string email;
 
@@ -85,7 +86,15 @@ namespace FitTrack.ViewModel
             if (CodeInput == verificationCode)
             {
                 MessageBox.Show("Verification successful!");
-                //OpenWorkoutWindow();
+
+                if (usermanager.CurrentUser is AdminUser) // Kontrollera om användaren är en administratör
+                {
+                    OpenAdminWindow();
+                }
+                else if (usermanager.CurrentUser is User)
+                {
+                    OpenWorkoutWindow(); // Vanlig användare
+                }
             }
             else
             {
@@ -115,6 +124,19 @@ namespace FitTrack.ViewModel
             // Sätt det nya fönstret som huvudfönster och visa det
             Application.Current.MainWindow = workoutWindow;
             workoutWindow.Show();
+        }
+
+        private void OpenAdminWindow()
+        {
+            // Skapa en ny instans av AdminWindow
+            AdminWindow adminWindow = new AdminWindow(usermanager);
+
+            // Stäng MainWindow
+            Application.Current.MainWindow.Close();
+
+            // Sätt det nya fönstret som huvudfönster och visa det
+            Application.Current.MainWindow = adminWindow;
+            adminWindow.Show();
         }
 
     }

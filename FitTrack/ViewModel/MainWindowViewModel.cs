@@ -17,6 +17,7 @@ namespace FitTrack.ViewModel
     {
         // Refererar till Usermanager klassen
         Usermanager usermanager;
+        Person currentUser;
 
         // Egenskaper
         private string usernameInput;
@@ -91,8 +92,6 @@ namespace FitTrack.ViewModel
                     {
                         OpenVerificationCodeWindow(null); // Öppna verifieringsfönstret om inte
                     }
-                    //// Öppna verifieringsfönstret om inloggningen lyckas
-                    //OpenVerificationCodeWindow(null);
                 }
                 else if (currentUser is AdminUser adminUser)
                 {
@@ -104,34 +103,6 @@ namespace FitTrack.ViewModel
                 MessageBox.Show("Invalid username or password.");
             }
         }
-        //private void SignIn(object parameter)
-        //{
-        //    if (string.IsNullOrEmpty(UsernameInput) || string.IsNullOrEmpty(PasswordInput))
-        //    {
-        //        MessageBox.Show("Please enter both username and password.");
-        //        return;
-        //    }
-
-        //    // Logga in användaren och returnera ett Person-objekt
-        //    Person currentUser = usermanager.LogIn(UsernameInput, PasswordInput); // Spara den inloggade användaren
-
-        //    if (currentUser != null)
-        //    {
-        //        if (currentUser is User user)
-        //        {
-        //            // anropar metod för att öppna verifieringsfönstret
-        //            OpenVerificationCodeWindow(null); 
-        //        }
-        //        else if (currentUser is AdminUser adminUser)
-        //        {
-        //            OpenAdminFunctions(adminUser);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Invalid username or password.");
-        //    }
-        //}
 
         private bool IsUserVerified(User user)
         {
@@ -226,6 +197,7 @@ namespace FitTrack.ViewModel
             // Sätt det nya fönstret som huvudfönster och visa det
             Application.Current.MainWindow = verificationCodeWindow;
             verificationCodeWindow.Show();
+
         }
     }
 }
