@@ -23,7 +23,9 @@ namespace FitTrack.ViewModel
         // list länder från usermanager
         public List<string> CountryList { get; private set; }
 
-        public Person CurrentUser => usermanager.CurrentUser; // Lägg till denna egenskap // NY
+        // Fick inte till bindningen med att byta namn på inloggad användare trots skapat egenskaper med propfull
+        // så tog hjälp av ChatGPT med kodraden nedan samt hur jag skulle kunna öppna fönster nya då det sätt jag gjort tidigare av någon anledning inte fungerade
+        public Person CurrentUser => usermanager.CurrentUser; 
 
         private string usernameInput;
 
@@ -80,7 +82,7 @@ namespace FitTrack.ViewModel
         public UserDetailsWindowViewModel(Usermanager usermanager, WorkoutWindowViewModel workoutWindowViewModel) // lagt till workoutwindow som parameter
         {
             this.usermanager = usermanager;
-            this.workoutWindowViewModel = workoutWindowViewModel; // ny
+            this.workoutWindowViewModel = workoutWindowViewModel; 
 
             CountryList = usermanager.CountryList;
 
@@ -126,17 +128,13 @@ namespace FitTrack.ViewModel
                     return;
                 }
 
-                // Här uppdaterar vi det aktuella användarnamnet i Usermanager
+                // Uppdaterar det aktuella användarnamnet i Usermanager
                 usermanager.CurrentUser.UserName = UsernameInput;
 
-                // NY
-                // Anropa metoden för att uppdatera användarnamnet i WorkoutWindowViewModel
+                // Anropar metoden för att uppdatera användarnamnet i WorkoutWindowViewModel
                 workoutWindowViewModel.UpdateUserName();
 
-                // Här kan du visa en bekräftelse
                 MessageBox.Show($"Username updated: {UsernameInput}");
-
-
 
                 Application.Current.MainWindow.Close();
 
@@ -150,7 +148,6 @@ namespace FitTrack.ViewModel
         private void Cancel(object parameter)
         {
             Application.Current.MainWindow.Close();
-            //OpenWorkoutsWindow();
         }
 
 

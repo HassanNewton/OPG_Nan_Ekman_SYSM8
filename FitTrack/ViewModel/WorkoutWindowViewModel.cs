@@ -56,7 +56,7 @@ namespace FitTrack.ViewModel
             }
         }
 
-        // NY för att kunna uppdatera det nya användarnamnet från UserDetailsWindow
+        // uppdatera det nya användarnamnet från UserDetailsWindow
         public void UpdateUserName()
         {
             OnPropertyChanged(nameof(User));
@@ -72,6 +72,9 @@ namespace FitTrack.ViewModel
         public RelayCommand SignOutCommand { get; }
         public RelayCommand CopyCommand { get; } 
         public RelayCommand SaveNewWorkoutCommand { get; }
+
+        public RelayCommand SearchCommand { get; }
+        public RelayCommand FilterCommand { get; }
 
         // Konstruktor
         public WorkoutWindowViewModel(Usermanager usermanager) 
@@ -92,6 +95,7 @@ namespace FitTrack.ViewModel
             SignOutCommand = new RelayCommand(SignOut);
             CopyCommand = new RelayCommand(CopyWorkout);
             SaveNewWorkoutCommand = new RelayCommand(SaveNewWorkout);
+
         }
 
         // Metoder
@@ -186,12 +190,6 @@ namespace FitTrack.ViewModel
         private void ExecuteOpenDetails(object parameter)
         {
             OpenDetails(selectedWorkout);
-
-            //// Öppna UserDetailsWindow med referens till Usermanager och WorkoutWindowViewModel
-            //UserDetailsWindow userDetailsWindow = new UserDetailsWindow(usermanager, this);
-            
-            //Application.Current.MainWindow = userDetailsWindow;
-            //userDetailsWindow.Show();
         }
 
         // Metod för att öppna UserDetailsWindow
@@ -245,18 +243,6 @@ namespace FitTrack.ViewModel
 
         private void SignOut(object parameter)
         {
-            ////usermanager.CurrentUser = null;
-
-            //// Skapa en ny instans av MainWindow
-            //MainWindow mainWindow = new MainWindow(usermanager);
-
-            //// Stäng MainWindow
-            //Application.Current.MainWindow.Close();
-
-            //// Sätt det nya fönstret som huvudfönster och visa det
-            //Application.Current.MainWindow = mainWindow;
-            //mainWindow.Show();
-
             try
             {
                 // Stäng alla öppna fönster
@@ -278,6 +264,9 @@ namespace FitTrack.ViewModel
             }
         }
 
+        private void FilterWorkout()
+        {
 
+        }
     }
 }

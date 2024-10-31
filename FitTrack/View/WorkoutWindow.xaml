@@ -32,6 +32,7 @@
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
+                <ColumnDefinition Width="350" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
@@ -41,6 +42,12 @@
                 <Button Content="USER DETAILS" Width="100" Height="20" Command="{Binding OpenUserDetailsCommand}" CommandParameter="{Binding SelectedWorkout}" HorizontalAlignment="Right" Margin="10"  />
             </StackPanel>
 
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <ComboBox Text="Type" ItemsSource="{Binding WorkoutTypes}" SelectedItem="{Binding SelectedWorkoutType}" Width="80" Height="20" />
+                <ComboBox Text="Date" Width="80" Height="20"/>
+                <Button Content="FILTER" Width="100" Height="20" Command="{Binding FilterCommand}" CommandParameter="{Binding SelectedWorkout}" HorizontalAlignment="Right" Margin="10"  />
+            </StackPanel>
+            
             <!-- Höger stackpanel för användarnamn och utloggningsknapp -->
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Background="LightGray" >
                 <TextBlock Text="{Binding User.UserName}" FontFamily="Arial" Background="Transparent" FontWeight="Bold"
@@ -82,6 +89,12 @@
                 <Button Content="ADD WORKOUT" Command="{Binding AddWorkOutCommand}" Margin="5"/>
                 <Button Content="REMOVE WORKOUT" Command="{Binding RemoveWorkoutCommand}" Margin="5"/>
                 <Button Content="COPY WORKOUT" Command="{Binding CopyCommand}" Margin="5"/>
+
+                <Label Margin="70"/>
+                <Label Content="SEARCH WORKOUT:" HorizontalAlignment="Center" FontFamily="Arial"/>
+                <TextBox Height="25" Margin="5" />
+                <Button Content="SEARCH" Command="{Binding SearchCommand}" Margin="5"/>
+
             </StackPanel>
 
         </Grid>

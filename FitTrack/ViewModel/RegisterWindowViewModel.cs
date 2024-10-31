@@ -90,8 +90,8 @@ namespace FitTrack.ViewModel
 
             this.usermanager = usermanager;
 
-            //CountryList = new List<string> { "Denmark", "Norway", "Sweden" };
             CountryList = usermanager.CountryList;
+
             RegisterUserCommand = new RelayCommand(RegisterNewUser);
         }
 
