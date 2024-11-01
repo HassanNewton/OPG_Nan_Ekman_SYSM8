@@ -79,7 +79,7 @@ namespace FitTrack.ViewModel
         public RelayCommand SaveCommand { get; }
 
         // Konstruktor
-        public UserDetailsWindowViewModel(Usermanager usermanager, WorkoutWindowViewModel workoutWindowViewModel) // lagt till workoutwindow som parameter
+        public UserDetailsWindowViewModel(Usermanager usermanager, WorkoutWindowViewModel workoutWindowViewModel) 
         {
             this.usermanager = usermanager;
             this.workoutWindowViewModel = workoutWindowViewModel; 
@@ -101,7 +101,7 @@ namespace FitTrack.ViewModel
                 if (string.IsNullOrEmpty(UsernameInput) || string.IsNullOrEmpty(PasswordInput) ||
                     string.IsNullOrEmpty(ConfirmPasswordInput) || string.IsNullOrEmpty(CountryComboBox))
                 {
-                    MessageBox.Show("Please enter both username, password and country.");
+                    MessageBox.Show("Please enter both username, password, and country.");
                     return;
                 }
                 if (!ValidateUsernameRequirements(UsernameInput))
@@ -109,8 +109,6 @@ namespace FitTrack.ViewModel
                     MessageBox.Show("Username must be at least 3 characters long.");
                     return;
                 }
-
-                MessageBox.Show($"Username updated: {UsernameInput}");
 
                 if (ConfirmPasswordInput != PasswordInput)
                 {
@@ -122,22 +120,47 @@ namespace FitTrack.ViewModel
                     MessageBox.Show("The password must be at least 5 characters.");
                     return;
                 }
-                if (usermanager.CheckUsername(UsernameInput))
+
+                bool usernameExists = false;
+                foreach (var user in usermanager.Users)
                 {
-                    MessageBox.Show("Username already exist.");
+                    if (user.UserName == UsernameInput && user != usermanager.CurrentUser)
+                    {
+                        usernameExists = true;
+                        break; // Avbryt loopen om användarnamnet redan existerar
+                    }
+                }
+
+                if (usernameExists)
+                {
+                    MessageBox.Show("Username already exists.");
                     return;
                 }
 
-                // Uppdaterar det aktuella användarnamnet i Usermanager
-                usermanager.CurrentUser.UserName = UsernameInput;
+                Person userToUpdate = null;
+                foreach (var user in usermanager.Users)
+                {
+                    if (user == usermanager.CurrentUser)
+                    {
+                        userToUpdate = user;
+                        break; // Avbryt loopen när vi har hittat den nuvarande användaren
+                    }
+                }
 
-                // Anropar metoden för att uppdatera användarnamnet i WorkoutWindowViewModel
+                if (userToUpdate != null)
+                {
+                    userToUpdate.UserName = UsernameInput;
+                    userToUpdate.Password = PasswordInput;
+                }
+
+                // Uppdatera CurrentUser och uppdatera UI
+                usermanager.CurrentUser.UserName = UsernameInput;
+                usermanager.CurrentUser.Password = PasswordInput;
+
                 workoutWindowViewModel.UpdateUserName();
 
                 MessageBox.Show($"Username updated: {UsernameInput}");
-
                 Application.Current.MainWindow.Close();
-
             }
             catch (Exception ex)
             {

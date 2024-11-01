@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitTrack.View"
         mc:Ignorable="d"
-        Title="AddWorkoutWindow" Height="300" Width="800">
+        Title="AddWorkoutWindow" Height="350" Width="800">
 
     <!--Sätter stil på knapparna-->
     <Window.Resources>

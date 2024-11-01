@@ -64,7 +64,6 @@ namespace FitTrack.ViewModel
 
         private bool CanSignIn(object parameter)
         {
-            // Kontrollera att användarnamn och lösenord är angivna
             return !string.IsNullOrEmpty(UsernameInput) && !string.IsNullOrEmpty(PasswordInput);
         }
 
@@ -73,10 +72,9 @@ namespace FitTrack.ViewModel
             // Kontrollera om kommandot kan köras
             if (!CanSignIn(parameter))
             {
-                return; // Avsluta om det inte kan köras
+                return; 
             }
 
-            // Logga in användaren
             Person currentUser = usermanager.LogIn(UsernameInput, PasswordInput);
 
             if (currentUser != null)
@@ -86,11 +84,11 @@ namespace FitTrack.ViewModel
 
                     if (IsUserVerified(user))
                     {
-                        OpenWorkoutWindow(user); // Öppna WorkoutWindow om användaren är verifierad
+                        OpenWorkoutWindow(user); 
                     }
                     else
                     {
-                        OpenVerificationCodeWindow(null); // Öppna verifieringsfönstret om inte
+                        OpenVerificationCodeWindow(null); 
                     }
                 }
                 else if (currentUser is AdminUser adminUser)

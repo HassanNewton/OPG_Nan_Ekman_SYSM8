@@ -33,9 +33,9 @@ namespace FitTrack.Model
             // Initierar Users som en ObservableCollection lista av Person-objekt med fördefinierade användare
             Users = new ObservableCollection<Person>
             {
-            new User { UserName = "user1", Password = "1234" },
+            new User { UserName = "user", Password = "password" },
             new User { UserName = "user2", Password = "5678" },
-            new AdminUser { UserName = "adminUser", Password = "admin123" }
+            new AdminUser { UserName = "admin", Password = "password" }
             };
         }
 

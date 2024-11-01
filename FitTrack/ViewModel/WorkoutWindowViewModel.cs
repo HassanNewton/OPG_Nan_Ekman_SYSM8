@@ -4,6 +4,7 @@ using FitTrack.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Reflection;
@@ -12,6 +13,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data; // För ICollectionView
 
 namespace FitTrack.ViewModel
 {
@@ -23,10 +25,10 @@ namespace FitTrack.ViewModel
         // hämta lista från Workoutmanager
         public ObservableCollection<Workout> Workouts { get; }
 
-        // lista för filtrering
-        public ObservableCollection<Workout> FilteredWorkouts { get; set; } // private set?
+        // Skapa en CollectionView för filtrering
+        public ICollectionView WorkoutsView { get; set; }
 
-        // lista för välja Type i comboBox
+        // Lista för typer av träning 
         public ObservableCollection<string> WorkoutTypes { get; set; }
 
 
@@ -37,7 +39,7 @@ namespace FitTrack.ViewModel
             set
             {
                 selectedWorkout = value;
-                OnPropertyChanged(nameof(SelectedWorkout)); // anropas så fort värdet ändras
+                OnPropertyChanged(nameof(SelectedWorkout)); 
             }
         }
 
@@ -62,7 +64,6 @@ namespace FitTrack.ViewModel
             }
         }
 
-
         private string selectedWorkoutType;
         public string SelectedWorkoutType
         {
@@ -70,21 +71,35 @@ namespace FitTrack.ViewModel
             set
             {
                 selectedWorkoutType = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(SelectedWorkoutType));
+                WorkoutsView.Refresh();
             }
         }
 
-        private DateTime filterDate = DateTime.MinValue; // Standardvärde
-        public DateTime FilterDate
+        private DateTime? filterDate; // Nullable för att hantera inget valt datum
+        public DateTime? FilterDate
         {
             get { return filterDate; }
             set
             {
                 filterDate = value;
-                OnPropertyChanged();                
+                OnPropertyChanged();
+                WorkoutsView.Refresh(); // Uppdatera vyn vid ändring
             }
         }
 
+        private string searchText;
+
+        public string SearchText
+        {
+            get { return searchText; }
+            set
+            {
+                searchText = value;
+                OnPropertyChanged(nameof(SearchText));
+                WorkoutsView.Refresh(); // Uppdatera listan direkt när söktext ändras
+            }
+        }
 
         // uppdatera det nya användarnamnet från UserDetailsWindow
         public void UpdateUserName()
@@ -104,20 +119,25 @@ namespace FitTrack.ViewModel
         public RelayCommand SaveNewWorkoutCommand { get; }
 
         public RelayCommand SearchCommand { get; }
-        public RelayCommand FilterCommand { get; }
+
 
         // Konstruktor
         public WorkoutWindowViewModel(Usermanager usermanager) 
         {
-            this.usermanager = usermanager; 
+            this.usermanager = usermanager;
 
-            // hämta lista från workoutmanager
+            // hämta lista med träningspass från workoutmanager
             Workouts = usermanager.WorkoutManager.WorkoutList;
 
-            FilteredWorkouts = new ObservableCollection<Workout>(Workouts);
+            // Hämta workout typer från workout manager
+            WorkoutTypes = new ObservableCollection<string>(usermanager.WorkoutManager.WorkoutTypes);
 
-            // hämta WokoutTypes från Workoutmanager
-            WorkoutTypes = usermanager.WorkoutManager.WorkoutTypes;
+            // Skapa en ICollectionView baserat på Workouts
+            WorkoutsView = CollectionViewSource.GetDefaultView(Workouts);
+            WorkoutsView.Filter = FilterWorkouts;
+
+            // Lägg till "All" till WorkoutTypes
+            WorkoutTypes.Insert(0, "All");
 
             NewWorkout = new CardioWorkout();
             NewWorkout = new StrengthWorkout();
@@ -131,21 +151,38 @@ namespace FitTrack.ViewModel
             CopyCommand = new RelayCommand(CopyWorkout);
             SaveNewWorkoutCommand = new RelayCommand(SaveNewWorkout);
             SearchCommand = new RelayCommand(SearchingForWorkout);
-            FilterCommand = new RelayCommand(FilterWorkout);
-
-
         }
 
         // Metoder
 
-        private void FilterWorkout(object parameter)
+        private bool FilterWorkouts(object obj)
         {
+            if (obj is Workout workout)
+            {
+                // Kolla om datummatchning
+                bool matchesDate = FilterDate == null || workout.Date.Date == FilterDate.Value.Date;
 
+                // Kolla om typmatchning
+                bool matchesType = string.IsNullOrEmpty(SelectedWorkoutType) || SelectedWorkoutType == "All" || workout.Type == SelectedWorkoutType;
+
+                // Kolla om söktexten matchar någon av workoutens egenskaper
+                bool matchesSearchText = string.IsNullOrEmpty(SearchText) ||
+                                         workout.Type.IndexOf(SearchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                                         workout.Notes.IndexOf(SearchText, StringComparison.OrdinalIgnoreCase) >= 0;
+
+                return matchesDate && matchesType && matchesSearchText; // Alla kriterier måste vara sanna
+            }
+            return false;
         }
 
         private void SearchingForWorkout(object parameter)
         {
-
+            // Konvertera parameter till söksträng
+            if (parameter is string searchText)
+            {
+                SearchText = searchText;
+                WorkoutsView.Refresh(); // Uppdatera vyn vid sökning
+            }
         }
 
         private void AddWorkOut(object parameter)

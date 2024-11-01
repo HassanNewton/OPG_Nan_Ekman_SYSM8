@@ -20,10 +20,6 @@ namespace FitTrack
             // Sätt explicit shutdown mode
             Application.Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
-            // Initiera instanser av UserManager och WorkoutManager
-            //UserManager = new Usermanager();
-            //Workoutmanager = new WorkoutManager();
-
             // Visa splash screen
             var splashScreen = new View.SplashScreen();
             splashScreen.Show();
